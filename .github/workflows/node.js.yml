@@ -31,7 +31,3 @@ jobs:
     - run: npm run test:unit
     - name: Cypress run
       uses: cypress-io/github-action@v5
-      with:
-        build: npm run build
-        start: npm run test:e2e
-        browser: chrome
