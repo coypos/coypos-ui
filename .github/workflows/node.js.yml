@@ -12,7 +12,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    continue-on-error: true
     strategy:
       matrix:
         node-version: [18.x]
@@ -34,7 +33,7 @@ jobs:
       env:
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
         GITHUB_ACTOR: ${{ github.actor }}
-        GITHUB_JOB_NAME: "Build and deploy"
+        GITHUB_JOB_NAME: "Testy jednostkowe i e2e"
         GITHUB_JOB_STATUS: ${{ job.status }}
   deploy:
     needs: build
@@ -62,5 +61,5 @@ jobs:
       env:
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
         GITHUB_ACTOR: ${{ github.actor }}
-        GITHUB_JOB_NAME: "Build and deploy"
+        GITHUB_JOB_NAME: "Deploy na serwer"
         GITHUB_JOB_STATUS: ${{ job.status }}
