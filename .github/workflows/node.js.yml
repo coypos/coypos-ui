@@ -29,7 +29,7 @@ jobs:
     - run: npm run test:e2e
     - name: Notify discord
       uses: th0th/notify-discord@v0.4.1
-      if: ${{ always() }}
+      if: failure()
       env:
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
         GITHUB_ACTOR: ${{ github.actor }}
@@ -38,7 +38,6 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
     - name: Deploy using ssh
       uses: appleboy/ssh-action@master
