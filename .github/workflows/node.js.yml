@@ -30,6 +30,16 @@ jobs:
     - run: npm run build
     - run: npm run test:unit
     - run: npm run test:e2e
+  notify_failture:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Discord notification
+      if: ${{ failure() }}
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      uses: Ilshidur/action-discord@master
+      with:
+        args: '@everyone The project {{ EVENT_PAYLOAD.repository.full_name }} has error. Error on test step'
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -49,6 +59,17 @@ jobs:
           npm run build
           sudo rm -r /var/www/coypos/*
           sudo cp -r /srv/coypos-ui/dist/* /var/www/coypos/
+  notify_failture2:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Discord notification
+      if: ${{ failure() }}
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      uses: Ilshidur/action-discord@master
+      with:
+        args: '@everyone The project {{ EVENT_PAYLOAD.repository.full_name }} has error. Error on deploy step'
   notify_success:
     needs: deploy
     runs-on: ubuntu-latest
@@ -59,13 +80,4 @@ jobs:
       uses: Ilshidur/action-discord@master
       with:
         args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
-  notify_failture:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Discord notification
-      if: ${{ failure() }}
-      env:
-        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-      uses: Ilshidur/action-discord@master
-      with:
-        args: '@everyone The project {{ EVENT_PAYLOAD.repository.full_name }} has error.'
+ 
