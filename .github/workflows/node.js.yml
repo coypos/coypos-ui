@@ -30,7 +30,7 @@ jobs:
     - run: npm run test:e2e
   notify_failure:
     needs: build
-    if: ${{ always() && contains(needs.*.result, 'success') }}
+    if: always() && contains(needs.*.result, 'success')
     runs-on: ubuntu-latest
     steps:
     - name: Discord notification
@@ -42,7 +42,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ always() && contains(needs.*.result, 'failure') }}
+    if: always() && !contains(needs.*.result, 'success')
     continue-on-error: true
     steps:
     - name: Deploy using ssh
@@ -62,7 +62,7 @@ jobs:
           sudo cp -r /srv/coypos-ui/dist/* /var/www/coypos/
   notify_failure2:
     needs: deploy
-    if: ${{ always() && contains(needs.*.result, 'success') }}
+    if: always() && !contains(needs.*.result, 'success')
     runs-on: ubuntu-latest
     steps:
     - name: Discord notification
@@ -73,7 +73,7 @@ jobs:
         args: '@everyone The project {{ EVENT_PAYLOAD.repository.full_name }} has error. Error on deploy step'
   notify_success:
     needs: deploy
-    if: ${{ always() && contains(needs.*.result, 'failure') }}
+    if: always() && contains(needs.*.result, 'success')
     runs-on: ubuntu-latest
     steps:
     - name: Discord notification
