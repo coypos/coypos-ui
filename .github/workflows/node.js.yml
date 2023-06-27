@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Discord notification
-      if: ${{ failure() }}
+      if: ${{ failure() && steps.build.outcome != 'success' }}
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       uses: Ilshidur/action-discord@master
@@ -60,11 +60,10 @@ jobs:
           sudo rm -r /var/www/coypos/*
           sudo cp -r /srv/coypos-ui/dist/* /var/www/coypos/
   notify_failture2:
-    needs: deploy
     runs-on: ubuntu-latest
     steps:
     - name: Discord notification
-      if: ${{ failure() }}
+      if: ${{  && steps.deploy.outcome != 'success' }}
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       uses: Ilshidur/action-discord@master
