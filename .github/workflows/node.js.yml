@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Discord notification
-      if: ${{  && steps.deploy.outcome != 'success' }}
+      if: ${{ failure()  && steps.deploy.outcome != 'success' }}
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       uses: Ilshidur/action-discord@master
