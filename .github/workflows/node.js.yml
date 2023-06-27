@@ -48,3 +48,24 @@ jobs:
           npm install
           npm run build
           sudo cp -r /srv/coypos-ui/dist/* /var/www/coypos/
+  notify_success:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Discord notification
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      uses: Ilshidur/action-discord@master
+      with:
+        args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
+  notify_failture:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Discord notification
+      if: ${{ failure() }}
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      uses: Ilshidur/action-discord@master
+      with:
+        args: '@everyone The project {{ EVENT_PAYLOAD.repository.full_name }} has error.'
