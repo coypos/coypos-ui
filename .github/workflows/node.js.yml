@@ -60,7 +60,6 @@ jobs:
       with:
         args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
   notify_failture:
-    needs: deploy
     runs-on: ubuntu-latest
     steps:
     - name: Discord notification
