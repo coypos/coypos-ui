@@ -42,6 +42,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    if: success()
     continue-on-error: true
     steps:
     - name: Deploy using ssh
@@ -72,6 +73,7 @@ jobs:
         args: '@everyone The project {{ EVENT_PAYLOAD.repository.full_name }} has error. Error on deploy step'
   notify_success:
     needs: deploy
+    if: success()
     runs-on: ubuntu-latest
     steps:
     - name: Discord notification
