@@ -47,6 +47,7 @@ jobs:
           git status
           npm install
           npm run build
+          sudo rm -r /var/www/coypos/*
           sudo cp -r /srv/coypos-ui/dist/* /var/www/coypos/
   notify_success:
     needs: deploy
