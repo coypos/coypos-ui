@@ -28,6 +28,14 @@ jobs:
     - run: npm run build
     - run: npm run test:unit
     - run: npm run test:e2e
+    - name: Notify discord
+      uses: th0th/notify-discord@v0.4.1
+      if: ${{ always() }}
+      env:
+        DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        GITHUB_ACTOR: ${{ github.actor }}
+        GITHUB_JOB_NAME: "Build and deploy"
+        GITHUB_JOB_STATUS: ${{ job.status }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -48,17 +56,11 @@ jobs:
           npm run build
           sudo rm -r /var/www/coypos/*
           sudo cp -r /srv/coypos-ui/dist/* /var/www/coypos/
-  notify:
-    name: Discord Notification
-    runs-on: ubuntu-latest
-    needs:
-      - build
-      - deploy
-    if: ${{ always() }} # You always want to be notified: success, failure, or cancelled
-    
-    steps:
-      - name: Notify
-        uses: nobrayner/discord-webhook@v1
-        with:
-          github-token: ${{ secrets.TOKEN }}
-          discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
+    - name: Notify discord
+      uses: th0th/notify-discord@v0.4.1
+      if: ${{ always() }}
+      env:
+        DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        GITHUB_ACTOR: ${{ github.actor }}
+        GITHUB_JOB_NAME: "Build and deploy"
+        GITHUB_JOB_STATUS: ${{ job.status }}
