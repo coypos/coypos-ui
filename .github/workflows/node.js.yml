@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Discord notification
-      if: failure() && steps.build.outcome != 'success'
+      if: always()&& needs.build.result == 'failure'
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       uses: Ilshidur/action-discord@master
@@ -42,7 +42,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: success()
+    if: needs.build.result == 'success'
     continue-on-error: true
     steps:
     - name: Deploy using ssh
@@ -65,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Discord notification
-      if: failure()  && steps.deploy.outcome != 'success'
+      if: always() && needs.deploy.result == 'failure'
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       uses: Ilshidur/action-discord@master
@@ -73,7 +73,7 @@ jobs:
         args: '@everyone The project {{ EVENT_PAYLOAD.repository.full_name }} has error. Error on deploy step'
   notify_success:
     needs: deploy
-    if: success()
+    if: needs.deploy.result == 'success'
     runs-on: ubuntu-latest
     steps:
     - name: Discord notification
