@@ -33,7 +33,7 @@ jobs:
       env:
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
         GITHUB_ACTOR: ${{ github.actor }}
-        GITHUB_JOB_NAME: "Testy jednostkowe i e2e"
+        GITHUB_JOB_NAME: "Testy jednostkowe i e2e @everyone"
         GITHUB_JOB_STATUS: ${{ job.status }}
   deploy:
     needs: build
