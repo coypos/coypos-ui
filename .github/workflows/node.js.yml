@@ -42,8 +42,9 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         port: 2137
         script: |
-          cd /srv/ui
+          cd /srv/coypos-ui
           git pull origin master
           git status
-          npm install --only=prod
-          pm2 restart node1
+          npm install
+          npm run build
+          sudo cp -r /srv/coypos-ui/dist/* /var/www/coypos/
