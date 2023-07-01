@@ -11,14 +11,11 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
@@ -29,4 +26,38 @@ jobs:
     - run: npm install
     - run: npm run build
     - run: npm run test
-
+    - name: Notify discord
+      uses: th0th/notify-discord@v0.4.1
+      if: failure()
+      env:
+        DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
+        GITHUB_ACTOR: ${{ github.actor }}
+        GITHUB_JOB_NAME: "Testy jednostkowe i e2e @everyone"
+        GITHUB_JOB_STATUS: ${{ job.status }}
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy using ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: 2137
+        script: |
+          cd /srv/coypos-ui
+          git pull origin master
+          git status
+          npm install
+          npm run build
+          sudo rm -r /var/www/coypos/*
+          sudo cp -r /srv/coypos-ui/dist/* /var/www/coypos/
+    - name: Notify discord
+      uses: th0th/notify-discord@v0.4.1
+      if: ${{ always() }}
+      env:
+        DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
+        GITHUB_ACTOR: ${{ github.actor }}
+        GITHUB_JOB_NAME: "Deploy na serwer"
+        GITHUB_JOB_STATUS: ${{ job.status }}
