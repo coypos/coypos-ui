@@ -47,6 +47,7 @@ jobs:
         port: 2137
         script: |
           cd /srv/coypos-ui
+          rm yarn.lock
           git pull origin master
           git status
           npm install
