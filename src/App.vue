@@ -1,4 +1,6 @@
 <template>
+  <HeaderLayout></HeaderLayout>
+
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
@@ -28,3 +30,6 @@ nav {
   }
 }
 </style>
+<script setup lang="ts">
+import HeaderLayout from "@/components/layout/Header.vue";
+</script>

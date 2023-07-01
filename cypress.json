@@ -1,7 +1,0 @@
-{
-  "pluginsFile": "tests/e2e/plugins/index.js",
-
-  "responseTimeout": 120e3,
-  "video": false
-
-}
