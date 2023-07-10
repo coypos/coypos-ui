@@ -1,15 +1,34 @@
 <template>
-  <div class="hello">
+  <div class="container hello">
     <h1>{{ $t("open") }}</h1>
-
-    <button @click="ktojestnajlepszy">Kto jest fajny</button>
-    {{ kto }}
+    <input id="input" v-model="thing.sampleRequestString" />
+    <button id="add" class="btn btn-primary" @click="addThings">Dodaj</button>
+    <div v-if="things.length" class="row">
+      <div class="col-3">Twoj String</div>
+      <div class="col-3">Wygenerowany String</div>
+      <div class="col-3">Dlugosc</div>
+      <div class="col-3">DELETE</div>
+    </div>
+    <div class="row" v-for="thing in things" :key="thing.id">
+      <div class="col-3">{{ thing.sampleRequestString }}</div>
+      <div class="col-3">
+        {{ thing.sampleGeneratedString }}
+      </div>
+      <div class="col-3">{{ thing.sampleGeneratedInt }}</div>
+      <div class="col-3">
+        <button class="btn btn-danger" @click="deleteThings(thing.id)">
+          DELETE
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import type { AxiosInstance } from "axios";
+import { ThingModel } from "@/types/Thing";
+import { ThingRequestModel } from "@/types/ThingRequest";
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
     $axios: AxiosInstance;
@@ -19,23 +38,41 @@ declare module "@vue/runtime-core" {
 export default defineComponent({
   name: "HelloComponent",
   data() {
-    return {
-      kto: "",
-    };
+    return {};
   },
   setup() {
     const { t } = useI18n({
       inheritLocale: true,
       useScope: "local",
     });
-
-    return { t };
+    let thing = ref<ThingRequestModel>({
+      sampleRequestString: "",
+    });
+    let result = ref<ThingModel>({ id: 0, sampleGeneratedInteger: 0 });
+    let things = ref<ThingModel[]>([{ id: 0, sampleGeneratedInteger: 0 }]);
+    return { t, thing, things, result };
   },
   methods: {
-    async ktojestnajlepszy() {
-      this.kto = await this.$axios.get("/thing/0");
-      console.log(this.kto);
+    async getThings() {
+      await this.$axios.get("/things").then((response) => {
+        this.things = response.data;
+      });
     },
+    async addThings() {
+      await this.$axios.post("/thing", this.thing).then(async (response) => {
+        this.result = response.data;
+        await this.getThings();
+      });
+    },
+    async deleteThings(id: number) {
+      await this.$axios.delete(`/thing/${id}`).then(async (response) => {
+        this.things = response.data;
+        await this.getThings();
+      });
+    },
+  },
+  mounted() {
+    this.getThings();
   },
 });
 </script>

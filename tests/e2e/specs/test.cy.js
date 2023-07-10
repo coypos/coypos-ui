@@ -18,3 +18,27 @@ describe("Cash register open View Language test", () => {
     cy.contains("h1", "Kasse geöffnet");
   });
 });
+
+describe("Things test", () => {
+  it("add one thing", () => {
+    cy.visit("/?lang=pl");
+    cy.get("#input").type("kajak");
+
+    cy.get("#add").click();
+  });
+  it("thing should be visible", () => {
+    cy.visit("/?lang=pl");
+    cy.get(".col-3")
+      .contains("kajak")
+      .first()
+      .next()
+      .should("have.text", "kajak")
+      .next();
+  });
+  it("delete one thing", () => {
+    cy.visit("/?lang=pl");
+    cy.get(".col-3").contains("kajak").next().next().next().click();
+
+    cy.get("#add").click();
+  });
+});
