@@ -22,22 +22,22 @@ describe("Cash register open View Language test", () => {
 describe("Things test", () => {
   it("add one thing", () => {
     cy.visit("/?lang=pl");
-    cy.get("#input").type("kajak");
+    cy.get("#input").type("andrzej");
 
     cy.get("#add").click();
   });
   it("thing should be visible", () => {
     cy.visit("/?lang=pl");
     cy.get(".col-3")
-      .contains("kajak")
+      .contains("andrzej")
       .first()
       .next()
-      .should("have.text", "kajak")
+      .should("have.text", "jezrdna")
       .next();
   });
   it("delete one thing", () => {
     cy.visit("/?lang=pl");
-    cy.get(".col-3").contains("kajak").next().next().next().click();
+    cy.get(".col-3").contains("andrzej").next().next().next().click();
 
     cy.get("#add").click();
   });
