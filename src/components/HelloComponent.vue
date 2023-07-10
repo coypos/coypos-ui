@@ -33,7 +33,7 @@ export default defineComponent({
   },
   methods: {
     async ktojestnajlepszy() {
-      this.kto = await this.$axios.get("/ktofajnyjest");
+      this.kto = await this.$axios.get("/thing/0");
       console.log(this.kto);
     },
   },
