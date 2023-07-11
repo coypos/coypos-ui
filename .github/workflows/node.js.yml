@@ -32,14 +32,14 @@ jobs:
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       with:
-        args: tests/e2e/screenshots/test.cy.js/Things test -- thing should be visible (failed).png
+        args: tests/e2e/screenshots/test.cy.js/*.*
     - name: Notify discord
       uses: th0th/notify-discord@v0.4.1
       if: failure()
       env:
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
         GITHUB_ACTOR: ${{ github.actor }}
-        GITHUB_JOB_NAME: "Testy jednostkowe i e2e @everyone"
+        GITHUB_JOB_NAME: "Testy jednostkowe i e2e"
         GITHUB_JOB_STATUS: ${{ job.status }}
   deploy:
     needs: build
