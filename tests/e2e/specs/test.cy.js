@@ -25,7 +25,8 @@ describe("Things test", () => {
     cy.wait(1000)
     cy.get("#input").type("andrzej");
     cy.wait(1000)
-    cy.get("#add").click();
+    cy.get("#add").trigger("click")
+    cy.wait(1000)
   });
   it("thing should be visible", () => {
     cy.visit("/?lang=pl");
