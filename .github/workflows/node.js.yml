@@ -33,6 +33,7 @@ jobs:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       with:
         args: tests/e2e/screenshots/test.cy.js/*.*
+        args: tests/e2e/videos/*
     - name: Notify discord
       uses: th0th/notify-discord@v0.4.1
       if: failure()

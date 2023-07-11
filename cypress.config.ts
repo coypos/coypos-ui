@@ -2,7 +2,7 @@ import { defineConfig } from "cypress";
 
 export default defineConfig({
   responseTimeout: 120000,
-  video: false,
+  video: true,
   fixturesFolder: "tests/e2e/fixtures",
   screenshotsFolder: "tests/e2e/screenshots",
   videosFolder: "tests/e2e/videos",
