@@ -26,6 +26,12 @@ jobs:
     - run: npm install
     - run: npm run build
     - run: npm run test
+    - name: Send screenshot to discord channel
+      uses: sinshutu/upload-to-discord@master
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      with:
+        args: tests/e2e/screenshots/test.cy.js/Things test -- thing should be visible (failed).png
     - name: Notify discord
       uses: th0th/notify-discord@v0.4.1
       if: failure()
