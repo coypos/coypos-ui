@@ -12,6 +12,7 @@ export default {
       baseURL: options.baseUrl,
       headers: {
         Authorization: options.token ? `Bearer ${options.token}` : "",
+        XApiKey: process.env.VUE_APP_TOKEN,
       },
     });
   },
