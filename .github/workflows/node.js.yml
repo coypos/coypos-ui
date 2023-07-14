@@ -64,6 +64,12 @@ jobs:
           rm yarn.lock
           git pull origin master
           git status
+          rm .env
+          touch .env
+          echo VUE_APP_I18N_LOCALE=pl >> .env
+          echo VUE_APP_I18N_FALLBACK_LOCALE=en >> .env
+          echo VUE_APP_API_URL=${{ secrets.API_URL }} >> .env
+          echo VUE_APP_TOKEN=${{ secrets.API_SECRET }} >> .env
           npm install
           npm run build
           sudo rm -r /var/www/coypos/*
