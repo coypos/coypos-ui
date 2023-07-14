@@ -62,9 +62,9 @@ jobs:
         script: |
           cd /srv/coypos-ui
           rm yarn.lock
+          rm .env
           git pull origin master
           git status
-          rm .env
           touch .env
           echo VUE_APP_I18N_LOCALE=pl >> .env
           echo VUE_APP_I18N_FALLBACK_LOCALE=en >> .env
