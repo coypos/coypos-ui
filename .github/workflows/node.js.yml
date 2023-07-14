@@ -23,6 +23,13 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - run: |
+        touch .env
+        echo VUE_APP_I18N_LOCALE=pl >> .env
+        echo VUE_APP_I18N_FALLBACK_LOCALE=en >> .env
+        echo VUE_APP_API_URL=${{ secrets.API_URL }} >> .env
+        echo VUE_APP_TOKEN=${{ secrets.API_SECRET }} >> .env
+        cat .env
     - run: npm install
     - run: npm run build
     - run: npm run test
