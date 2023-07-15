@@ -1,7 +1,9 @@
 <template>
   <div class="container hello">
     <input id="input" v-model="thing.sampleRequestString" />
-    <button id="add" class="btn btn-primary" @click="addThings">Dodaj</button>
+    <button id="add" class="btn btn-primary" @click="addThings">
+      {{ $t("add") }}
+    </button>
     <div v-if="things.length" class="row">
       <div class="col-3">Twoj String</div>
       <div class="col-3">Wygenerowany String</div>

@@ -39,23 +39,34 @@ export default defineComponent({
   name: "HeaderLayout",
 
   methods: {
-    changeLanguage(lang: string) {
-      this.$store.commit("changeLang", lang);
+    async changeLanguage(lang: string) {
+      this.$storage.setStorageSync("lang", lang);
       this.$i18n.locale = lang;
-      const currentParams = this.$router.currentRoute.value.params;
+      const currentParams = await this.$router.currentRoute.value.params;
       const currentName = this.$router.currentRoute.value.name;
       const mergedParams = { ...currentParams, lang: lang };
-      if (currentName)
-        this.$router.push({ name: currentName, query: mergedParams });
-      //this.$router.replace({ query: { lang: lang } });
+      if (currentName) {
+        await this.$router.push({ name: currentName, query: mergedParams });
+      }
+    },
+    refreshLanguage(to: any) {
+      const langParam = this.$storage.getStorageSync("lang");
+      if (to.query.lang) {
+        this.changeLanguage(to.query.lang);
+      } else if (langParam) {
+        this.changeLanguage(langParam);
+      } else {
+        this.changeLanguage("pl");
+      }
     },
   },
   mounted() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const myParam = urlParams.get("lang");
-    if (myParam) {
-      this.changeLanguage(myParam);
-    }
+    this.refreshLanguage;
+  },
+  watch: {
+    $route: function (to, from) {
+      this.refreshLanguage(to);
+    },
   },
 });
 </script>

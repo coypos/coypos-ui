@@ -1,6 +1,6 @@
 // https://docs.cypress.io/api/table-of-contents
 
-describe("Cash register open View Language test", () => {
+describe("Cash register Language test", () => {
   it("Cash register open View PL", () => {
     cy.visit("/?lang=pl");
     cy.contains("h1", "Kasa Otwarta");
@@ -16,6 +16,22 @@ describe("Cash register open View Language test", () => {
   it("Visits the app root url DE", () => {
     cy.visit("/?lang=de");
     cy.contains("h1", "Kasse geöffnet");
+  });
+  it("Things View button PL", () => {
+    cy.visit("/things?lang=pl");
+    cy.contains("#add", "Dodaj");
+  });
+  it("Things View button EN", () => {
+    cy.visit("/things?lang=en");
+    cy.contains("#add", "Add");
+  });
+  it("Things View button UK", () => {
+    cy.visit("/things?lang=uk");
+    cy.contains("#add", "додати");
+  });
+  it("Things View button DE", () => {
+    cy.visit("/things?lang=de");
+    cy.contains("#add", "Hinzufügen");
   });
 });
 
