@@ -40,8 +40,14 @@ export default defineComponent({
 
   methods: {
     changeLanguage(lang: string) {
+      this.$store.commit("changeLang", lang);
       this.$i18n.locale = lang;
-      this.$router.replace({ query: { lang: lang } });
+      const currentParams = this.$router.currentRoute.value.params;
+      const currentName = this.$router.currentRoute.value.name;
+      const mergedParams = { ...currentParams, lang: lang };
+      if (currentName)
+        this.$router.push({ name: currentName, query: mergedParams });
+      //this.$router.replace({ query: { lang: lang } });
     },
   },
   mounted() {

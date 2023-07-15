@@ -1,6 +1,5 @@
 <template>
   <div class="container hello">
-    <h1>{{ $t("open") }}</h1>
     <input id="input" v-model="thing.sampleRequestString" />
     <button id="add" class="btn btn-primary" @click="addThings">Dodaj</button>
     <div v-if="things.length" class="row">
@@ -25,7 +24,6 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { useI18n } from "vue-i18n";
 import type { AxiosInstance } from "axios";
 import { ThingModel } from "@/types/Thing";
 import { ThingRequestModel } from "@/types/ThingRequest";
@@ -41,16 +39,12 @@ export default defineComponent({
     return {};
   },
   setup() {
-    const { t } = useI18n({
-      inheritLocale: true,
-      useScope: "local",
-    });
     let thing = ref<ThingRequestModel>({
       sampleRequestString: "",
     });
     let result = ref<ThingModel>({ id: 0, sampleGeneratedInteger: 0 });
     let things = ref<ThingModel[]>([{ id: 0, sampleGeneratedInteger: 0 }]);
-    return { t, thing, things, result };
+    return { thing, things, result };
   },
   methods: {
     async getThings() {

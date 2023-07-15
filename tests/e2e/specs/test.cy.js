@@ -21,16 +21,16 @@ describe("Cash register open View Language test", () => {
 
 describe("Things test", () => {
   it("add one thing", () => {
-    cy.visit("/?lang=pl");
-    cy.wait(1000)
+    cy.visit("/things?lang=pl");
+    cy.wait(1000);
     cy.get("#input").type("andrzej");
-    cy.wait(1000)
-    cy.get("#add").trigger("click")
-    cy.wait(1000)
+    cy.wait(1000);
+    cy.get("#add").trigger("click");
+    cy.wait(1000);
   });
   it("thing should be visible", () => {
-    cy.visit("/?lang=pl");
-    cy.wait(1000)
+    cy.visit("/things?lang=pl");
+    cy.wait(1000);
     cy.get(".col-3")
       .contains("andrzej")
       .first()
@@ -39,8 +39,8 @@ describe("Things test", () => {
       .next();
   });
   it("delete one thing", () => {
-    cy.visit("/?lang=pl");
-    cy.wait(1000)
+    cy.visit("/things?lang=pl");
+    cy.wait(1000);
     cy.get(".col-3").contains("andrzej").next().next().next().click();
   });
 });
