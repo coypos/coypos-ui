@@ -35,6 +35,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { QueryModel } from "@/types/Query";
+
 export default defineComponent({
   name: "HeaderLayout",
 
@@ -49,7 +51,7 @@ export default defineComponent({
         await this.$router.push({ name: currentName, query: mergedParams });
       }
     },
-    refreshLanguage(to: any) {
+    refreshLanguage(to: QueryModel) {
       const langParam = this.$storage.getStorageSync("lang");
       if (to.query.lang) {
         this.changeLanguage(to.query.lang);
@@ -64,7 +66,7 @@ export default defineComponent({
     this.refreshLanguage;
   },
   watch: {
-    $route: function (to, from) {
+    $route: function (to) {
       this.refreshLanguage(to);
     },
   },
