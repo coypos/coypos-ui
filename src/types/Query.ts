@@ -1,5 +1,5 @@
 export interface QueryModel {
-  /**Request string */
+  /**Query object */
 
   query: {
     lang: string;
