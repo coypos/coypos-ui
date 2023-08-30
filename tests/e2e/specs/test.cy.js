@@ -3,7 +3,7 @@
 describe("Cash register Language test", () => {
   it("Cash register open View PL", () => {
     cy.visit("/?lang=pl");
-    cy.contains("h1", "Kasa Otwarta");
+    cy.contains("h1", "KASA OTWARTA");
   });
   it("Visits the app root url EN", () => {
     cy.visit("/?lang=en");

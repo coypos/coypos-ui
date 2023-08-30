@@ -1,4 +1,9 @@
 {
-  "open": "Kasse geöffnet",
-  "add": "Hinzufügen"
+  "open": "KASSE GEÖFFNET",
+  "add": "Hinzufügen",
+  "welcome": "WIR LADEN EIN!",
+  "info":"SCANNEN SIE EINEN ARTIKEL ODER TIPPEN SIE AUF „START“, UM ZU STARTEN",
+  "start": "START",
+  "bag": "WERBUNG",
+  "help": "HELFEN"
 }

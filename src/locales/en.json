@@ -1,5 +1,10 @@
 {
-  "open": "Cash register open",
-  "add": "Add"
+  "open": "CASH REGISTER OPEN",
+  "add": "Add",
+  "welcome": "WELCOME!",
+  "info":"SCAN AN ARTICLE OR TAP START TO START",
+  "start": "START",
+  "bag": "BAG",
+  "help": "HELP"
 
 }
