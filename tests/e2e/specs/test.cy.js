@@ -7,15 +7,15 @@ describe("Cash register Language test", () => {
   });
   it("Visits the app root url EN", () => {
     cy.visit("/?lang=en");
-    cy.contains("h1", "Cash register open");
+    cy.contains("h1", "CASH REGISTER OPEN");
   });
   it("Visits the app root url UK", () => {
     cy.visit("/?lang=uk");
-    cy.contains("h1", "Відкрита каса");
+    cy.contains("h1", "ВІДКРИТА КАСА");
   });
   it("Visits the app root url DE", () => {
     cy.visit("/?lang=de");
-    cy.contains("h1", "Kasse geöffnet");
+    cy.contains("h1", "KASSE GEÖFFNET");
   });
   it("Things View button PL", () => {
     cy.visit("/things?lang=pl");
