@@ -3,7 +3,7 @@
     <img
       @click="changeLanguage('pl')"
       :class="flagClass"
-      src="../assets/pl.png"
+      src="../assets/flags/pl.png"
       alt="Polski"
       id="pl"
       srcset=""
@@ -11,7 +11,7 @@
     <img
       @click="changeLanguage('en')"
       :class="flagClass"
-      src="../assets/en.jpg"
+      src="../assets/flags/en.jpg"
       alt="English"
       srcset=""
       id="en"
@@ -19,7 +19,7 @@
     <img
       @click="changeLanguage('uk')"
       :class="flagClass"
-      src="../assets/uk.png"
+      src="../assets/flags/uk.png"
       alt="українська"
       srcset=""
       id="uk"
@@ -27,7 +27,7 @@
     <img
       @click="changeLanguage('de')"
       :class="flagClass"
-      src="../assets/ge.png"
+      src="../assets/flags/ge.png"
       alt="Deutsch"
       srcset=""
       id="de"

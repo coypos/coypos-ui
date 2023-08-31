@@ -30,6 +30,7 @@
         <button-component color="yellow" :text="$t(`help`)"></button-component>
       </div>
     </div>
+    <scanner-component></scanner-component>
   </div>
 </template>
 
@@ -38,9 +39,10 @@ import { defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
 import FlagsComponent from "@/components/FlagsComponent.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
+import ScannerComponent from "@/components/ScannerComponent.vue";
 export default defineComponent({
   name: "HomeView",
-  components: { ButtonComponent, FlagsComponent },
+  components: { ScannerComponent, ButtonComponent, FlagsComponent },
   setup() {
     const { t } = useI18n({
       inheritLocale: true,

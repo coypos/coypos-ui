@@ -1,6 +1,5 @@
 <template>
   <div class="scanner">
-    na ten moment dziala wpisywanie numerow i zatwierdzenie enterem
     <h1>{{ scanned }}</h1>
   </div>
 </template>
