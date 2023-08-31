@@ -5,14 +5,16 @@
       :class="flagClass"
       src="../assets/pl.png"
       alt="Polski"
+      id="pl"
       srcset=""
     />
     <img
       @click="changeLanguage('en')"
       :class="flagClass"
-      src="../assets/en.png"
+      src="../assets/en.jpg"
       alt="English"
       srcset=""
+      id="en"
     />
     <img
       @click="changeLanguage('uk')"
@@ -20,6 +22,7 @@
       src="../assets/uk.png"
       alt="українська"
       srcset=""
+      id="uk"
     />
     <img
       @click="changeLanguage('de')"
@@ -27,20 +30,19 @@
       src="../assets/ge.png"
       alt="Deutsch"
       srcset=""
+      id="de"
     />
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { QueryModel } from "@/types/Query";
-
 export default defineComponent({
   name: "FlagsComponent",
   props: {
     horizontally: Boolean,
   },
   setup() {
-    let flagClass = ref<string>("flag");
+    let flagClass = ref<string>("flag ");
     return { flagClass };
   },
   methods: {
@@ -52,13 +54,35 @@ export default defineComponent({
       const mergedParams = { ...currentParams, lang: lang };
       if (currentName) {
         await this.$router.push({ name: currentName, query: mergedParams });
+        this.activeFlag();
+      }
+    },
+    async changeHorizontally() {
+      if (this.horizontally == true) {
+        this.flagClass = "flag horizontally";
+      } else {
+        this.flagClass = "flag";
+      }
+    },
+    async activeFlag() {
+      let flags = document.getElementsByClassName("flag");
+      if (flags) {
+        for (let i = 0; i < flags.length; i++) {
+          flags[i].className = this.flagClass;
+        }
+      }
+      let lang = this.$storage.getStorageSync("lang");
+      let flag = document.getElementById(lang);
+      if (flag) {
+        console.log(flag.className);
+        flag.className = flag.className + " active";
       }
     },
   },
   mounted() {
-    if (this.horizontally == true) {
-      this.flagClass = "flag horizontally";
-    }
+    this.changeHorizontally().then(() => {
+      this.activeFlag();
+    });
   },
 });
 </script>
@@ -67,19 +91,25 @@ export default defineComponent({
   .flag {
     width: 150px;
     height: 90px;
-    padding: 2px;
+    margin: 2px;
     display: block;
     margin-bottom: 30px;
     margin-top: 35px;
     margin-left: 15px;
+    border: 2px solid #0b3e62;
+  }
+  .active {
+    -webkit-box-shadow: 0px 0px 12px 0px rgba(255, 255, 255, 1);
+    -moz-box-shadow: 0px 0px 12px 0px rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 12px 0px rgba(255, 255, 255, 1);
   }
   .horizontally {
     display: inline;
     width: 120px;
     height: 70px;
     margin-bottom: 5px;
-    margin-top: 5px;
-    margin-left: 15px;
+    margin-top: 20px;
+    margin-left: 30px;
   }
 }
 </style>

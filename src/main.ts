@@ -6,7 +6,6 @@ import axios from "./axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import Vue3Storage, { StorageType } from "vue3-storage";
-console.log(process.env.VUE_APP_API_URL);
 createApp(App)
   .use(i18n)
   .use(router)

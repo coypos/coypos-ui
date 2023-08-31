@@ -4,16 +4,7 @@
       <div class="col-12">
         <HeaderLayout></HeaderLayout>
       </div>
-      <div class="row">
-        <div class="col-12">
-          <nav>
-            <router-link to="/">Hello</router-link> |
-            <router-link to="/cart">Cart</router-link> |
-            <router-link to="/products">Products</router-link> |
-            <router-link to="/things">Things</router-link>
-          </nav>
-        </div>
-      </div>
+      <div class="row"></div>
     </div>
 
     <div class="row">
