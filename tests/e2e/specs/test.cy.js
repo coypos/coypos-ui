@@ -35,6 +35,64 @@ describe("Cash register Language test", () => {
   });
 });
 
+describe("user going to cart and selecting products", () => {
+  it("select breads", () => {
+    cy.visit("/?lang=pl");
+    cy.wait(1000);
+    cy.get("div").contains("START").click();
+    cy.url().should("include", "/cart?lang=pl");
+    cy.get("div").contains("Pieczywo").click();
+    cy.url().should("include", "/category?category=2&lang=pl");
+    cy.get("div").contains("Chleby").click();
+    cy.url().should("include", "/products?lang=pl");
+  });
+  it("select fruits", () => {
+    cy.visit("/?lang=pl");
+    cy.wait(1000);
+    cy.get("div").contains("START").click();
+    cy.url().should("include", "/cart?lang=pl");
+    cy.get("div").contains("Owoce i Warzywa").click();
+    cy.url().should("include", "/category?category=1&lang=pl");
+    cy.get("div").contains("Owoce").click();
+    cy.url().should("include", "/products?lang=pl");
+  });
+});
+
+describe("user changing languages", () => {
+  it("changing languages on home", () => {
+    cy.visit("/?lang=pl");
+    cy.wait(1000);
+    cy.get("#en").click();
+    cy.url().should("include", "lang=en");
+    cy.get("div").contains("BAG");
+    cy.get("#uk").click();
+    cy.url().should("include", "lang=uk");
+    cy.get("div").contains("РЕКЛАМА");
+    cy.get("#de").click();
+    cy.url().should("include", "lang=de");
+    cy.get("div").contains("WERBUNG");
+    cy.get("#pl").click();
+    cy.url().should("include", "lang=pl");
+    cy.get("div").contains("REKLAMÓWKA");
+  });
+  it("changing languages on cart", () => {
+    cy.visit("/cart?lang=pl");
+    cy.wait(1000);
+    cy.get("#en").click();
+    cy.url().should("include", "lang=en");
+    cy.get("p").contains("HELP");
+    cy.get("#uk").click();
+    cy.url().should("include", "lang=uk");
+    cy.get("p").contains("ДОПОМОГА");
+    cy.get("#de").click();
+    cy.url().should("include", "lang=de");
+    cy.get("p").contains("HELFEN");
+    cy.get("#pl").click();
+    cy.url().should("include", "lang=pl");
+    cy.get("p").contains("POMOC");
+  });
+});
+
 describe("Things test", () => {
   it("add one thing", () => {
     cy.visit("/things?lang=pl");
