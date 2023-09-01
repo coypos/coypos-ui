@@ -52,6 +52,7 @@ export default defineComponent({
       const currentParams = await this.$router.currentRoute.value.params;
       const currentName = this.$router.currentRoute.value.name;
       const mergedParams = { ...currentParams, lang: lang };
+
       if (currentName) {
         await this.$router.push({ name: currentName, query: mergedParams });
         this.activeFlag();

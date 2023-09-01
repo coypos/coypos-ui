@@ -15,11 +15,23 @@
           <div class="col-6">
             <product-component
               text="Owoce i Warzywa"
+              @click="
+                $router.push({
+                  name: `category`,
+                  query: { category: '1' },
+                })
+              "
               image="/images/products/vegetables.png"
             ></product-component>
           </div>
           <div class="col-6">
             <product-component
+              @click="
+                $router.push({
+                  name: `category`,
+                  query: { category: '2' },
+                })
+              "
               text="Pieczywo"
               image="/images/products/bread.png"
             ></product-component>
