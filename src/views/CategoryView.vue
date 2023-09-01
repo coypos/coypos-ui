@@ -5,12 +5,22 @@
         <product-component
           text="Owoce"
           image="/images/products/fruits.png"
+          @click="
+            $router.push({
+              name: `products`,
+            })
+          "
         ></product-component>
       </div>
       <div class="col-6">
         <product-component
           text="Warzywa"
           image="/images/products/vegetables2.png"
+          @click="
+            $router.push({
+              name: `products`,
+            })
+          "
         ></product-component>
       </div>
     </div>
@@ -19,12 +29,22 @@
         <product-component
           text="Chleby"
           image="/images/products/bread3.png"
+          @click="
+            $router.push({
+              name: `products`,
+            })
+          "
         ></product-component>
       </div>
       <div class="col-6">
         <product-component
           text="Bułki"
           image="/images/products/bread2.png"
+          @click="
+            $router.push({
+              name: `products`,
+            })
+          "
         ></product-component>
       </div>
     </div>

@@ -75,7 +75,6 @@ export default defineComponent({
       let lang = this.$storage.getStorageSync("lang");
       let flag = document.getElementById(lang);
       if (flag) {
-        console.log(flag.className);
         flag.className = flag.className + " active";
       }
     },

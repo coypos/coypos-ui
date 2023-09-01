@@ -32,6 +32,7 @@ jobs:
         cat .env
     - run: npm install
     - run: npm run build
+    - run: npm run test:unit
     - run: npm run test
     - name: Send screenshot to discord channel
       uses: sinshutu/upload-to-discord@master

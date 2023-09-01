@@ -14,10 +14,16 @@ export default defineComponent({
     let buttonClass = ref<string>("btn btn-primary btn-lg btn-default  mr-1");
     return { buttonClass };
   },
+  methods: {
+    updateClass() {
+      if (this.color == "yellow") {
+        this.buttonClass = "btn btn-warning btn-default btn-lg mr-1 ";
+      }
+      return this.buttonClass;
+    },
+  },
   mounted() {
-    if (this.color == "yellow") {
-      this.buttonClass = "btn btn-warning btn-default btn-lg mr-1 ";
-    }
+    this.updateClass();
   },
 });
 </script>

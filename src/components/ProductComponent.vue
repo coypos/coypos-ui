@@ -13,15 +13,25 @@ export default defineComponent({
     text: String,
     color: String,
     image: String,
+    small: Boolean,
   },
   setup() {
     let buttonClass = ref<string>("btn btn-primary btn-lg btn-default  mr-1");
     return { buttonClass };
   },
+  methods: {
+    updateClass() {
+      if (this.color == "yellow") {
+        this.buttonClass = "btn btn-warning btn-default btn-lg mr-1 ";
+      }
+      if (this.small) {
+        this.buttonClass = "btn  btn-primary small btn-default btn-lg mr-1 ";
+      }
+      return this.buttonClass;
+    },
+  },
   mounted() {
-    if (this.color == "yellow") {
-      this.buttonClass = "btn btn-warning btn-default btn-lg mr-1 ";
-    }
+    this.updateClass();
   },
 });
 </script>
@@ -72,5 +82,26 @@ $mynewcolor2: #ffa629;
   width: 160px;
   left: 30px;
   bottom: 10px;
+}
+.small {
+  position: relative;
+  top: 0;
+  height: 200px;
+  width: 170px;
+  font-size: 30px;
+  line-height: 30px;
+  text-align: center;
+  padding-top: 20px;
+  font-weight: 700;
+  border-radius: 40px;
+  border-width: 2px;
+  margin: 15px;
+  .buttonimage {
+    position: absolute;
+    height: 110px;
+    width: 110px;
+    left: 25px;
+    bottom: 10px;
+  }
 }
 </style>

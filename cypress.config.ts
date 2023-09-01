@@ -1,11 +1,16 @@
 import { defineConfig } from "cypress";
-
 export default defineConfig({
   responseTimeout: 120000,
   video: true,
   fixturesFolder: "tests/e2e/fixtures",
   screenshotsFolder: "tests/e2e/screenshots",
   videosFolder: "tests/e2e/videos",
+  component: {
+    devServer: {
+      framework: "vue-cli",
+      bundler: "webpack",
+    },
+  },
   e2e: {
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.
