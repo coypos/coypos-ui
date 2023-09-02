@@ -30,7 +30,7 @@
 <script setup lang="ts"></script>
 <style scoped lang="scss">
 .about {
-  color: white;
+  color: var(--text-second-color);
   height: 590px;
   width: 100%;
   position: relative;
@@ -38,8 +38,8 @@
   padding: 30px;
   border-radius: 40px;
   margin: 55px 15px;
-  background-color: #0b3e62;
-  border: 2px solid darken(#0b3e62, 7.5%);
+  background-color: var(--button-color);
+  border: 2px solid var(--button-color-darker);
   .list {
     position: relative;
     color: black;
@@ -50,8 +50,8 @@
     padding: 20px 20px 20px;
     border-radius: 40px;
     margin: 5px;
-    background-color: #bde3ff;
-    border: 2px solid darken(#bde3ff, 10%);
+    background-color: var(--cart-background-color);
+    border: 2px solid var(--cart-background-color-darker);
   }
   .summary {
     font-size: 1.15em;

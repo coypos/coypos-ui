@@ -27,7 +27,11 @@
         <button-component :text="$t(`bag`)"></button-component>
       </div>
       <div class="col-6">
-        <button-component color="yellow" :text="$t(`help`)"></button-component>
+        <button-component
+          @click="changeColor"
+          color="yellow"
+          :text="$t(`help`)"
+        ></button-component>
       </div>
     </div>
     <scanner-component></scanner-component>
@@ -49,6 +53,36 @@ export default defineComponent({
       useScope: "local",
     });
     return { t };
+  },
+  methods: {
+    changeColor() {
+      document.documentElement.style.setProperty("--text-color", "#000");
+      document.documentElement.style.setProperty("--text-second-color", "#000");
+      document.documentElement.style.setProperty("--text-third-color", "#000");
+      document.documentElement.style.setProperty("--background-color", "#fff");
+      document.documentElement.style.setProperty("--button-color", "#fdf");
+      document.documentElement.style.setProperty(
+        "--button-color-darker",
+        "#fef"
+      );
+      document.documentElement.style.setProperty("--button-text-color", "#000");
+      document.documentElement.style.setProperty(
+        "--button-color-warning",
+        "#fbf"
+      );
+      document.documentElement.style.setProperty(
+        "--button-color-warning-darker",
+        "#faf"
+      );
+      document.documentElement.style.setProperty(
+        "--cart-background-color",
+        "#fef"
+      );
+      document.documentElement.style.setProperty(
+        "--cart-background-color-darker",
+        "#fcf"
+      );
+    },
   },
 });
 </script>

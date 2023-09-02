@@ -21,23 +21,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #0d99ff;
-  background-color: #085085;
+  color: var(--text-color);
+  background-color: var(--background-color);
   width: 100%;
   height: 100vh;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>
 <script lang="ts">

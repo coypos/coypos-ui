@@ -96,7 +96,7 @@ export default defineComponent({
     margin-bottom: 30px;
     margin-top: 35px;
     margin-left: 15px;
-    border: 2px solid #0b3e62;
+    border: 2px solid var(--button-color);
   }
   .active {
     -webkit-box-shadow: 0px 0px 12px 0px rgba(255, 255, 255, 1);

@@ -36,8 +36,6 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-$mynewcolor: #0b3e62;
-$mynewcolor2: #ffa629;
 @import "bootstrap";
 .btn-default {
   position: relative;
@@ -55,26 +53,38 @@ $mynewcolor2: #ffa629;
 }
 
 .btn-primary {
-  @include button-variant(
-    $mynewcolor,
-    darken($mynewcolor, 7.5%),
-    darken($mynewcolor, 10%),
-    lighten($mynewcolor, 5%),
-    lighten($mynewcolor, 10%),
-    darken($mynewcolor, 30%)
-  );
-  color: white;
+  --bs-btn-color: var(--button-color);
+  --bs-btn-bg: var(--button-color);
+  --bs-btn-border-color: var(--button-color-darker);
+  --bs-btn-hover-color: var(--button-text-color);
+  --bs-btn-hover-bg: var(--button-color);
+  --bs-btn-hover-border-color: var(--button-color-darker);
+  --bs-btn-focus-shadow-rgb: 7, 39, 62;
+  --bs-btn-active-color: var(--button-color);
+  --bs-btn-active-bg: var(--button-color);
+  --bs-btn-active-border-color: var(--button-color-darker);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: var(--button-color);
+  --bs-btn-disabled-bg: var(--button-color);
+  --bs-btn-disabled-border-color: var(--button-color-darker);
+  color: var(--text-second-color);
 }
 .btn-warning {
-  @include button-variant(
-    $mynewcolor2,
-    darken($mynewcolor2, 7.5%),
-    darken($mynewcolor2, 10%),
-    lighten($mynewcolor2, 5%),
-    lighten($mynewcolor2, 10%),
-    darken($mynewcolor2, 30%)
-  );
-  color: black;
+  --bs-btn-color: var(--button-color-warning);
+  --bs-btn-bg: var(--button-color-warning);
+  --bs-btn-border-color: var(--button-color-warning-darker);
+  --bs-btn-hover-color: var(--text-third-color);
+  --bs-btn-hover-bg: var(--button-color-warning);
+  --bs-btn-hover-border-color: var(--button-color-warning-darker);
+  --bs-btn-focus-shadow-rgb: 254, 149, 3;
+  --bs-btn-active-color: var(--text-third-color);
+  --bs-btn-active-bg: var(--button-color-warning);
+  --bs-btn-active-border-color: var(--button-color-warning-darker);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: var(--button-color-warning-darker);
+  --bs-btn-disabled-bg: var(--button-color-warning);
+  --bs-btn-disabled-border-color: var(--button-color-warning-darker);
+  color: var(--text-third-color);
 }
 .buttonimage {
   position: absolute;
