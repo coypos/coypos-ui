@@ -72,10 +72,10 @@ jobs:
           echo VUE_APP_API_URL=${{ secrets.API_URL }} >> .env
           echo VUE_APP_TOKEN=${{ secrets.API_SECRET }} >> .env
           echo BASE_URL=https://smilginp.evolpe.net  >> .env
-          npm install
-          npm run build
-          sudo rm -r /var/www/coypos/*
-          sudo cp -r /srv/coypos-ui/dist/* /var/www/coypos/
+          sudo docker-compose kill
+          sudo docker-compose rm -f
+          sudo docker image prune -af
+          sudo docker-compose up -d
     - name: Notify discord
       uses: th0th/notify-discord@v0.4.1
       if: ${{ always() }}
