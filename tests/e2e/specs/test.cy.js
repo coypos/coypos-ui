@@ -44,7 +44,7 @@ describe("user going to cart and selecting products", () => {
     cy.get("div").contains("Pieczywo").click();
     cy.url().should("include", "/category?category=2&lang=pl");
     cy.get("div").contains("Chleby").click();
-    cy.url().should("include", "/products?lang=pl");
+    cy.url().should("include", "/products?category=3&lang=pl");
   });
   it("select fruits", () => {
     cy.visit("/?lang=pl");
@@ -54,7 +54,7 @@ describe("user going to cart and selecting products", () => {
     cy.get("div").contains("Owoce i Warzywa").click();
     cy.url().should("include", "/category?category=1&lang=pl");
     cy.get("div").contains("Owoce").click();
-    cy.url().should("include", "/products?lang=pl");
+    cy.url().should("include", "products?category=1&lang=pl");
   });
 });
 
@@ -64,32 +64,32 @@ describe("user changing languages", () => {
     cy.wait(1000);
     cy.get("#en").click();
     cy.url().should("include", "lang=en");
-    cy.get("div").contains("BAG");
+    cy.get("div").contains("HELP");
     cy.get("#uk").click();
     cy.url().should("include", "lang=uk");
-    cy.get("div").contains("РЕКЛАМА");
+    cy.get("div").contains("ДОПОМОГА");
     cy.get("#de").click();
     cy.url().should("include", "lang=de");
-    cy.get("div").contains("WERBUNG");
+    cy.get("div").contains("HELFEN");
     cy.get("#pl").click();
     cy.url().should("include", "lang=pl");
-    cy.get("div").contains("REKLAMÓWKA");
+    cy.get("div").contains("POMOC");
   });
   it("changing languages on cart", () => {
     cy.visit("/cart?lang=pl");
     cy.wait(1000);
     cy.get("#en").click();
     cy.url().should("include", "lang=en");
-    cy.get("p").contains("HELP");
+    cy.get("div").contains("HELP");
     cy.get("#uk").click();
     cy.url().should("include", "lang=uk");
-    cy.get("p").contains("ДОПОМОГА");
+    cy.get("div").contains("ДОПОМОГА");
     cy.get("#de").click();
     cy.url().should("include", "lang=de");
-    cy.get("p").contains("HELFEN");
+    cy.get("div").contains("HELFEN");
     cy.get("#pl").click();
     cy.url().should("include", "lang=pl");
-    cy.get("p").contains("POMOC");
+    cy.get("div").contains("POMOC");
   });
 });
 

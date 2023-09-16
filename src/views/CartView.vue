@@ -18,7 +18,10 @@
               @click="
                 $router.push({
                   name: `category`,
-                  query: { category: '1' },
+                  query: {
+                    category: '1',
+                    lang: $router.currentRoute.value.query.lang,
+                  },
                 })
               "
               image="/images/products/vegetables.png"
@@ -29,7 +32,10 @@
               @click="
                 $router.push({
                   name: `category`,
-                  query: { category: '2' },
+                  query: {
+                    category: '2',
+                    lang: $router.currentRoute.value.query.lang,
+                  },
                 })
               "
               text="Pieczywo"
@@ -41,7 +47,10 @@
               @click="
                 $router.push({
                   name: `category`,
-                  query: { category: '3' },
+                  query: {
+                    category: '3',
+                    lang: $router.currentRoute.value.query.lang,
+                  },
                 })
               "
               text="Cukierki"

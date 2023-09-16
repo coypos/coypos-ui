@@ -10,6 +10,10 @@
           @click="
             $router.push({
               name: `products`,
+              query: {
+                category: '1',
+                lang: $router.currentRoute.value.query.lang,
+              },
             })
           "
         ></product-component>
@@ -21,6 +25,10 @@
           @click="
             $router.push({
               name: `products`,
+              query: {
+                category: '2',
+                lang: $router.currentRoute.value.query.lang,
+              },
             })
           "
         ></product-component>
@@ -37,6 +45,10 @@
           @click="
             $router.push({
               name: `products`,
+              query: {
+                category: '3',
+                lang: $router.currentRoute.value.query.lang,
+              },
             })
           "
         ></product-component>
@@ -48,6 +60,10 @@
           @click="
             $router.push({
               name: `products`,
+              query: {
+                category: '4',
+                lang: $router.currentRoute.value.query.lang,
+              },
             })
           "
         ></product-component>
@@ -67,6 +83,7 @@
         ></product-component>
       </div>
     </div>
+    <back-button-component where="cart"></back-button-component>
   </div>
 </template>
 <script lang="ts">
@@ -74,6 +91,7 @@ import { defineComponent } from "vue";
 
 import { useI18n } from "vue-i18n";
 import ProductComponent from "@/components/ProductComponent.vue";
+import BackButtonComponent from "@/components/BackButtonComponent.vue";
 import router from "@/router";
 export default defineComponent({
   name: "ThingsView",
@@ -84,6 +102,7 @@ export default defineComponent({
   },
   components: {
     ProductComponent,
+    BackButtonComponent,
   },
   setup() {
     const { t } = useI18n({

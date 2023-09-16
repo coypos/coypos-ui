@@ -10,7 +10,12 @@
           <h1 class="open">{{ $t("welcome") }}</h1>
         </div>
         <button-component
-          @click="$router.push(`/cart`)"
+          @click="
+            $router.push({
+              name: 'cart',
+              query: { lang: $router.currentRoute.value.query.lang },
+            })
+          "
           :text="$t(`start`)"
           color="green"
         ></button-component>

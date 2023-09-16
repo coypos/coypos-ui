@@ -49,7 +49,7 @@ export default defineComponent({
     async changeLanguage(lang: string) {
       this.$storage.setStorageSync("lang", lang);
       this.$i18n.locale = lang;
-      const currentParams = await this.$router.currentRoute.value.params;
+      const currentParams = await this.$router.currentRoute.value.query;
       const currentName = this.$router.currentRoute.value.name;
       const mergedParams = { ...currentParams, lang: lang };
 

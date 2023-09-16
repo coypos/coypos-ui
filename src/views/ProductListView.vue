@@ -9,6 +9,7 @@
       image="/images/products/bread3.png"
       @click="$router.push(`/cart`)"
     ></product-component>
+    <back-button-component where="cart"></back-button-component>
   </div>
 </template>
 <script lang="ts">
@@ -20,9 +21,10 @@ import { useI18n } from "vue-i18n";
 import { showModal } from "@/functions";
 
 import { ProductModel } from "@/types/Product";
+import BackButtonComponent from "@/components/BackButtonComponent.vue";
 export default defineComponent({
   name: "productlistView",
-  components: { ProductComponent },
+  components: { BackButtonComponent, ProductComponent },
   setup() {
     const { t } = useI18n({
       inheritLocale: true,
@@ -35,9 +37,13 @@ export default defineComponent({
   methods: {
     async getProducts() {
       try {
-        await this.$axios.get("/products").then((response) => {
-          this.products = response.data;
-        });
+        await this.$axios
+          .get(
+            `/products?category=${this.$router.currentRoute.value.query.category}`
+          )
+          .then((response) => {
+            this.products = response.data;
+          });
       } catch (e) {
         showModal();
       }
