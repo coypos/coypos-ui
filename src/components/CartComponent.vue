@@ -7,17 +7,10 @@
     </div>
     <div class="row list">
       <div class="col-12">
-        <div class="row">
-          <div class="col-8">Koncentrat pom.</div>
-          <div class="col-4 right">4,99zł</div>
-        </div>
-        <div class="row">
-          <div class="col-8">Ser żółty plas.</div>
-          <div class="col-4 right">8,99zł</div>
-        </div>
-        <div class="row">
-          <div class="col-8">Chipsy ceb.</div>
-          <div class="col-4 right">19,99zł</div>
+        <div v-for="(product, index) in cartList" :key="index" class="row">
+          <div class="col-6">{{ product.name }}</div>
+          <div class="col-2">1</div>
+          <div class="col-4 right">{{ product.price }} zł</div>
         </div>
       </div>
     </div>
@@ -28,11 +21,35 @@
           <img src="/images/buttons/cart.png" />
         </div>
       </div>
-      <div class="col-4 right">21.37 zł</div>
+      <div class="col-4 right">{{ sum.toFixed(2) }}zł</div>
     </div>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script lang="ts">
+import { defineComponent, ref } from "vue";
+import { CartModel } from "@/types/Cart";
+export default defineComponent({
+  name: "CartComponent",
+
+  setup() {
+    let cartList = ref<CartModel[]>([]);
+    let sum = 0.0;
+    return { cartList, sum };
+  },
+  methods: {
+    async getCartList() {
+      this.cartList = this.$storage.getStorageSync("cartList") as CartModel[];
+      this.sum = 0;
+      for (let i = 0; this.cartList.length > i; i++) {
+        this.sum += this.cartList[i].price;
+      }
+    },
+  },
+  mounted() {
+    this.getCartList();
+  },
+});
+</script>
 <style scoped lang="scss">
 .about {
   color: var(--text-color);

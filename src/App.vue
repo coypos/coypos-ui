@@ -63,6 +63,7 @@ export default defineComponent({
   },
   mounted() {
     this.refreshLanguage;
+    this.$storage.setStorageSync("cartList", []);
   },
   watch: {
     $route: function (to) {

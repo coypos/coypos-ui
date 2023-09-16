@@ -89,7 +89,7 @@ import { useI18n } from "vue-i18n";
 import ProductComponent from "@/components/ProductComponent.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
 export default defineComponent({
-  name: "ThingsView",
+  name: "CartView",
   components: {
     ProductComponent,
     CartComponent,

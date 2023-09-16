@@ -7,7 +7,7 @@
       :small="true"
       :text="product.name"
       image="/images/products/bread3.png"
-      @click="$router.push(`/cart`)"
+      @click="addToCart(product.name, product.price)"
     ></product-component>
     <back-button-component where="cart"></back-button-component>
   </div>
@@ -22,6 +22,7 @@ import { showModal } from "@/functions";
 
 import { ProductModel } from "@/types/Product";
 import BackButtonComponent from "@/components/BackButtonComponent.vue";
+import { CartModel } from "@/types/Cart";
 export default defineComponent({
   name: "productlistView",
   components: { BackButtonComponent, ProductComponent },
@@ -47,6 +48,12 @@ export default defineComponent({
       } catch (e) {
         showModal();
       }
+    },
+    async addToCart(name: string, price: number) {
+      let list = this.$storage.getStorageSync("cartList") as CartModel[];
+      list.push({ name: name, price: price });
+      this.$storage.setStorageSync("cartList", list);
+      this.$router.push(`/cart`);
     },
   },
   mounted() {
