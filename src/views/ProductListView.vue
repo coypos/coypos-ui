@@ -1,26 +1,25 @@
 <template>
   <div class="productlist">
     <product-component
-      v-for="number in 15"
+      v-for="product in products"
       class="product"
-      :key="number"
+      :key="product.id"
       :small="true"
-      text="Chleb"
+      :text="product.name"
       image="/images/products/bread3.png"
-      @click="
-        $router.push({
-          name: `products`,
-        })
-      "
+      @click="$router.push(`/cart`)"
     ></product-component>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 import ProductComponent from "@/components/ProductComponent.vue";
 
 import { useI18n } from "vue-i18n";
+import { showModal } from "@/functions";
+
+import { ProductModel } from "@/types/Product";
 export default defineComponent({
   name: "productlistView",
   components: { ProductComponent },
@@ -29,7 +28,23 @@ export default defineComponent({
       inheritLocale: true,
       useScope: "local",
     });
-    return { t };
+    let products = ref<ProductModel[]>([]);
+
+    return { t, products };
+  },
+  methods: {
+    async getProducts() {
+      try {
+        await this.$axios.get("/products").then((response) => {
+          this.products = response.data;
+        });
+      } catch (e) {
+        showModal();
+      }
+    },
+  },
+  mounted() {
+    this.getProducts();
   },
 });
 </script>

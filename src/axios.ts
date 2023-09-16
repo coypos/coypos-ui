@@ -11,6 +11,7 @@ export default {
     app.config.globalProperties.$axios = axios.create({
       baseURL: options.baseUrl,
       headers: {
+        "Content-Type": "application/json",
         Authorization: options.token ? `Bearer ${options.token}` : "",
         XApiKey: process.env.VUE_APP_TOKEN,
       },
