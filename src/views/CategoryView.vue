@@ -79,7 +79,7 @@
         <product-component
           color="yellow"
           :text="$t(`help`)"
-          image="/images/products/chat.png"
+          image="/images/buttons/chat.png"
         ></product-component>
       </div>
     </div>
