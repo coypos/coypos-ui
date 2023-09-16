@@ -8,11 +8,11 @@
       <div class="col-7">
         <div class="row">
           <div class="col-12">
-            <h3>Zeskanuj kod towaru lub wybierz kategorie</h3>
+            <h3 class="scaninfo">Zeskanuj kod towaru lub wybierz kategorie</h3>
           </div>
         </div>
         <div class="row">
-          <div class="col-6">
+          <div class="col-4">
             <product-component
               text="Owoce i Warzywa"
               @click="
@@ -24,7 +24,7 @@
               image="/images/products/vegetables.png"
             ></product-component>
           </div>
-          <div class="col-6">
+          <div class="col-4">
             <product-component
               @click="
                 $router.push({
@@ -36,20 +36,34 @@
               image="/images/products/bread.png"
             ></product-component>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-6">
+          <div class="col-4">
             <product-component
-              text="Zakończ i zapłać"
-              image="/images/products/card.png"
+              @click="
+                $router.push({
+                  name: `category`,
+                  query: { category: '3' },
+                })
+              "
+              text="Cukierki"
+              image="/images/products/sweets.png"
             ></product-component>
           </div>
-          <div class="col-6">
-            <product-component
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button-component
+              text="Zakończ i zapłać"
+              :width="90"
+            ></button-component>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button-component
               color="yellow"
               :text="$t(`help`)"
-              image="/images/products/chat.png"
-            ></product-component>
+              :width="90"
+            ></button-component>
           </div>
         </div>
       </div>
@@ -64,12 +78,13 @@ import ScannerComponent from "@/components/ScannerComponent.vue";
 
 import { useI18n } from "vue-i18n";
 import ProductComponent from "@/components/ProductComponent.vue";
+import ButtonComponent from "@/components/ButtonComponent.vue";
 export default defineComponent({
   name: "ThingsView",
   components: {
     ProductComponent,
     CartComponent,
-
+    ButtonComponent,
     ScannerComponent,
   },
   setup() {
@@ -85,5 +100,8 @@ export default defineComponent({
 <style scoped lang="scss">
 .cart {
   padding-top: 30px;
+}
+.scaninfo {
+  font-weight: 700;
 }
 </style>

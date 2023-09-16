@@ -12,6 +12,7 @@
         <button-component
           @click="$router.push(`/cart`)"
           :text="$t(`start`)"
+          color="green"
         ></button-component>
         <div class="info">{{ $t("info") }}</div>
       </div>
@@ -23,14 +24,12 @@
       <div class="col-12"></div>
     </div>
     <div class="row">
-      <div class="col-6">
-        <button-component :text="$t(`bag`)"></button-component>
-      </div>
-      <div class="col-6">
+      <div class="col-12">
         <button-component
           @click="changeColor"
           color="yellow"
           :text="$t(`help`)"
+          :width="70"
         ></button-component>
       </div>
     </div>
@@ -100,6 +99,7 @@ export default defineComponent({
   margin-top: 10px;
   margin-bottom: 40px;
   font-size: 20px;
+  font-weight: 700;
 }
 .logo {
   margin-top: 50px;

@@ -1,5 +1,7 @@
 <template>
-  <div :class="buttonClass">{{ text }}</div>
+  <div :style="'width:' + width + '%;'" :class="buttonClass">
+    {{ text }}
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
@@ -9,6 +11,8 @@ export default defineComponent({
   props: {
     text: String,
     color: String,
+    width: Number,
+    height: Number,
   },
   setup() {
     let buttonClass = ref<string>("btn btn-primary btn-lg btn-default  mr-1");
@@ -30,15 +34,17 @@ export default defineComponent({
 <style scoped lang="scss">
 @import "bootstrap";
 .btn-default {
-  height: 190px;
+  height: 180px;
   min-width: 420px;
   font-size: 40px;
   line-height: 40px;
   text-align: center;
-  padding-top: 75px;
+  padding-top: 70px;
   font-weight: 700;
   border-radius: 30px;
   border-width: 2px;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .btn-primary {
@@ -56,23 +62,23 @@ export default defineComponent({
   --bs-btn-disabled-color: var(--button-color);
   --bs-btn-disabled-bg: var(--button-color);
   --bs-btn-disabled-border-color: var(--button-color-darker);
-  color: var(--text-second-color);
+  color: var(--button-text-color);
 }
 .btn-warning {
   --bs-btn-color: var(--button-color-warning);
   --bs-btn-bg: var(--button-color-warning);
   --bs-btn-border-color: var(--button-color-warning-darker);
-  --bs-btn-hover-color: var(--text-third-color);
+  --bs-btn-hover-color: var(--button-warning-text-color);
   --bs-btn-hover-bg: var(--button-color-warning);
   --bs-btn-hover-border-color: var(--button-color-warning-darker);
   --bs-btn-focus-shadow-rgb: 254, 149, 3;
-  --bs-btn-active-color: var(--text-third-color);
+  --bs-btn-active-color: var(--button-warning-text-color);
   --bs-btn-active-bg: var(--button-color-warning);
   --bs-btn-active-border-color: var(--button-color-warning-darker);
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color: var(--button-color-warning-darker);
   --bs-btn-disabled-bg: var(--button-color-warning);
   --bs-btn-disabled-border-color: var(--button-color-warning-darker);
-  color: var(--text-third-color);
+  color: var(--button-warning-text-color);
 }
 </style>

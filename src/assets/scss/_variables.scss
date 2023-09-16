@@ -1,15 +1,26 @@
 
 :root {
   /* default value */
-  --text-color: #fff;
-  --text-second-color: #fff;
-  --text-third-color: #000;
-  --background-color: #085085;
-  --button-color: #0b3e62;
-  --button-color-darker: #072840;
-  --button-text-color: white;
+  //buttons
+  --button-color: #14AE5C;
+  --button-color-darker: #27AE7C;
+  --button-text-color: #fff;
   --button-color-warning: #ffa629;
   --button-color-warning-darker: #ff9603;
-  --cart-background-color: #bde3ff;
-  --cart-background-color-darker: #8acdff;
+  --button-warning-text-color: #000;
+  //products
+  --product-color: #0B3E62;
+  --product-color-darker:#3B4E65;
+  --product-text-color: #fff;
+ //cart
+  --cart-first-background-color:#fff;
+  --cart-second-background-color:#bde3ff;
+  --cart-second-background-color-darker: #8acdff;
+  --cart-border-color:#ccc;
+
+
+//main settings
+  --text-color: #000;
+  --background-color: #fff;
+  --flag-border-color:#BDE3FF;
 }

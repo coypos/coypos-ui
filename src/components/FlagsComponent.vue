@@ -96,12 +96,12 @@ export default defineComponent({
     margin-bottom: 30px;
     margin-top: 35px;
     margin-left: 15px;
-    border: 2px solid var(--button-color);
+    border: 2px solid var(--text-color);
   }
   .active {
-    -webkit-box-shadow: 0px 0px 12px 0px rgba(255, 255, 255, 1);
-    -moz-box-shadow: 0px 0px 12px 0px rgba(255, 255, 255, 1);
-    box-shadow: 0px 0px 12px 0px rgba(255, 255, 255, 1);
+    -webkit-box-shadow: 0px 0px 12px 11px var(--flag-border-color);
+    -moz-box-shadow: 0px 0px 12px 11px var(--flag-border-color);
+    box-shadow: 0px 0px 12px 11px var(--flag-border-color);
   }
   .horizontally {
     display: inline;

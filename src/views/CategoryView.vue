@@ -1,7 +1,9 @@
 <template>
   <div class="cart">
     <div v-if="$router.currentRoute.value.query.category == 1" class="row">
-      <div class="col-6">
+      <div class="col-3"></div>
+
+      <div class="col-3">
         <product-component
           text="Owoce"
           image="/images/products/fruits.png"
@@ -12,7 +14,7 @@
           "
         ></product-component>
       </div>
-      <div class="col-6">
+      <div class="col-3">
         <product-component
           text="Warzywa"
           image="/images/products/vegetables2.png"
@@ -23,9 +25,12 @@
           "
         ></product-component>
       </div>
+      <div class="col-3"></div>
     </div>
     <div v-if="$router.currentRoute.value.query.category == 2" class="row">
-      <div class="col-6">
+      <div class="col-3"></div>
+
+      <div class="col-3">
         <product-component
           text="Chleby"
           image="/images/products/bread3.png"
@@ -36,7 +41,7 @@
           "
         ></product-component>
       </div>
-      <div class="col-6">
+      <div class="col-3">
         <product-component
           text="Bułki"
           image="/images/products/bread2.png"
@@ -47,10 +52,14 @@
           "
         ></product-component>
       </div>
+      <div class="col-3"></div>
     </div>
     <div class="row">
-      <div class="col-6"></div>
-      <div class="col-6">
+      <div class="col-3"></div>
+      <div class="col-3"></div>
+      <div class="col-3"></div>
+
+      <div class="col-3">
         <product-component
           color="yellow"
           :text="$t(`help`)"
