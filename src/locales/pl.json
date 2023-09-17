@@ -5,5 +5,7 @@
   "info":"ZESKANUJ ARTYKUŁ LUB DOTKNIJ START, ABY ROZPOCZĄĆ",
   "start": "START",
   "bag": "REKLAMÓWKA",
-  "help": "POMOC"
+  "help": "POMOC",
+  "login":"Logowanie Pracownika",
+  "cardscan": "ZESKANUJ KARTE, ABY ROZPOCZĄĆ"
 }

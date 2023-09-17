@@ -3,7 +3,17 @@ import { shallowMount, mount } from "@vue/test-utils";
 import ButtonComponent from "@/components/ButtonComponent.vue";
 import FlagsComponent from "@/components/FlagsComponent.vue";
 import ProductComponent from "@/components/ProductComponent.vue";
-
+import BackButtonComponent from "@/components/BackButtonComponent.vue";
+import CartComponent from "@/components/CartComponent.vue";
+import ModalComponent from "@/components/ModalComponent.vue";
+import PinComponent from "@/components/PinComponent.vue";
+describe("BackButtonComponent.vue", () => {
+  it("should render", () => {
+    const wrapper = shallowMount(BackButtonComponent);
+    expect(wrapper.find(".backbutton").isVisible()).to.be.true;
+    expect(wrapper.find(".backbutton").find("img").isVisible()).to.be.true;
+  });
+});
 describe("ButtonComponent.vue", () => {
   it("renders text in button when passed", () => {
     const text = "message";
@@ -20,6 +30,18 @@ describe("ButtonComponent.vue", () => {
     expect(classes).to.contain("btn-warning");
   });
 });
+describe("CartComponent.vue", () => {
+  it("should render", () => {
+    const wrapper = shallowMount(CartComponent);
+    expect(wrapper.find(".about").isVisible()).to.be.true;
+    expect(wrapper.find(".about").find(".list").isVisible()).to.be.true;
+    expect(wrapper.find(".about").find(".summary").isVisible()).to.be.true;
+    expect(
+      wrapper.find(".about").find(".summary").find(".right").text()
+    ).to.contain("0.00zł");
+  });
+});
+
 describe("FlagsComponent.vue", () => {
   it("should render", () => {
     const wrapper = shallowMount(FlagsComponent);
@@ -30,6 +52,47 @@ describe("FlagsComponent.vue", () => {
     expect(wrapper.find("#de").isVisible()).to.be.true;
   });
 });
+
+describe("ModalComponent.vue", () => {
+  it("renders title when passed", () => {
+    const title = "message";
+    const wrapper = shallowMount(ModalComponent, {
+      props: { title },
+    });
+    expect(wrapper.text()).to.include(title);
+  });
+  it("renders text when passed", () => {
+    const text = "message";
+    const wrapper = shallowMount(ModalComponent, {
+      props: { text },
+    });
+    expect(wrapper.text()).to.include(text);
+  });
+});
+
+describe("PinComponent.vue", () => {
+  it("should render", () => {
+    const wrapper = shallowMount(PinComponent);
+    expect(wrapper.find(".pin").isVisible()).to.be.true;
+    expect(wrapper.find(".pin").findAll(".row").length).to.equal(4);
+    expect(wrapper.find(".pin").find(".row").findAll(".col-4").length).to.equal(
+      3
+    );
+  });
+  it("click on number should add number to pin", () => {
+    const wrapper = shallowMount(PinComponent);
+
+    wrapper
+      .find(".pin")
+      .find(".row")
+      .find(".col-4")
+      .trigger("click")
+      .then(() => {
+        expect(wrapper.find(".row").find(".col-12").text()).to.contain("1");
+      });
+  });
+});
+
 describe("ProductComponent.vue", () => {
   it("renders text in button when passed", () => {
     const text = "message";

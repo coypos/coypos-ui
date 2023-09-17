@@ -1,6 +1,13 @@
 <template>
   <div class="container-fluid">
-    <div class="row" v-if="$router.currentRoute.value.name != `home`">
+    <div
+      class="row"
+      v-if="
+        $router.currentRoute.value.name != `home` &&
+        $router.currentRoute.value.name != `login` &&
+        $router.currentRoute.value.name != `pin`
+      "
+    >
       <div class="col-12">
         <HeaderLayout></HeaderLayout>
       </div>
@@ -12,6 +19,12 @@
         <router-view />
       </div>
     </div>
+    <modal-component
+      :title="ErrorModal.title"
+      :text="ErrorModal.text"
+      :buttons="ErrorModal.buttons"
+      ref="staticBackdrop"
+    ></modal-component>
   </div>
 </template>
 
@@ -31,13 +44,23 @@
 import { defineComponent, ref } from "vue";
 import { QueryModel } from "@/types/Query";
 import HeaderLayout from "@/components/layout/Header.vue";
+import ModalComponent from "@/components/ModalComponent.vue";
+import { ModalModel } from "@/types/Modal";
 
 export default defineComponent({
   name: "app",
-  components: { HeaderLayout },
+  components: { ModalComponent, HeaderLayout },
   setup() {
     let flagClass = ref<string>("flag");
-    return { flagClass };
+    let ErrorModal = ref<ModalModel>({
+      title: "Kasa zamknięta",
+      text: "Wystąpił błąd kasy, kasa została zamknięta. Poproś o pomoc sprzedawce.",
+      buttons: [
+        { text: "Dostęp Administracyjny", color: "danger" },
+        { text: "Wezwij sprzedawce", color: "success" },
+      ],
+    });
+    return { flagClass, ErrorModal };
   },
   methods: {
     async changeLanguage(lang: string) {

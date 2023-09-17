@@ -31,7 +31,7 @@
     <div class="row">
       <div class="col-12">
         <button-component
-          @click="changeColor"
+          @click="showModal()"
           color="yellow"
           :text="$t(`help`)"
           :width="70"
@@ -48,6 +48,7 @@ import { useI18n } from "vue-i18n";
 import FlagsComponent from "@/components/FlagsComponent.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
 import ScannerComponent from "@/components/ScannerComponent.vue";
+import { showModal } from "@/functions";
 export default defineComponent({
   name: "HomeView",
   components: { ScannerComponent, ButtonComponent, FlagsComponent },
@@ -59,6 +60,7 @@ export default defineComponent({
     return { t };
   },
   methods: {
+    showModal,
     changeColor() {
       document.documentElement.style.setProperty("--text-color", "#000");
       document.documentElement.style.setProperty("--text-second-color", "#000");

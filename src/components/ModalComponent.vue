@@ -28,6 +28,14 @@
             type="button"
             :class="'btn btn-' + button.color"
             data-bs-dismiss="modal"
+            @click="
+              $router.push({
+                name: `login`,
+                query: {
+                  lang: $router.currentRoute.value.query.lang,
+                },
+              })
+            "
           >
             {{ button.text }}
           </button>

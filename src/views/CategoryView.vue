@@ -77,6 +77,7 @@
 
       <div class="col-3">
         <product-component
+          @click="showModal()"
           color="yellow"
           :text="$t(`help`)"
           image="/images/buttons/chat.png"
@@ -93,9 +94,11 @@ import { useI18n } from "vue-i18n";
 import ProductComponent from "@/components/ProductComponent.vue";
 import BackButtonComponent from "@/components/BackButtonComponent.vue";
 import router from "@/router";
+import { showModal } from "@/functions";
 export default defineComponent({
   name: "ThingsView",
   methods: {
+    showModal,
     router() {
       return router;
     },

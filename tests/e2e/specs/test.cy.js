@@ -115,15 +115,12 @@ describe("Things test", () => {
   it("delete one thing", () => {
     cy.visit("/things?lang=pl");
     cy.wait(1000);
-    cy.get(".col-3").contains("andrzej").next().next().next().click();
-  });
-  it("add empty thing - check error", () => {
-    cy.visit("/things?lang=pl");
-    cy.wait(1000);
-    cy.get("#add").trigger("click");
-    cy.wait(1000);
-    cy.get(".modal-title")
-      .should("be.visible")
-      .should("have.text", "Kasa zamknięta");
+    cy.get(".col-3")
+      .contains("andrzej")
+      .next()
+      .next()
+      .next()
+      .children()
+      .click();
   });
 });

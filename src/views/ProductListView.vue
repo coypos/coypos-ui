@@ -19,7 +19,6 @@ import ProductComponent from "@/components/ProductComponent.vue";
 
 import { useI18n } from "vue-i18n";
 import { showModal } from "@/functions";
-
 import { ProductModel } from "@/types/Product";
 import BackButtonComponent from "@/components/BackButtonComponent.vue";
 import { CartModel } from "@/types/Cart";

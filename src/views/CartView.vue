@@ -69,6 +69,7 @@
         <div class="row">
           <div class="col-12">
             <button-component
+              @click="showModal()"
               color="yellow"
               :text="$t(`help`)"
               :width="90"
@@ -88,8 +89,10 @@ import ScannerComponent from "@/components/ScannerComponent.vue";
 import { useI18n } from "vue-i18n";
 import ProductComponent from "@/components/ProductComponent.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
+import { showModal } from "@/functions";
 export default defineComponent({
   name: "CartView",
+  methods: { showModal },
   components: {
     ProductComponent,
     CartComponent,

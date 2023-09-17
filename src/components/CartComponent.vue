@@ -33,7 +33,7 @@ export default defineComponent({
 
   setup() {
     let cartList = ref<CartModel[]>([]);
-    let sum = 0.0;
+    let sum = ref<number>(0.0);
     return { cartList, sum };
   },
   methods: {
