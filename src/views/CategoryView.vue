@@ -12,7 +12,7 @@
             $router.push({
               name: `products`,
               query: {
-                category: '1',
+                category: '6',
                 lang: $router.currentRoute.value.query.lang,
               },
             })
@@ -28,7 +28,7 @@
             $router.push({
               name: `products`,
               query: {
-                category: '2',
+                category: '7',
                 lang: $router.currentRoute.value.query.lang,
               },
             })
@@ -49,7 +49,7 @@
             $router.push({
               name: `products`,
               query: {
-                category: '3',
+                category: '8',
                 lang: $router.currentRoute.value.query.lang,
               },
             })
@@ -64,7 +64,7 @@
             $router.push({
               name: `products`,
               query: {
-                category: '4',
+                category: '2',
                 lang: $router.currentRoute.value.query.lang,
               },
             })

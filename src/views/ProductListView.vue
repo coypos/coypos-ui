@@ -37,10 +37,14 @@ export default defineComponent({
   methods: {
     async getProducts() {
       try {
+        const data = {
+          category: { id: this.$router.currentRoute.value.query.category },
+        };
+
+        const jsonString = JSON.stringify(data);
+        const encodedJsonString = encodeURIComponent(jsonString);
         await this.$axios
-          .get(
-            `/products?category=${this.$router.currentRoute.value.query.category}`
-          )
+          .get(`/products?body=${encodedJsonString}`)
           .then((response) => {
             this.products = response.data;
           });
