@@ -60,4 +60,8 @@ export default defineComponent({
   },
 });
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.product {
+  margin: 15px;
+}
+</style>

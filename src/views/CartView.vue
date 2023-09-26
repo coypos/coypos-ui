@@ -19,7 +19,7 @@
                 $router.push({
                   name: `category`,
                   query: {
-                    category: '1',
+                    category: '4',
                     lang: $router.currentRoute.value.query.lang,
                   },
                 })
@@ -33,7 +33,7 @@
                 $router.push({
                   name: `category`,
                   query: {
-                    category: '2',
+                    category: '3',
                     lang: $router.currentRoute.value.query.lang,
                   },
                 })
@@ -48,7 +48,7 @@
                 $router.push({
                   name: `category`,
                   query: {
-                    category: '3',
+                    category: '5',
                     lang: $router.currentRoute.value.query.lang,
                   },
                 })
@@ -60,20 +60,26 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <button-component
+            <product-component
+              @click="showModal()"
+              :small="true"
+              :width="100"
+              color="green"
               text="Zakończ i zapłać"
-              :width="90"
-            ></button-component>
+              image="/images/buttons/card.png"
+            ></product-component>
           </div>
         </div>
         <div class="row">
           <div class="col-12">
-            <button-component
+            <product-component
               @click="showModal()"
+              :small="true"
+              :width="100"
               color="yellow"
               :text="$t(`help`)"
-              :width="90"
-            ></button-component>
+              image="/images/buttons/chat.png"
+            ></product-component>
           </div>
         </div>
       </div>
@@ -81,22 +87,21 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 import CartComponent from "@/components/CartComponent.vue";
 import ScannerComponent from "@/components/ScannerComponent.vue";
 
 import { useI18n } from "vue-i18n";
 import ProductComponent from "@/components/ProductComponent.vue";
-import ButtonComponent from "@/components/ButtonComponent.vue";
+import { CategoryModel } from "@/types/Category";
 import { showModal } from "@/functions";
 export default defineComponent({
   name: "CartView",
-  methods: { showModal },
+
   components: {
     ProductComponent,
     CartComponent,
-    ButtonComponent,
     ScannerComponent,
   },
   setup() {
@@ -104,7 +109,32 @@ export default defineComponent({
       inheritLocale: true,
       useScope: "local",
     });
-    return { t };
+    let categories = ref<CategoryModel[]>([]);
+    return { t, categories };
+  },
+  methods: {
+    async getParentCategoriesList() {
+      const data = {
+        parentCategory: 3,
+      };
+
+      const jsonString = JSON.stringify(data);
+      const encodedJsonString = encodeURIComponent(jsonString);
+
+      try {
+        await this.$axios
+          .get(`/categories?body=${encodedJsonString}`)
+          .then((response) => {
+            this.categories = response.data;
+            console.log(response.data);
+          });
+      } catch (e) {
+        showModal();
+      }
+    },
+  },
+  mounted() {
+    this.getParentCategoriesList();
   },
 });
 </script>

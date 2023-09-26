@@ -90,10 +90,16 @@ export default defineComponent({
     z-index: 9;
     position: relative;
     border-radius: 100%;
-    margin-top: -30px;
+
     background-color: #f3f3f3;
+    max-height: 100px;
+    max-width: 100px;
+    margin: auto;
+    margin-top: -40px;
     img {
       padding: 10px;
+      max-height: 100px;
+      max-width: 100px;
       width: 100%;
       height: 100%;
     }

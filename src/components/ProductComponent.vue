@@ -1,5 +1,5 @@
 <template>
-  <div :class="buttonClass">
+  <div :style="'width:' + width + '%;'" :class="buttonClass">
     <p>{{ text }}</p>
     <img class="buttonimage" :src="image" />
   </div>
@@ -14,6 +14,7 @@ export default defineComponent({
     image: String,
     small: Boolean,
     color: String,
+    width: Number,
   },
   setup() {
     let buttonClass = ref<string>("btn btn-primary btn-lg btn-default  mr-1");
@@ -21,10 +22,13 @@ export default defineComponent({
   },
   methods: {
     updateClass() {
-      if (this.color == "yellow") {
+      if (this.color == "yellow" && this.small) {
+        this.buttonClass = "btn btn-warning small btn-default btn-lg mr-1 ";
+      } else if (this.color == "green" && this.small) {
+        this.buttonClass = "btn btn-success small btn-default btn-lg mr-1 ";
+      } else if (this.color == "yellow") {
         this.buttonClass = "btn btn-warning btn-default btn-lg mr-1 ";
-      }
-      if (this.small) {
+      } else if (this.small) {
         this.buttonClass = "btn  btn-primary small btn-default btn-lg mr-1 ";
       }
       return this.buttonClass;
@@ -100,7 +104,7 @@ export default defineComponent({
 .small {
   position: relative;
   top: 0;
-  height: 200px;
+  height: 180px;
   width: 170px;
   font-size: 30px;
   line-height: 30px;
@@ -109,12 +113,10 @@ export default defineComponent({
   font-weight: 700;
   border-radius: 40px;
   border-width: 2px;
-  margin: 15px;
   .buttonimage {
     position: absolute;
     height: 110px;
     width: 110px;
-    left: 25px;
     bottom: 10px;
   }
 }

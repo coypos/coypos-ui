@@ -1,11 +1,13 @@
+import { CategoryModel } from "@/types/Category";
+
 export interface ProductModel {
   ID: number | null;
 
   CreateDate: Date | string | null;
 
-  UpdatedDate: Date | string | null;
+  UpdateDate: Date | string | null;
 
-  Status: boolean | null;
+  Enabled: boolean | null;
 
   Name: string | null;
 
@@ -13,15 +15,13 @@ export interface ProductModel {
 
   Price: number | null;
 
-  Quantity: number | null;
-
-  IsWeight: boolean | null;
-
   IsLoose: boolean | null;
+
+  Weight: number | null;
 
   Description: string | null;
 
-  Category: string | null;
+  Category: CategoryModel | null;
 
   Image: string | null;
 }

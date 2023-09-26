@@ -1,12 +1,13 @@
 <template>
   <div class="cart">
-    <div v-if="$router.currentRoute.value.query.category == 1" class="row">
+    <div v-if="$router.currentRoute.value.query.category == 4" class="row">
       <div class="col-3"></div>
 
       <div class="col-3">
         <product-component
           text="Owoce"
           image="/images/products/fruits.png"
+          :small="false"
           @click="
             $router.push({
               name: `products`,
@@ -22,6 +23,7 @@
         <product-component
           text="Warzywa"
           image="/images/products/vegetables2.png"
+          :small="false"
           @click="
             $router.push({
               name: `products`,
@@ -35,7 +37,8 @@
       </div>
       <div class="col-3"></div>
     </div>
-    <div v-if="$router.currentRoute.value.query.category == 2" class="row">
+
+    <div v-if="$router.currentRoute.value.query.category == 3" class="row">
       <div class="col-3"></div>
 
       <div class="col-3">
@@ -71,13 +74,11 @@
       <div class="col-3"></div>
     </div>
     <div class="row">
-      <div class="col-3"></div>
-      <div class="col-3"></div>
-      <div class="col-3"></div>
-
-      <div class="col-3">
+      <div class="col-12">
         <product-component
           @click="showModal()"
+          :small="true"
+          :width="80"
           color="yellow"
           :text="$t(`help`)"
           image="/images/buttons/chat.png"
