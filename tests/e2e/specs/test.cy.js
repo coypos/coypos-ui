@@ -44,7 +44,7 @@ describe("user going to cart and selecting products", () => {
     cy.get("div").contains("Pieczywo").click();
     cy.url().should("include", "/category?category=3&lang=pl");
     cy.get("div").contains("Chleby").click();
-    cy.url().should("include", "/products?category=3&lang=pl");
+    cy.url().should("include", "/products?category=8&lang=pl");
   });
   it("select fruits", () => {
     cy.visit("/?lang=pl");
@@ -54,7 +54,7 @@ describe("user going to cart and selecting products", () => {
     cy.get("div").contains("Owoce i Warzywa").click();
     cy.url().should("include", "/category?category=4&lang=pl");
     cy.get("div").contains("Owoce").click();
-    cy.url().should("include", "products?category=1&lang=pl");
+    cy.url().should("include", "products?category=6&lang=pl");
   });
 });
 
