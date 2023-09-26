@@ -55,7 +55,7 @@ jobs:
       env:
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
         GITHUB_ACTOR: ${{ github.actor }}
-        GITHUB_JOB_NAME: "Testy jednostkowe i e2e"
+        GITHUB_JOB_NAME: ${{ github.event.head_commit.message }}
         GITHUB_JOB_STATUS: ${{ job.status }}
   deploy:
     needs: build
@@ -90,5 +90,5 @@ jobs:
       env:
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}
         GITHUB_ACTOR: ${{ github.actor }}
-        GITHUB_JOB_NAME: "Deploy na serwer"
+        GITHUB_JOB_NAME: ${{ github.event.head_commit.message }}
         GITHUB_JOB_STATUS: ${{ job.status }}
