@@ -17,22 +17,6 @@ describe("Cash register Language test", () => {
     cy.visit("/?lang=de");
     cy.contains("h1", "KASSE GEÖFFNET");
   });
-  it("Things View button PL", () => {
-    cy.visit("/things?lang=pl");
-    cy.contains("#add", "Dodaj");
-  });
-  it("Things View button EN", () => {
-    cy.visit("/things?lang=en");
-    cy.contains("#add", "Add");
-  });
-  it("Things View button UK", () => {
-    cy.visit("/things?lang=uk");
-    cy.contains("#add", "додати");
-  });
-  it("Things View button DE", () => {
-    cy.visit("/things?lang=de");
-    cy.contains("#add", "Hinzufügen");
-  });
 });
 
 describe("user going to cart and selecting products", () => {

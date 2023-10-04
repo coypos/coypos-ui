@@ -30,9 +30,18 @@ jobs:
         echo VUE_APP_API_URL=${{ secrets.API_URL }} >> .env
         echo VUE_APP_TOKEN=${{ secrets.API_SECRET }} >> .env
         cat .env
-    - run: npm install
-    - run: npm run test:unit
-    - run: npm run test
+    - name: Run install
+      uses: borales/actions-yarn@v4
+      with:
+        cmd: install # will run `yarn install` command
+    - name: Unit Test run
+      uses: borales/actions-yarn@v4
+      with:
+        cmd: test:unit
+    - name: E2E test run
+      uses: borales/actions-yarn@v4
+      with:
+        cmd: test
     - name: Send screenshot to discord channel
       uses: sinshutu/upload-to-discord@master
       if: failure()
