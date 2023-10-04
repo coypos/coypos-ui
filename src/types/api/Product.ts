@@ -1,4 +1,4 @@
-import { CategoryModel } from "@/types/Category";
+import { CategoryModel } from "@/types/api/Category";
 
 export interface ProductModel {
   ID: number | null;

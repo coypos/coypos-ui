@@ -27,7 +27,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { CartModel } from "@/types/Cart";
+import { CartModel } from "@/types/api/Cart";
 export default defineComponent({
   name: "CartComponent",
 

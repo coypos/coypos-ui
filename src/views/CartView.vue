@@ -12,49 +12,19 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-4">
+          <div v-for="category in categories" :key="category.id" class="col-4">
             <product-component
-              text="Owoce i Warzywa"
+              :text="category.name"
               @click="
                 $router.push({
                   name: `category`,
                   query: {
-                    category: '4',
+                    category: category.id,
                     lang: $router.currentRoute.value.query.lang,
                   },
                 })
               "
               image="/images/products/vegetables.png"
-            ></product-component>
-          </div>
-          <div class="col-4">
-            <product-component
-              @click="
-                $router.push({
-                  name: `category`,
-                  query: {
-                    category: '3',
-                    lang: $router.currentRoute.value.query.lang,
-                  },
-                })
-              "
-              text="Pieczywo"
-              image="/images/products/bread.png"
-            ></product-component>
-          </div>
-          <div class="col-4">
-            <product-component
-              @click="
-                $router.push({
-                  name: `category`,
-                  query: {
-                    category: '5',
-                    lang: $router.currentRoute.value.query.lang,
-                  },
-                })
-              "
-              text="Cukierki"
-              image="/images/products/sweets.png"
             ></product-component>
           </div>
         </div>
@@ -94,7 +64,7 @@ import ScannerComponent from "@/components/ScannerComponent.vue";
 
 import { useI18n } from "vue-i18n";
 import ProductComponent from "@/components/ProductComponent.vue";
-import { CategoryModel } from "@/types/Category";
+import { CategoryModel } from "@/types/api/Category";
 import { showModal } from "@/functions";
 export default defineComponent({
   name: "CartView",
@@ -115,7 +85,7 @@ export default defineComponent({
   methods: {
     async getParentCategoriesList() {
       const data = {
-        parentCategory: 3,
+        ParentCategory: null,
       };
 
       const jsonString = JSON.stringify(data);
@@ -125,8 +95,10 @@ export default defineComponent({
         await this.$axios
           .get(`/categories?body=${encodedJsonString}`)
           .then((response) => {
-            this.categories = response.data;
-            console.log(response.data);
+            this.categories = response.data.filter((object: CategoryModel) => {
+              return object.parentCategory == null;
+            });
+            console.log(this.categories);
           });
       } catch (e) {
         showModal();

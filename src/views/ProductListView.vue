@@ -19,9 +19,9 @@ import ProductComponent from "@/components/ProductComponent.vue";
 
 import { useI18n } from "vue-i18n";
 import { showModal } from "@/functions";
-import { ProductModel } from "@/types/Product";
+import { ProductModel } from "@/types/api/Product";
 import BackButtonComponent from "@/components/BackButtonComponent.vue";
-import { CartModel } from "@/types/Cart";
+import { CartModel } from "@/types/api/Cart";
 export default defineComponent({
   name: "productlistView",
   components: { BackButtonComponent, ProductComponent },
