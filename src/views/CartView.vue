@@ -98,7 +98,6 @@ export default defineComponent({
             this.categories = response.data.filter((object: CategoryModel) => {
               return object.parentCategory == null;
             });
-            console.log(this.categories);
           });
       } catch (e) {
         showModal();
