@@ -1,7 +1,7 @@
 export interface SettingModel {
-  ID: number | null;
+  id: number | null;
 
-  Key: string | null;
+  key: string;
 
-  Value: string | null;
+  value: string | null;
 }

@@ -45,8 +45,14 @@ import { defineComponent, ref } from "vue";
 import { QueryModel } from "@/types/Query";
 import HeaderLayout from "@/components/layout/Header.vue";
 import ModalComponent from "@/components/ModalComponent.vue";
+import type { AxiosInstance } from "axios";
 import { ModalModel } from "@/types/Modal";
-
+declare module "@vue/runtime-core" {
+  interface ComponentCustomProperties {
+    $axios: AxiosInstance;
+    catTags: string[];
+  }
+}
 export default defineComponent({
   name: "app",
   components: { ModalComponent, HeaderLayout },

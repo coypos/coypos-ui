@@ -22,7 +22,11 @@
         <div class="info">{{ $t("info") }}</div>
       </div>
       <div class="col-2">
-        <img class="logo" src="../assets/logo.png" alt="logo" />
+        <img
+          class="logo"
+          :src="this.$storage.getStorageSync(`logo`)"
+          alt="logo"
+        />
       </div>
     </div>
     <div class="row">
@@ -43,12 +47,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import FlagsComponent from "@/components/FlagsComponent.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
 import ScannerComponent from "@/components/ScannerComponent.vue";
 import { showModal } from "@/functions";
+import { SettingModel } from "@/types/api/Setting";
 export default defineComponent({
   name: "HomeView",
   components: { ScannerComponent, ButtonComponent, FlagsComponent },
@@ -57,38 +62,36 @@ export default defineComponent({
       inheritLocale: true,
       useScope: "local",
     });
-    return { t };
+    let settings = ref<SettingModel[]>([]);
+    return { t, settings };
   },
   methods: {
     showModal,
-    changeColor() {
-      document.documentElement.style.setProperty("--text-color", "#000");
-      document.documentElement.style.setProperty("--text-second-color", "#000");
-      document.documentElement.style.setProperty("--text-third-color", "#000");
-      document.documentElement.style.setProperty("--background-color", "#fff");
-      document.documentElement.style.setProperty("--button-color", "#fdf");
-      document.documentElement.style.setProperty(
-        "--button-color-darker",
-        "#fef"
-      );
-      document.documentElement.style.setProperty("--button-text-color", "#000");
-      document.documentElement.style.setProperty(
-        "--button-color-warning",
-        "#fbf"
-      );
-      document.documentElement.style.setProperty(
-        "--button-color-warning-darker",
-        "#faf"
-      );
-      document.documentElement.style.setProperty(
-        "--cart-background-color",
-        "#fef"
-      );
-      document.documentElement.style.setProperty(
-        "--cart-background-color-darker",
-        "#fcf"
-      );
+    async getSettings() {
+      try {
+        await this.$axios.get(`/settings`).then((response) => {
+          this.settings = response.data;
+        });
+      } catch (e) {
+        showModal();
+      }
+      for (let i = 0; this.settings.length > i; i++) {
+        if (this.settings[i].key.startsWith("--")) {
+          document.documentElement.style.setProperty(
+            this.settings[i].key,
+            this.settings[i].value
+          );
+        } else if (this.settings[i].key == "logo") {
+          this.$storage.setStorageSync(
+            this.settings[i].key,
+            this.settings[i].value
+          );
+        }
+      }
     },
+  },
+  mounted() {
+    this.getSettings();
   },
 });
 </script>

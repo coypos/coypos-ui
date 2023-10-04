@@ -92,35 +92,3 @@ describe("user changing languages", () => {
     cy.get("div").contains("POMOC");
   });
 });
-
-describe("Things test", () => {
-  it("add one thing", () => {
-    cy.visit("/things?lang=pl");
-    cy.wait(1000);
-    cy.get("#input").type("andrzej");
-    cy.wait(1000);
-    cy.get("#add").trigger("click");
-    cy.wait(1000);
-  });
-  it("thing should be visible", () => {
-    cy.visit("/things?lang=pl");
-    cy.wait(1000);
-    cy.get(".col-3")
-      .contains("andrzej")
-      .first()
-      .next()
-      .should("have.text", "jezrdna")
-      .next();
-  });
-  it("delete one thing", () => {
-    cy.visit("/things?lang=pl");
-    cy.wait(1000);
-    cy.get(".col-3")
-      .contains("andrzej")
-      .next()
-      .next()
-      .next()
-      .children()
-      .click();
-  });
-});

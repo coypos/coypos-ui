@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HelloView from "../views/HelloView.vue";
-import ThingsView from "../views/ThingsView.vue";
 import CartView from "../views/CartView.vue";
 import ProductListView from "../views/ProductListView.vue";
 import CategoryView from "../views/CategoryView.vue";
@@ -12,11 +11,6 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "home",
     component: HelloView,
-  },
-  {
-    path: "/things",
-    name: "things",
-    component: ThingsView,
   },
   {
     path: "/cart",
