@@ -28,13 +28,19 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { CartModel } from "@/types/api/Cart";
+import { useI18n } from "vue-i18n";
 export default defineComponent({
   name: "CartComponent",
 
   setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
+
     let cartList = ref<CartModel[]>([]);
     let sum = ref<number>(0.0);
-    return { cartList, sum };
+    return { cartList, sum, t };
   },
   methods: {
     async getCartList() {
