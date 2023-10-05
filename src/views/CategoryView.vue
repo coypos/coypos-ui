@@ -1,78 +1,32 @@
 <template>
   <div class="cart">
-    <div v-if="$router.currentRoute.value.query.category == 4" class="row">
-      <div class="col-3"></div>
-
-      <div class="col-3">
+    <div class="row">
+      <div
+        :class="'col-' + column"
+        v-for="category in categories"
+        :key="category.id"
+      >
         <product-component
-          text="Owoce"
+          :text="category.name"
           image="/images/products/fruits.png"
           :small="false"
           @click="
             $router.push({
               name: `products`,
               query: {
-                category: '6',
+                category: category.id,
                 lang: $router.currentRoute.value.query.lang,
               },
             })
           "
         ></product-component>
       </div>
-      <div class="col-3">
-        <product-component
-          text="Warzywa"
-          image="/images/products/vegetables2.png"
-          :small="false"
-          @click="
-            $router.push({
-              name: `products`,
-              query: {
-                category: '7',
-                lang: $router.currentRoute.value.query.lang,
-              },
-            })
-          "
-        ></product-component>
-      </div>
-      <div class="col-3"></div>
     </div>
-
-    <div v-if="$router.currentRoute.value.query.category == 3" class="row">
-      <div class="col-3"></div>
-
-      <div class="col-3">
-        <product-component
-          text="Chleby"
-          image="/images/products/bread3.png"
-          @click="
-            $router.push({
-              name: `products`,
-              query: {
-                category: '8',
-                lang: $router.currentRoute.value.query.lang,
-              },
-            })
-          "
-        ></product-component>
-      </div>
-      <div class="col-3">
-        <product-component
-          text="Bułki"
-          image="/images/products/bread2.png"
-          @click="
-            $router.push({
-              name: `products`,
-              query: {
-                category: '2',
-                lang: $router.currentRoute.value.query.lang,
-              },
-            })
-          "
-        ></product-component>
-      </div>
-      <div class="col-3"></div>
-    </div>
+    <div
+      v-if="itemsPerPage / categories.length > 2"
+      class="row"
+      style="height: 265px"
+    ></div>
     <div class="row">
       <div class="col-12">
         <product-component
@@ -89,31 +43,56 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
-import { useI18n } from "vue-i18n";
 import ProductComponent from "@/components/ProductComponent.vue";
 import BackButtonComponent from "@/components/BackButtonComponent.vue";
-import router from "@/router";
 import { showModal } from "@/functions";
+import { CategoryModel } from "@/types/api/Category";
+import { SettingModel } from "@/types/api/Setting";
 export default defineComponent({
-  name: "ThingsView",
-  methods: {
-    showModal,
-    router() {
-      return router;
-    },
-  },
+  name: "CategoryView",
+
   components: {
     ProductComponent,
     BackButtonComponent,
   },
   setup() {
-    const { t } = useI18n({
-      inheritLocale: true,
-      useScope: "local",
-    });
-    return { t };
+    let categories = ref<CategoryModel[]>([]);
+    let column = ref<number>(0);
+    let itemsPerPage = ref<number>(5);
+    let settings = ref<SettingModel[]>([]);
+    let page = ref<number>(1);
+    return { settings, page, itemsPerPage, column, categories };
+  },
+
+  methods: {
+    showModal,
+
+    async getParentCategoriesList() {
+      const data = {
+        parentCategory: { id: this.$router.currentRoute.value.query.category },
+      };
+      const jsonString = JSON.stringify(data);
+      const encodedJsonString = encodeURIComponent(jsonString);
+
+      try {
+        await this.$axios
+          .get(
+            `/categories?filter=AND&itemsPerPage=${this.itemsPerPage}&page=${this.page}&body=${encodedJsonString}`
+          )
+          .then((response) => {
+            this.categories = response.data;
+            console.log(this.categories);
+          });
+      } catch (e) {
+        showModal();
+      }
+    },
+  },
+  mounted() {
+    this.column = 12 / Math.ceil(this.itemsPerPage / 2);
+    this.getParentCategoriesList();
   },
 });
 </script>
