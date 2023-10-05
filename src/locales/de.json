@@ -4,5 +4,10 @@
   "info":"SCANNEN SIE EINEN ARTIKEL ODER TIPPEN SIE AUF „START“, UM ZU STARTEN",
   "start": "START",
   "bag": "WERBUNG",
-  "help": "HELFEN"
+  "help": "HELFEN",
+  "login":"Mitarbeiter-Login",
+  "cardscan": "SCANNEN SIE IHRE KARTE, UM ZU STARTEN",
+  "YourShopping": "IHR EINKAUF",
+  "Total": "Summe",
+  "Pay": "Beenden und bezahlen"
 }

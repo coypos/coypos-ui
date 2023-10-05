@@ -4,6 +4,10 @@
   "info":"SCAN AN ARTICLE OR TAP START TO START",
   "start": "START",
   "bag": "BAG",
-  "help": "HELP"
-
+  "help": "HELP",
+  "login":"Employee Login",
+  "cardscan": "SCAN YOUR CARD TO START",
+  "YourShopping": "YOUR SHOPPING",
+  "Total": "Total",
+  "Pay": "Finish and pay"
 }

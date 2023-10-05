@@ -2,7 +2,7 @@
   <div class="about">
     <div class="row">
       <div class="col 12">
-        <h1>TWOJE ZAKUPY</h1>
+        <h1>{{ $t("YourShopping") }}</h1>
       </div>
     </div>
     <div class="row list">
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="row summary">
-      <div class="col-4">Razem:</div>
+      <div class="col-4">{{ $t("Total") }}:</div>
       <div class="col-4 center">
         <div class="cartico">
           <img src="/images/buttons/cart.png" />

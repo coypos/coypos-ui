@@ -35,7 +35,7 @@
               :small="true"
               :width="100"
               color="green"
-              text="Zakończ i zapłać"
+              :text="$t('Pay')"
               image="/images/buttons/card.png"
             ></product-component>
           </div>
@@ -83,6 +83,7 @@ export default defineComponent({
     return { t, categories };
   },
   methods: {
+    showModal,
     async getParentCategoriesList() {
       const data = {
         ParentCategory: null,
