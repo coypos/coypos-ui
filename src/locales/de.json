@@ -10,5 +10,6 @@
   "yourshopping": "IHR EINKAUF",
   "total": "Summe",
   "pay": "Beenden und bezahlen",
-  "scaninfo": "Scannen Sie den Produktcode oder wählen Sie Kategorien aus"
+  "scaninfo": "Scannen Sie den Produktcode oder wählen Sie Kategorien aus",
+  "payinfo": "Wählen Sie eine Zahlungsmethode"
 }

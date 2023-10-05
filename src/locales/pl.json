@@ -10,5 +10,6 @@
   "yourshopping": "TWOJE ZAKUPY",
   "total": "Razem",
   "pay": "Zakończ i zapłać",
-  "scaninfo": "Zeskanuj kod towaru lub wybierz kategorie"
+  "scaninfo": "Zeskanuj kod towaru lub wybierz kategorie",
+  "payinfo": "Wybierz metodę płatności"
 }

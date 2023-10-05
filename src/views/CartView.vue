@@ -8,10 +8,15 @@
       <div class="col-7">
         <div class="row">
           <div class="col-12">
-            <h3 class="scaninfo">{{ $t("scaninfo") }}</h3>
+            <h3 class="scaninfo" v-if="!payView">
+              {{ $t("scaninfo") }}
+            </h3>
+            <h3 class="scaninfo" v-else>
+              {{ $t("payinfo") }}
+            </h3>
           </div>
         </div>
-        <div class="row">
+        <div class="row" v-if="!payView">
           <div v-for="category in categories" :key="category.id" class="col-4">
             <product-component
               :text="category.name"
@@ -29,10 +34,25 @@
             ></product-component>
           </div>
         </div>
+        <div class="row" v-else>
+          <div
+            v-for="(payment, index) in payments"
+            :key="index"
+            class="col-4"
+            style="margin-top: 70px"
+          >
+            <product-component
+              :text="payment.name"
+              image="/images/products/vegetables.png"
+            ></product-component>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-12">
             <product-component
-              @click="showModal()"
+              v-if="!payView"
+              @click="payView = true"
               :small="true"
               :width="100"
               color="green"
@@ -44,8 +64,19 @@
         <div class="row">
           <div class="col-12">
             <product-component
+              v-if="!payView"
               @click="showModal()"
               :small="true"
+              :width="100"
+              color="yellow"
+              :text="$t(`help`)"
+              image="/images/buttons/chat.png"
+            ></product-component>
+
+            <product-component
+              v-else
+              @click="showModal()"
+              :small="false"
               :width="100"
               color="yellow"
               :text="$t(`help`)"
@@ -76,7 +107,9 @@ export default defineComponent({
   },
   setup() {
     let categories = ref<CategoryModel[]>([]);
-    return { categories };
+    let payView = ref<boolean>(false);
+    let payments = ref<CategoryModel[]>([]);
+    return { payments, payView, categories };
   },
   methods: {
     showModal,
@@ -102,6 +135,29 @@ export default defineComponent({
     },
   },
   mounted() {
+    this.payments = [
+      {
+        id: null,
+        name: "Gotówka",
+        parentCategory: null,
+        UpdateDate: null,
+        CreateDate: null,
+      },
+      {
+        id: null,
+        name: "Inne",
+        parentCategory: null,
+        UpdateDate: null,
+        CreateDate: null,
+      },
+      {
+        id: null,
+        name: "Karta",
+        parentCategory: null,
+        UpdateDate: null,
+        CreateDate: null,
+      },
+    ];
     this.getParentCategoriesList();
   },
 });

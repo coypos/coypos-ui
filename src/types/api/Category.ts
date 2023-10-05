@@ -1,7 +1,7 @@
 export interface CategoryModel {
-  ID: number | null;
+  id: number | null;
 
-  Name: string | null;
+  name: string | null;
 
   parentCategory: CategoryModel | null;
 

@@ -10,5 +10,7 @@
   "yourshopping": "YOUR SHOPPING",
   "total": "Total",
   "pay": "Finish and pay",
-  "scaninfo": "Scan the product code or select categories"
+  "scaninfo": "Scan the product code or select categories",
+  "payinfo": "Select a payment method"
+
 }
