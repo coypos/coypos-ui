@@ -2,7 +2,7 @@
   <div class="about">
     <div class="row">
       <div class="col 12">
-        <h1>{{ $t("YourShopping") }}</h1>
+        <h1>{{ $t(`yourshopping`) }}</h1>
       </div>
     </div>
     <div class="row list">
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="row summary">
-      <div class="col-4">{{ $t("Total") }}:</div>
+      <div class="col-4">{{ $t(`total`) }}:</div>
       <div class="col-4 center">
         <div class="cartico">
           <img src="/images/buttons/cart.png" />
@@ -27,20 +27,16 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+
 import { CartModel } from "@/types/api/Cart";
-import { useI18n } from "vue-i18n";
+
 export default defineComponent({
   name: "CartComponent",
 
   setup() {
-    const { t } = useI18n({
-      inheritLocale: true,
-      useScope: "local",
-    });
-
     let cartList = ref<CartModel[]>([]);
     let sum = ref<number>(0.0);
-    return { cartList, sum, t };
+    return { cartList, sum };
   },
   methods: {
     async getCartList() {

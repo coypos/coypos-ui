@@ -7,7 +7,8 @@
   "help": "HELP",
   "login":"Employee Login",
   "cardscan": "SCAN YOUR CARD TO START",
-  "YourShopping": "YOUR SHOPPING",
-  "Total": "Total",
-  "Pay": "Finish and pay"
+  "yourshopping": "YOUR SHOPPING",
+  "total": "Total",
+  "pay": "Finish and pay",
+  "scaninfo": "Scan the product code or select categories"
 }

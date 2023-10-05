@@ -47,6 +47,7 @@ import HeaderLayout from "@/components/layout/Header.vue";
 import ModalComponent from "@/components/ModalComponent.vue";
 import type { AxiosInstance } from "axios";
 import { ModalModel } from "@/types/Modal";
+import { useI18n } from "vue-i18n";
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
     $axios: AxiosInstance;
@@ -57,6 +58,10 @@ export default defineComponent({
   name: "app",
   components: { ModalComponent, HeaderLayout },
   setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
     let flagClass = ref<string>("flag");
     let ErrorModal = ref<ModalModel>({
       title: "Kasa zamknięta",
@@ -66,7 +71,7 @@ export default defineComponent({
         { text: "Wezwij sprzedawce", color: "success" },
       ],
     });
-    return { flagClass, ErrorModal };
+    return { t, flagClass, ErrorModal };
   },
   methods: {
     async changeLanguage(lang: string) {

@@ -8,7 +8,7 @@
       <div class="col-7">
         <div class="row">
           <div class="col-12">
-            <h3 class="scaninfo">Zeskanuj kod towaru lub wybierz kategorie</h3>
+            <h3 class="scaninfo">{{ $t("scaninfo") }}</h3>
           </div>
         </div>
         <div class="row">
@@ -35,7 +35,7 @@
               :small="true"
               :width="100"
               color="green"
-              :text="$t('Pay')"
+              :text="$t(`pay`)"
               image="/images/buttons/card.png"
             ></product-component>
           </div>
@@ -62,7 +62,6 @@ import { defineComponent, ref } from "vue";
 import CartComponent from "@/components/CartComponent.vue";
 import ScannerComponent from "@/components/ScannerComponent.vue";
 
-import { useI18n } from "vue-i18n";
 import ProductComponent from "@/components/ProductComponent.vue";
 import { CategoryModel } from "@/types/api/Category";
 import { showModal } from "@/functions";
@@ -75,12 +74,8 @@ export default defineComponent({
     ScannerComponent,
   },
   setup() {
-    const { t } = useI18n({
-      inheritLocale: true,
-      useScope: "local",
-    });
     let categories = ref<CategoryModel[]>([]);
-    return { t, categories };
+    return { categories };
   },
   methods: {
     showModal,

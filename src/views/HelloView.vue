@@ -58,12 +58,8 @@ export default defineComponent({
   name: "HomeView",
   components: { ScannerComponent, ButtonComponent, FlagsComponent },
   setup() {
-    const { t } = useI18n({
-      inheritLocale: true,
-      useScope: "local",
-    });
     let settings = ref<SettingModel[]>([]);
-    return { t, settings };
+    return { settings };
   },
   methods: {
     showModal,

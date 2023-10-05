@@ -7,7 +7,8 @@
   "help": "POMOC",
   "login":"Logowanie Pracownika",
   "cardscan": "ZESKANUJ KARTE, ABY ROZPOCZĄĆ",
-  "YourShopping": "TWOJE ZAKUPY",
-  "Total": "Razem",
-  "Pay": "Zakończ i zapłać"
+  "yourshopping": "TWOJE ZAKUPY",
+  "total": "Razem",
+  "pay": "Zakończ i zapłać",
+  "scaninfo": "Zeskanuj kod towaru lub wybierz kategorie"
 }
