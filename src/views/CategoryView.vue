@@ -21,6 +21,17 @@
           "
         ></product-component>
       </div>
+      <div :class="'col-' + column">
+        <page-button-component
+          v-if="page != 1"
+          type="left"
+          :page="page - 1"
+        ></page-button-component>
+        <page-button-component
+          type="right"
+          :page="page + 1"
+        ></page-button-component>
+      </div>
     </div>
     <div
       v-if="itemsPerPage / categories.length > 2"
@@ -47,6 +58,7 @@ import { defineComponent, ref } from "vue";
 
 import ProductComponent from "@/components/ProductComponent.vue";
 import BackButtonComponent from "@/components/BackButtonComponent.vue";
+import PageButtonComponent from "@/components/PageButtonComponent.vue";
 import { showModal } from "@/functions";
 import { CategoryModel } from "@/types/api/Category";
 import { SettingModel } from "@/types/api/Setting";
@@ -56,6 +68,7 @@ export default defineComponent({
   components: {
     ProductComponent,
     BackButtonComponent,
+    PageButtonComponent,
   },
   setup() {
     let categories = ref<CategoryModel[]>([]);
@@ -83,16 +96,28 @@ export default defineComponent({
           )
           .then((response) => {
             this.categories = response.data;
-            console.log(this.categories);
           });
       } catch (e) {
+        console.log(e);
         showModal();
       }
     },
   },
   mounted() {
+    this.page = parseInt(this.$router.currentRoute.value.query.page as string);
     this.column = 12 / Math.ceil(this.itemsPerPage / 2);
     this.getParentCategoriesList();
+  },
+  updated() {
+    if (
+      this.page !=
+      parseInt(this.$router.currentRoute.value.query.page as string)
+    ) {
+      this.page = parseInt(
+        this.$router.currentRoute.value.query.page as string
+      );
+      this.getParentCategoriesList();
+    }
   },
 });
 </script>

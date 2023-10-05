@@ -20,6 +20,7 @@
                   name: `category`,
                   query: {
                     category: category.id,
+                    page: 1,
                     lang: $router.currentRoute.value.query.lang,
                   },
                 })
