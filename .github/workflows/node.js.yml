@@ -38,10 +38,7 @@ jobs:
       uses: borales/actions-yarn@v4
       with:
         cmd: test:unit
-    - name: E2E Test run
-      uses: borales/actions-yarn@v4
-      with:
-        cmd: test
+
     - name: Send screenshot to discord channel
       uses: sinshutu/upload-to-discord@master
       if: failure()

@@ -48,7 +48,6 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { useI18n } from "vue-i18n";
 import FlagsComponent from "@/components/FlagsComponent.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
 import ScannerComponent from "@/components/ScannerComponent.vue";
