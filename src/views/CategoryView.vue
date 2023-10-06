@@ -16,6 +16,7 @@
               query: {
                 category: category.id,
                 lang: $router.currentRoute.value.query.lang,
+                page: 1,
               },
             })
           "
@@ -74,9 +75,8 @@ export default defineComponent({
     let categories = ref<CategoryModel[]>([]);
     let column = ref<number>(0);
     let itemsPerPage = ref<number>(5);
-    let settings = ref<SettingModel[]>([]);
     let page = ref<number>(1);
-    return { settings, page, itemsPerPage, column, categories };
+    return { page, itemsPerPage, column, categories };
   },
 
   methods: {

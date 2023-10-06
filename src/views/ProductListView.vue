@@ -1,15 +1,25 @@
 <template>
-  <div class="productlist">
-    <product-component
-      v-for="product in products"
-      class="product"
-      :key="product.id"
-      :small="true"
-      :text="product.name"
-      image="/images/products/bread3.png"
-      @click="addToCart(product.name, product.price)"
-    ></product-component>
-    <back-button-component where="cart"></back-button-component>
+  <div class="row productlist">
+    <div :class="'col-' + column" v-for="product in products" :key="product.id">
+      <product-component
+        :small="false"
+        :text="product.name"
+        image="/images/products/bread3.png"
+        @click="addToCart(product.name, product.price)"
+      ></product-component>
+      <back-button-component where="cart"></back-button-component>
+    </div>
+    <div :class="'col-' + column">
+      <page-button-component
+        v-if="page != 1"
+        type="left"
+        :page="page - 1"
+      ></page-button-component>
+      <page-button-component
+        type="right"
+        :page="page + 1"
+      ></page-button-component>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -22,17 +32,20 @@ import { showModal } from "@/functions";
 import { ProductModel } from "@/types/api/Product";
 import BackButtonComponent from "@/components/BackButtonComponent.vue";
 import { CartModel } from "@/types/api/Cart";
+import PageButtonComponent from "@/components/PageButtonComponent.vue";
 export default defineComponent({
   name: "productlistView",
-  components: { BackButtonComponent, ProductComponent },
+  components: { PageButtonComponent, BackButtonComponent, ProductComponent },
   setup() {
     const { t } = useI18n({
       inheritLocale: true,
       useScope: "local",
     });
     let products = ref<ProductModel[]>([]);
-
-    return { t, products };
+    let column = ref<number>(0);
+    let itemsPerPage = ref<number>(5);
+    let page = ref<number>(1);
+    return { t, products, column, itemsPerPage, page };
   },
   methods: {
     async getProducts() {
@@ -44,7 +57,9 @@ export default defineComponent({
         const jsonString = JSON.stringify(data);
         const encodedJsonString = encodeURIComponent(jsonString);
         await this.$axios
-          .get(`/products?body=${encodedJsonString}`)
+          .get(
+            `/products?filter=AND&itemsPerPage=${this.itemsPerPage}&page=${this.page}&body=${encodedJsonString}`
+          )
           .then((response) => {
             this.products = response.data;
           });
@@ -60,7 +75,20 @@ export default defineComponent({
     },
   },
   mounted() {
+    this.page = parseInt(this.$router.currentRoute.value.query.page as string);
+    this.column = 12 / Math.ceil(this.itemsPerPage / 2);
     this.getProducts();
+  },
+  updated() {
+    if (
+      this.page !=
+      parseInt(this.$router.currentRoute.value.query.page as string)
+    ) {
+      this.page = parseInt(
+        this.$router.currentRoute.value.query.page as string
+      );
+      this.getProducts();
+    }
   },
 });
 </script>
