@@ -6,6 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test": "vue-cli-service test:e2e --headless",
+    "test:github": "UV_USE_IO_URING=0 vue-cli-service test:e2e --headless",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
