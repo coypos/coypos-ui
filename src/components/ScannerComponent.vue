@@ -8,6 +8,9 @@ import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "ScannerComponent",
+  props: {
+    goto: String,
+  },
   data() {
     return {};
   },
@@ -25,8 +28,21 @@ export default defineComponent({
       if (inputValue && !isNaN(parseInt(inputValue))) {
         this.scanned += inputValue;
       } else if (inputValue == "Enter") {
-        console.log(`wyszukaj produkt o numerze ${this.scanned}`);
-        this.scanned = "";
+        if (this.$router.currentRoute.value.name == "login") {
+          console.log("check user exists");
+          const user = true;
+          if (user) {
+            this.$router.push({
+              name: this.goto,
+              query: {
+                id: this.scanned,
+                lang: this.$router.currentRoute.value.query.lang,
+              },
+            });
+          } else {
+            this.scanned = "";
+          }
+        }
       }
     },
     removeScannerEvent() {

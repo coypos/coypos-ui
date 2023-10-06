@@ -17,6 +17,7 @@
                 name: `pin`,
                 query: {
                   lang: $router.currentRoute.value.query.lang,
+                  id: 4044780572,
                 },
               })
             "
@@ -28,7 +29,7 @@
       </div>
     </div>
 
-    <scanner-component></scanner-component>
+    <scanner-component goto="pin"></scanner-component>
   </div>
 </template>
 

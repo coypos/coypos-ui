@@ -15,8 +15,6 @@
         <img class="logo" src="../assets/logo.png" alt="logo" />
       </div>
     </div>
-
-    <scanner-component></scanner-component>
   </div>
 </template>
 
@@ -24,11 +22,10 @@
 import { defineComponent } from "vue";
 import { useI18n } from "vue-i18n";
 import FlagsComponent from "@/components/FlagsComponent.vue";
-import ScannerComponent from "@/components/ScannerComponent.vue";
 import PinComponent from "@/components/PinComponent.vue";
 export default defineComponent({
   name: "SellerLoginView",
-  components: { ScannerComponent, FlagsComponent, PinComponent },
+  components: { FlagsComponent, PinComponent },
   setup() {
     const { t } = useI18n({
       inheritLocale: true,
