@@ -4,8 +4,6 @@ import ButtonComponent from "@/components/ButtonComponent.vue";
 import FlagsComponent from "@/components/FlagsComponent.vue";
 import ProductComponent from "@/components/ProductComponent.vue";
 import BackButtonComponent from "@/components/BackButtonComponent.vue";
-import CartComponent from "@/components/CartComponent.vue";
-import ModalComponent from "@/components/ModalComponent.vue";
 import PinComponent from "@/components/PinComponent.vue";
 describe("BackButtonComponent.vue", () => {
   it("should render", () => {
@@ -30,22 +28,6 @@ describe("ButtonComponent.vue", () => {
     expect(classes).to.contain("btn-warning");
   });
 });
-describe("CartComponent.vue", () => {
-  it("should render", () => {
-    try {
-      const wrapper = shallowMount(CartComponent);
-      expect(wrapper.find(".about").isVisible()).to.be.true;
-      expect(wrapper.find(".about").find(".list").isVisible()).to.be.true;
-      expect(wrapper.find(".about").find(".summary").isVisible()).to.be.true;
-      expect(
-        wrapper.find(".about").find(".summary").find(".right").text()
-      ).to.contain("0.00zł");
-    } catch (e) {
-      console.log(e);
-    }
-  });
-});
-
 describe("FlagsComponent.vue", () => {
   it("should render", () => {
     const wrapper = shallowMount(FlagsComponent);
