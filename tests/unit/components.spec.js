@@ -56,24 +56,6 @@ describe("FlagsComponent.vue", () => {
     expect(wrapper.find("#de").isVisible()).to.be.true;
   });
 });
-
-describe("ModalComponent.vue", () => {
-  it("renders title when passed", () => {
-    const title = "message";
-    const wrapper = shallowMount(ModalComponent, {
-      props: { title },
-    });
-    expect(wrapper.text()).to.include(title);
-  });
-  it("renders text when passed", () => {
-    const text = "message";
-    const wrapper = shallowMount(ModalComponent, {
-      props: { text },
-    });
-    expect(wrapper.text()).to.include(text);
-  });
-});
-
 describe("PinComponent.vue", () => {
   it("should render", () => {
     const wrapper = shallowMount(PinComponent);

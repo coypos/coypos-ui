@@ -42,13 +42,23 @@ export default defineComponent({
     async getCartList() {
       this.cartList = this.$storage.getStorageSync("cartList") as CartModel[];
       this.sum = 0;
-      for (let i = 0; this.cartList.length > i; i++) {
-        this.sum += this.cartList[i].price;
+      if (this.cartList) {
+        for (let i = 0; this.cartList.length > i; i++) {
+          this.sum += this.cartList[i].price;
+        }
       }
     },
   },
   mounted() {
-    this.getCartList();
+    setInterval(() => {
+      this.getCartList();
+      if (
+        this.cartList !=
+        (this.$storage.getStorageSync("cartList") as CartModel[])
+      ) {
+        this.getCartList();
+      }
+    }, 400);
   },
 });
 </script>

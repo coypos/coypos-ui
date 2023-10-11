@@ -19,12 +19,7 @@
         <router-view />
       </div>
     </div>
-    <modal-component
-      :title="ErrorModal.title"
-      :text="ErrorModal.text"
-      :buttons="ErrorModal.buttons"
-      ref="staticBackdrop"
-    ></modal-component>
+    <modal-component ref="staticBackdrop"></modal-component>
   </div>
 </template>
 
@@ -46,7 +41,6 @@ import { QueryModel } from "@/types/Query";
 import HeaderLayout from "@/components/layout/Header.vue";
 import ModalComponent from "@/components/ModalComponent.vue";
 import type { AxiosInstance } from "axios";
-import { ModalModel } from "@/types/Modal";
 import { useI18n } from "vue-i18n";
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
@@ -63,15 +57,8 @@ export default defineComponent({
       useScope: "local",
     });
     let flagClass = ref<string>("flag");
-    let ErrorModal = ref<ModalModel>({
-      title: "Kasa zamknięta",
-      text: "Wystąpił błąd kasy, kasa została zamknięta. Poproś o pomoc sprzedawce.",
-      buttons: [
-        { text: "Dostęp Administracyjny", color: "danger" },
-        { text: "Wezwij sprzedawce", color: "success" },
-      ],
-    });
-    return { t, flagClass, ErrorModal };
+
+    return { t, flagClass };
   },
   methods: {
     async changeLanguage(lang: string) {
@@ -97,7 +84,6 @@ export default defineComponent({
   },
   mounted() {
     this.refreshLanguage;
-    this.$storage.setStorageSync("cartList", []);
   },
   watch: {
     $route: function (to) {

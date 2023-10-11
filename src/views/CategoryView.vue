@@ -42,7 +42,7 @@
     <div class="row">
       <div class="col-12">
         <product-component
-          @click="showModal()"
+          @click="showModal('Wezwano pomoc')"
           :small="true"
           :width="80"
           color="yellow"
@@ -62,7 +62,6 @@ import BackButtonComponent from "@/components/BackButtonComponent.vue";
 import PageButtonComponent from "@/components/PageButtonComponent.vue";
 import { showModal } from "@/functions";
 import { CategoryModel } from "@/types/api/Category";
-import { SettingModel } from "@/types/api/Setting";
 export default defineComponent({
   name: "CategoryView",
 
@@ -98,8 +97,7 @@ export default defineComponent({
             this.categories = response.data;
           });
       } catch (e) {
-        console.log(e);
-        showModal();
+        showModal(e as string);
       }
     },
   },

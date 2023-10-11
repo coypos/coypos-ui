@@ -12,15 +12,16 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title" id="staticBackdropLabel">{{ title }}</h1>
+          <h1 class="modal-title" id="staticBackdropLabel">Kasa zamknięta</h1>
         </div>
-        <div class="modal-body">{{ text }}</div>
+        <div class="modal-body">
+          "Wystąpił błąd kasy, kasa została zamknięta. Poproś o pomoc
+          sprzedawce.
+        </div>
         <div class="modal-footer">
           <button
-            v-for="button in buttons"
-            :key="button"
             type="button"
-            :class="'btn btn-' + button.color"
+            :class="'btn btn-danger'"
             data-bs-dismiss="modal"
             @click="
               $router.push({
@@ -31,7 +32,22 @@
               })
             "
           >
-            {{ button.text }}
+            Dostęp Administracyjny
+          </button>
+          <button
+            type="button"
+            :class="'btn btn-success'"
+            data-bs-dismiss="modal"
+            @click="
+              $router.push({
+                name: `login`,
+                query: {
+                  lang: $router.currentRoute.value.query.lang,
+                },
+              })
+            "
+          >
+            Wezwij sprzedawce
           </button>
         </div>
       </div>
@@ -41,11 +57,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 export default defineComponent({
-  props: {
-    title: String,
-    text: String,
-    buttons: Array,
-  },
   expose: ["showModal"],
   name: "ModalComponent",
 });

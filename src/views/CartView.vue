@@ -65,7 +65,7 @@
           <div class="col-12">
             <product-component
               v-if="!payView"
-              @click="showModal()"
+              @click="showModal('Wezwano pomoc')"
               :small="true"
               :width="100"
               color="yellow"
@@ -75,7 +75,7 @@
 
             <product-component
               v-else
-              @click="showModal()"
+              @click="showModal('Wezwano pomoc')"
               :small="false"
               :width="100"
               color="yellow"
@@ -130,7 +130,7 @@ export default defineComponent({
             });
           });
       } catch (e) {
-        showModal();
+        showModal(e as string);
       }
     },
   },

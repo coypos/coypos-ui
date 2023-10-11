@@ -1,10 +1,10 @@
 <template>
-  <div class="scanner">
-    <h1>{{ scanned }}</h1>
-  </div>
+  <div class="scanner"></div>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { showModal } from "@/functions";
+import { CartModel } from "@/types/api/Cart";
 
 export default defineComponent({
   name: "ScannerComponent",
@@ -39,15 +39,39 @@ export default defineComponent({
                 lang: this.$router.currentRoute.value.query.lang,
               },
             });
-          } else {
-            this.scanned = "";
           }
+        } else {
+          this.getProduct();
+          this.scanned = "";
         }
       }
     },
     removeScannerEvent() {
       window.removeEventListener("keydown", this.handleBarcodeInput);
       window.removeEventListener("input", this.handleBarcodeInput);
+    },
+    async addToCart(name: string, price: number) {
+      let list = this.$storage.getStorageSync("cartList") as CartModel[];
+      list.push({ name: name, price: price });
+
+      this.$storage.setStorageSync("cartList", list);
+    },
+    async getProduct() {
+      try {
+        const data = {
+          barcode: this.scanned,
+        };
+
+        const jsonString = JSON.stringify(data);
+        const encodedJsonString = encodeURIComponent(jsonString);
+        await this.$axios
+          .get(`/products?filter=AND&body=${encodedJsonString}`)
+          .then((response) => {
+            this.addToCart(response.data[0].name, response.data[0].price);
+          });
+      } catch (e) {
+        showModal("Nie znaleziono produktu");
+      }
     },
   },
   mounted() {

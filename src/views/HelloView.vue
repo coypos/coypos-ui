@@ -35,7 +35,7 @@
     <div class="row">
       <div class="col-12">
         <button-component
-          @click="showModal()"
+          @click="showModal('Wezwano pomoc')"
           color="yellow"
           :text="$t(`help`)"
           :width="70"
@@ -68,7 +68,7 @@ export default defineComponent({
           this.settings = response.data;
         });
       } catch (e) {
-        showModal();
+        showModal(e as string);
       }
       for (let i = 0; this.settings.length > i; i++) {
         if (this.settings[i].key.startsWith("--")) {
@@ -87,6 +87,7 @@ export default defineComponent({
   },
   mounted() {
     this.getSettings();
+    this.$storage.setStorageSync("cartList", []);
   },
 });
 </script>

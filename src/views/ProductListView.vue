@@ -64,7 +64,7 @@ export default defineComponent({
             this.products = response.data;
           });
       } catch (e) {
-        showModal();
+        showModal(e as string);
       }
     },
     async addToCart(name: string, price: number) {
