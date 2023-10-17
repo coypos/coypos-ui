@@ -97,6 +97,7 @@ import ScannerComponent from "@/components/ScannerComponent.vue";
 import ProductComponent from "@/components/ProductComponent.vue";
 import { CategoryModel } from "@/types/api/Category";
 import { showModal } from "@/functions";
+import { ResponseModel } from "@/types/Response";
 export default defineComponent({
   name: "CartView",
 
@@ -125,7 +126,8 @@ export default defineComponent({
         await this.$axios
           .get(`/categories?filter=isnull&body=${encodedJsonString}`)
           .then((response) => {
-            this.categories = response.data.response;
+            const resp: ResponseModel = response.data;
+            this.categories = resp.response;
           });
       } catch (e) {
         showModal(e as string);

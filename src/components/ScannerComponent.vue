@@ -5,6 +5,7 @@
 import { defineComponent, ref } from "vue";
 import { showModal } from "@/functions";
 import { CartModel } from "@/types/api/Cart";
+import { ResponseModel } from "@/types/Response";
 
 export default defineComponent({
   name: "ScannerComponent",
@@ -67,10 +68,8 @@ export default defineComponent({
         await this.$axios
           .get(`/products?filter=AND&body=${encodedJsonString}`)
           .then((response) => {
-            this.addToCart(
-              response.data.response[0].name,
-              response.data.response[0].price
-            );
+            const resp: ResponseModel = response.data;
+            this.addToCart(resp.response[0].name, resp.response[0].price);
           });
       } catch (e) {
         showModal("Nie znaleziono produktu");

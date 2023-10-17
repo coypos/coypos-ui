@@ -1,4 +1,8 @@
 export interface ResponseModel {
-  /**Additional response info */
-  info: string | null;
+  response: Array<any>;
+  page: number | null;
+  totalPages: number;
+  itemsPerPage: number | null;
+  totalItems: number | null;
+  totalItemsFiltered: number | null;
 }

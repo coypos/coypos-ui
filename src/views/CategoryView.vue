@@ -63,6 +63,7 @@ import BackButtonComponent from "@/components/BackButtonComponent.vue";
 import PageButtonComponent from "@/components/PageButtonComponent.vue";
 import { showModal } from "@/functions";
 import { CategoryModel } from "@/types/api/Category";
+import { ResponseModel } from "@/types/Response";
 export default defineComponent({
   name: "CategoryView",
 
@@ -96,8 +97,9 @@ export default defineComponent({
             `/categories?filter=AND&itemsPerPage=${this.itemsPerPage}&page=${this.page}&body=${encodedJsonString}`
           )
           .then((response) => {
-            this.categories = response.data.response;
-            this.totalPages = response.data.totalPages;
+            const resp: ResponseModel = response.data;
+            this.categories = resp.response;
+            this.totalPages = resp.totalPages;
           });
       } catch (e) {
         showModal(e as string);

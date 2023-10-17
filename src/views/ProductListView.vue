@@ -34,6 +34,7 @@ import { ProductModel } from "@/types/api/Product";
 import BackButtonComponent from "@/components/BackButtonComponent.vue";
 import { CartModel } from "@/types/api/Cart";
 import PageButtonComponent from "@/components/PageButtonComponent.vue";
+import { ResponseModel } from "@/types/Response";
 export default defineComponent({
   name: "productlistView",
   components: { PageButtonComponent, BackButtonComponent, ProductComponent },
@@ -63,8 +64,9 @@ export default defineComponent({
             `/products?filter=AND&itemsPerPage=${this.itemsPerPage}&page=${this.page}&body=${encodedJsonString}`
           )
           .then((response) => {
-            this.products = response.data.response;
-            this.totalPages = response.data.totalPages;
+            const resp: ResponseModel = response.data;
+            this.products = resp.response;
+            this.totalPages = resp.totalPages;
           });
       } catch (e) {
         showModal(e as string);
