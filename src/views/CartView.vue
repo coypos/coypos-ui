@@ -115,7 +115,7 @@ export default defineComponent({
     showModal,
     async getParentCategoriesList() {
       const data = {
-        ParentCategory: null,
+        parentCategory: -1,
       };
 
       const jsonString = JSON.stringify(data);
@@ -123,11 +123,9 @@ export default defineComponent({
 
       try {
         await this.$axios
-          .get(`/categories?body=${encodedJsonString}`)
+          .get(`/categories?filter=isnull&body=${encodedJsonString}`)
           .then((response) => {
-            this.categories = response.data.filter((object: CategoryModel) => {
-              return object.parentCategory == null;
-            });
+            this.categories = response.data.response;
           });
       } catch (e) {
         showModal(e as string);

@@ -29,6 +29,7 @@
           :page="page - 1"
         ></page-button-component>
         <page-button-component
+          v-if="totalPages != page"
           type="right"
           :page="page + 1"
         ></page-button-component>
@@ -75,7 +76,8 @@ export default defineComponent({
     let column = ref<number>(0);
     let itemsPerPage = ref<number>(5);
     let page = ref<number>(1);
-    return { page, itemsPerPage, column, categories };
+    let totalPages = ref<number>(1);
+    return { totalPages, page, itemsPerPage, column, categories };
   },
 
   methods: {
@@ -94,7 +96,8 @@ export default defineComponent({
             `/categories?filter=AND&itemsPerPage=${this.itemsPerPage}&page=${this.page}&body=${encodedJsonString}`
           )
           .then((response) => {
-            this.categories = response.data;
+            this.categories = response.data.response;
+            this.totalPages = response.data.totalPages;
           });
       } catch (e) {
         showModal(e as string);

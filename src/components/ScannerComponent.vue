@@ -67,7 +67,10 @@ export default defineComponent({
         await this.$axios
           .get(`/products?filter=AND&body=${encodedJsonString}`)
           .then((response) => {
-            this.addToCart(response.data[0].name, response.data[0].price);
+            this.addToCart(
+              response.data.response[0].name,
+              response.data.response[0].price
+            );
           });
       } catch (e) {
         showModal("Nie znaleziono produktu");
