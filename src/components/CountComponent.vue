@@ -12,7 +12,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title" id="staticBackdropLabel">Podaj ilość</h1>
+          <h1 class="modal-title" id="staticBackdropLabel">Podaj liczbę</h1>
         </div>
         <div class="modal-body">
           <pin-component :product="product"></pin-component>
