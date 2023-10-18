@@ -21,21 +21,6 @@
         <div class="modal-footer">
           <button
             type="button"
-            :class="'btn btn-danger'"
-            data-bs-dismiss="modal"
-            @click="
-              $router.push({
-                name: `login`,
-                query: {
-                  lang: $router.currentRoute.value.query.lang,
-                },
-              })
-            "
-          >
-            Dostęp Administracyjny
-          </button>
-          <button
-            type="button"
             :class="'btn btn-success'"
             data-bs-dismiss="modal"
             @click="

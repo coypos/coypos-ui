@@ -1,27 +1,27 @@
 import { CategoryModel } from "@/types/api/Category";
 
 export interface ProductModel {
-  ID: number | null;
+  id: number | null;
 
-  CreateDate: Date | string | null;
+  createDate: Date | string | null;
 
-  UpdateDate: Date | string | null;
+  updateDate: Date | string | null;
 
-  Enabled: boolean | null;
+  enabled: boolean | null;
 
-  Name: string | null;
+  name: string;
 
-  Barcode: string | null;
+  barcode: string | null;
 
-  Price: number | null;
+  price: number;
 
-  IsLoose: boolean | null;
+  isLoose: boolean | null;
 
-  Weight: number | null;
+  weight: number | null;
 
-  Description: string | null;
+  description: string | null;
 
-  Category: CategoryModel | null;
+  category: CategoryModel | null;
 
-  Image: string | null;
+  image: string | null;
 }

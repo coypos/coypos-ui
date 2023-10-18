@@ -5,7 +5,7 @@
         :small="false"
         :text="product.name"
         image="/images/products/bread3.png"
-        @click="addToCart(product.name, product.price)"
+        @click="showCountModal(product)"
       ></product-component>
       <back-button-component where="cart"></back-button-component>
     </div>
@@ -21,6 +21,7 @@
         :page="page + 1"
       ></page-button-component>
     </div>
+    <count-component :product="product"></count-component>
   </div>
 </template>
 <script lang="ts">
@@ -29,15 +30,21 @@ import { defineComponent, ref } from "vue";
 import ProductComponent from "@/components/ProductComponent.vue";
 
 import { useI18n } from "vue-i18n";
-import { showModal } from "@/functions";
+import { showCountModal, showModal } from "@/functions";
 import { ProductModel } from "@/types/api/Product";
 import BackButtonComponent from "@/components/BackButtonComponent.vue";
 import { CartModel } from "@/types/api/Cart";
 import PageButtonComponent from "@/components/PageButtonComponent.vue";
+import CountComponent from "@/components/CountComponent.vue";
 import { ResponseModel } from "@/types/Response";
 export default defineComponent({
   name: "productlistView",
-  components: { PageButtonComponent, BackButtonComponent, ProductComponent },
+  components: {
+    PageButtonComponent,
+    BackButtonComponent,
+    ProductComponent,
+    CountComponent,
+  },
   setup() {
     const { t } = useI18n({
       inheritLocale: true,
@@ -48,9 +55,24 @@ export default defineComponent({
     let itemsPerPage = ref<number>(5);
     let page = ref<number>(1);
     let totalPages = ref<number>(1);
-    return { totalPages, t, products, column, itemsPerPage, page };
+    let product = ref<ProductModel>();
+    return { product, totalPages, t, products, column, itemsPerPage, page };
   },
   methods: {
+    showCountModal(product: ProductModel) {
+      this.product = product;
+      if (product.isLoose) {
+        this.addToCart(product.name, product.price, 1);
+      } else {
+        showCountModal();
+      }
+    },
+    async addToCart(name: string, price: number, count: number) {
+      let list = this.$storage.getStorageSync("cartList") as CartModel[];
+      list.push({ name: name, price: price, count: count });
+      this.$storage.setStorageSync("cartList", list);
+      this.$router.push(`/cart`);
+    },
     async getProducts() {
       try {
         const data = {
@@ -71,12 +93,6 @@ export default defineComponent({
       } catch (e) {
         showModal(e as string);
       }
-    },
-    async addToCart(name: string, price: number) {
-      let list = this.$storage.getStorageSync("cartList") as CartModel[];
-      list.push({ name: name, price: price });
-      this.$storage.setStorageSync("cartList", list);
-      this.$router.push(`/cart`);
     },
   },
   mounted() {

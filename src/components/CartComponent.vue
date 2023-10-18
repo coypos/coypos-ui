@@ -9,7 +9,7 @@
       <div class="col-12">
         <div v-for="(product, index) in cartList" :key="index" class="row">
           <div class="col-6">{{ product.name }}</div>
-          <div class="col-2">1</div>
+          <div class="col-2">{{ product.count }}</div>
           <div class="col-4 right">{{ product.price }} zł</div>
         </div>
       </div>
@@ -44,7 +44,7 @@ export default defineComponent({
       this.sum = 0;
       if (this.cartList) {
         for (let i = 0; this.cartList.length > i; i++) {
-          this.sum += this.cartList[i].price;
+          this.sum = this.sum + this.cartList[i].count * this.cartList[i].price;
         }
       }
     },
@@ -86,6 +86,12 @@ export default defineComponent({
     margin: 5px;
     background-color: var(--cart-second-background-color);
     border: 2px solid var(--cart-second-background-color-darker);
+    overflow: clip;
+    .col-12 {
+      bottom: 30px;
+      width: 90%;
+      position: absolute;
+    }
   }
   .summary {
     font-size: 1.15em;

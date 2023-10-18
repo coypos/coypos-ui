@@ -1,8 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-12">
-      {{ pin }}
-    </div>
+    <div class="col-12">{{ pin }}</div>
   </div>
   <div class="pin">
     <div class="row">
@@ -23,15 +21,28 @@
     <div class="row">
       <div @click="removefrompin()" class="col-4 leftdown">Kasuj</div>
       <div @click="addtopin('0')" class="col-4">0</div>
-      <div @click="accept()" class="col-4 rightdown">Zatw</div>
+      <div
+        v-if="product"
+        data-bs-target="modal"
+        data-bs-dismiss="modal"
+        @click="accept()"
+        class="col-4 rightdown"
+      >
+        Zatw
+      </div>
+      <div v-else @click="accept()" class="col-4 rightdown">Zatw</div>
     </div>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { CartModel } from "@/types/api/Cart";
 export default defineComponent({
   name: "PinComponent",
-
+  props: {
+    product: Object,
+    usage: String,
+  },
   setup() {
     let pin = ref<string>("");
     return { pin };
@@ -44,12 +55,25 @@ export default defineComponent({
       this.pin = this.pin.slice(0, this.pin.length - 1);
     },
     async accept() {
+      if (this.product) {
+        await this.addToCart(
+          this.product.name,
+          this.product.price,
+          parseInt(this.pin)
+        );
+      }
       this.$router.push({
         name: `cart`,
         query: {
           lang: this.$router.currentRoute.value.query.lang,
         },
       });
+    },
+    async addToCart(name: string, price: number, count: number) {
+      let list = this.$storage.getStorageSync("cartList") as CartModel[];
+      list.push({ name: name, price: price, count: count });
+      this.$storage.setStorageSync("cartList", list);
+      this.$router.push(`/cart`);
     },
   },
   mounted() {

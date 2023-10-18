@@ -53,7 +53,7 @@ export default defineComponent({
     },
     async addToCart(name: string, price: number) {
       let list = this.$storage.getStorageSync("cartList") as CartModel[];
-      list.push({ name: name, price: price });
+      list.push({ name: name, price: price, count: 1 });
 
       this.$storage.setStorageSync("cartList", list);
     },

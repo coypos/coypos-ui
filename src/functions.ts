@@ -9,3 +9,9 @@ export function showModal(e: string) {
     "Wystąpił błąd kasy, kasa została zamknięta. Poproś o pomoc sprzedawce. </br>" +
     e;
 }
+export function showCountModal() {
+  const myModal = new Modal(
+    document.getElementById("staticBackdropPin") as Element
+  );
+  myModal.show();
+}
