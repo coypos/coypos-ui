@@ -40,6 +40,7 @@
             :key="index"
             class="col-4"
             style="margin-top: 70px"
+            @click="pay(payment.name)"
           >
             <product-component
               :text="payment.name"
@@ -113,6 +114,12 @@ export default defineComponent({
     return { payments, payView, categories };
   },
   methods: {
+    pay(name: string) {
+      if (name == "Inne") {
+        const suma = this.$storage.getStorageSync("sum");
+        window.location.href = `https://platnosc.hotpay.pl/?SEKRET=ZTY0MHBVb29JRU5MeHNKdExZWGdieGZVRDIwYU9sZ3BWSTl0RC9BeDhQWT0%2C&KWOTA=${suma}&NAZWA_USLUGI=Zakupy&ADRES_WWW=https%3A%2F%2Fsmilginp.evolpe.net&ID_ZAMOWIENIA=1&EMAIL=&DANE_OSOBOWE=`;
+      }
+    },
     showModal,
     async getParentCategoriesList() {
       const data = {

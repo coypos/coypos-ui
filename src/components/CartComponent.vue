@@ -45,6 +45,7 @@ export default defineComponent({
       if (this.cartList) {
         for (let i = 0; this.cartList.length > i; i++) {
           this.sum = this.sum + this.cartList[i].count * this.cartList[i].price;
+          this.$storage.setStorageSync("sum", this.sum);
         }
       }
     },
@@ -90,6 +91,7 @@ export default defineComponent({
     .col-12 {
       bottom: 30px;
       width: 90%;
+      min-height: 90%;
       position: absolute;
     }
   }
