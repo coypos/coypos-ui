@@ -5,7 +5,7 @@ import ProductListView from "../views/ProductListView.vue";
 import CategoryView from "../views/CategoryView.vue";
 import SellerLoginView from "@/views/SellerLoginView.vue";
 import pinLoginView from "@/views/PinLoginView.vue";
-
+import searchView from "@/views/SearchView.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -36,6 +36,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/pin",
     name: "pin",
     component: pinLoginView,
+  },
+  {
+    path: "/search",
+    name: "search",
+    component: searchView,
   },
 ];
 

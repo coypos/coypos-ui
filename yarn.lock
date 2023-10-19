@@ -7053,6 +7053,11 @@ signal-exit@^3.0.0, signal-exit@^3.0.2, signal-exit@^3.0.3:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.7.tgz#a9a1767f8af84155114eaabd73f99273c8f59ad9"
   integrity sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==
 
+simple-keyboard@^3.7.20:
+  version "3.7.20"
+  resolved "https://registry.yarnpkg.com/simple-keyboard/-/simple-keyboard-3.7.20.tgz#4fc7da8699e902f14aceb685ad58b4c1eed7d5fe"
+  integrity sha512-xPeJfpPH5lY+Dm78u5WOfAnznaIP1Fj8LpESw+/NKe4WjCimgVbCiiert1EEpsWPDMV2Y89peNlzukkrkqPzuA==
+
 sirv@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/sirv/-/sirv-2.0.3.tgz#ca5868b87205a74bef62a469ed0296abceccd446"

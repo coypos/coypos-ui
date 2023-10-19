@@ -68,14 +68,30 @@
               v-if="!payView"
               @click="showModal('Wezwano pomoc')"
               :small="true"
-              :width="100"
+              :width="70"
               color="yellow"
               :text="$t(`help`)"
               image="/images/buttons/chat.png"
             ></product-component>
-
             <product-component
-              v-else
+              v-if="!payView"
+              @click="
+                $router.push({
+                  name: `search`,
+                  query: {
+                    lang: $router.currentRoute.value.query.lang,
+                    page: 1,
+                  },
+                })
+              "
+              :small="true"
+              :width="30"
+              color="green"
+              :text="'SZUKAJ'"
+              image="/images/buttons/search.png"
+            ></product-component>
+            <product-component
+              v-if="payView"
               @click="showModal('Wezwano pomoc')"
               :small="false"
               :width="100"
