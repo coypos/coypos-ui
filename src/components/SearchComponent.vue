@@ -20,7 +20,7 @@ export default defineComponent({
   },
   setup() {
     let buttonClass = ref<string>("btn btn-primary btn-lg btn-default  mr-1");
-    const keyboard = ref<any>(null);
+    const keyboard = ref<Keyboard>();
 
     return { keyboard, buttonClass };
   },
@@ -45,10 +45,10 @@ export default defineComponent({
   },
 
   methods: {
-    onChange(input: any) {
+    onChange(input: string) {
       this.$emit("onChange", input);
     },
-    onKeyPress(button: any) {
+    onKeyPress(button: string) {
       this.$emit("onKeyPress", button);
 
       /**
@@ -57,17 +57,21 @@ export default defineComponent({
       if (button === "{shift}" || button === "{lock}") this.handleShift();
     },
     handleShift() {
-      let currentLayout = this.keyboard.options.layoutName;
-      let shiftToggle = currentLayout === "default" ? "shift" : "default";
+      if (this.keyboard) {
+        let currentLayout = this.keyboard.options.layoutName;
+        let shiftToggle = currentLayout === "default" ? "shift" : "default";
 
-      this.keyboard.setOptions({
-        layoutName: shiftToggle,
-      });
+        this.keyboard.setOptions({
+          layoutName: shiftToggle,
+        });
+      }
     },
   },
   watch: {
     input(input) {
-      this.keyboard.setInput(input);
+      if (this.keyboard) {
+        this.keyboard.setInput(input);
+      }
     },
   },
 });

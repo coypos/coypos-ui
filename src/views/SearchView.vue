@@ -30,12 +30,7 @@
         @input="onInputChange"
         placeholder="Tap on the virtual keyboard to start"
       />
-      <search-component
-        class="search"
-        @onChange="onChange"
-        @onKeyPress="onKeyPress"
-        :input="input"
-      />
+      <search-component class="search" @onChange="onChange" :input="input" />
     </div>
   </div>
 </template>
@@ -53,6 +48,7 @@ import PageButtonComponent from "@/components/PageButtonComponent.vue";
 import CountComponent from "@/components/CountComponent.vue";
 import { ResponseModel } from "@/types/Response";
 import SearchComponent from "@/components/SearchComponent.vue";
+import { KeyboardInputModal } from "@/types/KeyboardInput";
 export default defineComponent({
   name: "SearchView",
   components: {
@@ -73,7 +69,7 @@ export default defineComponent({
     let page = ref<number>(1);
     let totalPages = ref<number>(1);
     let product = ref<ProductModel>();
-    let input = ref<any>();
+    let input = ref<string>();
     return {
       input,
       product,
@@ -100,13 +96,10 @@ export default defineComponent({
       this.$storage.setStorageSync("cartList", list);
       this.$router.push(`/cart`);
     },
-    onChange(input: any) {
+    onChange(input: string) {
       this.input = input;
     },
-    onKeyPress(button: any) {
-      console.log("button", button);
-    },
-    onInputChange(input: any) {
+    onInputChange(input: KeyboardInputModal) {
       this.input = input.target.value;
     },
     async getProducts() {
@@ -144,7 +137,7 @@ export default defineComponent({
     }
   },
   watch: {
-    input(input) {
+    input() {
       this.getProducts();
     },
   },
