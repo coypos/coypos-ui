@@ -21,12 +21,25 @@ export default defineComponent({
   setup() {
     let buttonClass = ref<string>("btn btn-primary btn-lg btn-default  mr-1");
     const keyboard = ref<any>(null);
+
     return { keyboard, buttonClass };
   },
   mounted() {
     this.keyboard = new Keyboard(this.keyboardClass, {
       onChange: this.onChange,
       onKeyPress: this.onKeyPress,
+      display: {
+        "{bksp}": "USUŃ",
+        "{space}": "SPACJA",
+      },
+      layout: {
+        default: [
+          "q w e r t y u i o p",
+          "a s d f g h j k l",
+          "z x c v b n m",
+          "{space} {bksp}",
+        ],
+      },
     });
   },
 
@@ -58,7 +71,10 @@ export default defineComponent({
   },
 });
 </script>
-<style scoped lang="scss">
+<style lang="scss">
+.hg-theme-default {
+  background-color: var(--product-color);
+}
 .searchbutton {
   position: absolute;
   border-top-left-radius: 100%;

@@ -5,7 +5,8 @@
       v-if="
         $router.currentRoute.value.name != `home` &&
         $router.currentRoute.value.name != `login` &&
-        $router.currentRoute.value.name != `pin`
+        $router.currentRoute.value.name != `pin` &&
+        $router.currentRoute.value.name != `search`
       "
     >
       <div class="col-12">

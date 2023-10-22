@@ -4,6 +4,7 @@
       <product-component
         :small="false"
         :text="product.name"
+        style="height: 220px"
         image="/images/products/bread3.png"
         @click="showCountModal(product)"
       ></product-component>
@@ -16,7 +17,7 @@
         :page="page - 1"
       ></page-button-component>
       <page-button-component
-        v-if="totalPages != page"
+        v-if="totalPages != page && totalPages != 0"
         type="right"
         :page="page + 1"
       ></page-button-component>
@@ -154,22 +155,22 @@ export default defineComponent({
   margin: 15px;
 }
 .searchcomponent {
-  background: var(--product-color-darker);
+  //background: var(--product-color-darker);
   position: absolute;
-  width: 100%;
-  height: 320px;
-  left: 0;
+  width: 80%;
+  height: 245px;
+  right: 0;
   bottom: 0;
   .searchinput {
     position: absolute;
     left: 5%;
-    width: 90vw;
-    bottom: 270px;
+    width: 90%;
+    bottom: 210px;
   }
   .search {
     position: absolute;
     left: 5%;
-    width: 90vw;
+    width: 90%;
     bottom: 20px;
   }
 }
