@@ -110,21 +110,17 @@ export default defineComponent({
     },
     async getProducts() {
       try {
-        const data = {
-          name: this.input,
-        };
-
-        const jsonString = JSON.stringify(data);
-        const encodedJsonString = encodeURIComponent(jsonString);
-        await this.$axios
-          .get(
-            `/products?filter=AND&itemsPerPage=${this.itemsPerPage}&page=${this.page}&body=${encodedJsonString}`
-          )
-          .then((response) => {
-            const resp: ResponseModel = response.data;
-            this.products = resp.response;
-            this.totalPages = resp.totalPages;
-          });
+        if (this.input) {
+          await this.$axios
+            .get(
+              `/search/${this.input}?itemsPerPage=${this.itemsPerPage}&page=${this.page}`
+            )
+            .then((response) => {
+              const resp: ResponseModel = response.data;
+              this.products = resp.response;
+              this.totalPages = resp.totalPages;
+            });
+        }
       } catch (e) {
         showModal(e as string);
       }
