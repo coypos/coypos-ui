@@ -165,7 +165,7 @@ export default defineComponent({
     position: absolute;
     left: 5%;
     width: 90%;
-    bottom: 210px;
+    bottom: 250px;
   }
   .search {
     position: absolute;
