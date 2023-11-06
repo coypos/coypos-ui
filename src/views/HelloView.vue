@@ -53,6 +53,7 @@ import ButtonComponent from "@/components/ButtonComponent.vue";
 import ScannerComponent from "@/components/ScannerComponent.vue";
 import { showModal } from "@/functions";
 import { SettingModel } from "@/types/api/Setting";
+import { ResponseModel } from "@/types/Response";
 export default defineComponent({
   name: "HomeView",
   components: { ScannerComponent, ButtonComponent, FlagsComponent },
@@ -65,7 +66,8 @@ export default defineComponent({
     async getSettings() {
       try {
         await this.$axios.get(`/settings`).then((response) => {
-          this.settings = response.data;
+          const resp: ResponseModel = response.data;
+          this.settings = resp.response;
         });
       } catch (e) {
         showModal(e as string);
