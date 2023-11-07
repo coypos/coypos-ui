@@ -1,7 +1,7 @@
 <template>
   <div :style="'width:' + width + '%;'" :class="buttonClass">
     <p>{{ text }}</p>
-    <img class="buttonimage" :src="image" />
+    <img class="buttonimage" :src="'data:image/jpeg;base64,' + image" />
   </div>
 </template>
 <script lang="ts">
@@ -93,13 +93,13 @@ export default defineComponent({
 .buttonimage {
   position: absolute;
   max-height: 160px;
-  max-width: 160px;
+  max-width: 90%;
   width: 70%;
   left: 0;
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  bottom: 10px;
+  bottom: 20px;
 }
 .small {
   position: relative;

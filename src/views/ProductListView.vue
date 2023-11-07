@@ -4,7 +4,7 @@
       <product-component
         :small="false"
         :text="product.name"
-        image="/images/products/bread3.png"
+        :image="product.image"
         @click="showCountModal(product)"
       ></product-component>
       <back-button-component where="cart"></back-button-component>
@@ -83,7 +83,7 @@ export default defineComponent({
         const encodedJsonString = encodeURIComponent(jsonString);
         await this.$axios
           .get(
-            `/products?filter=AND&itemsPerPage=${this.itemsPerPage}&page=${this.page}&body=${encodedJsonString}`
+            `/products?filter=AND&loadImages=true&itemsPerPage=${this.itemsPerPage}&page=${this.page}&body=${encodedJsonString}`
           )
           .then((response) => {
             const resp: ResponseModel = response.data;
@@ -116,5 +116,8 @@ export default defineComponent({
 <style scoped lang="scss">
 .product {
   margin: 15px;
+}
+.productlist {
+  margin-top: 20px;
 }
 </style>
