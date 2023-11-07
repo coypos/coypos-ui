@@ -4,7 +4,7 @@
       <product-component
         :small="false"
         :text="product.name"
-        :image="product.image"
+        :image="'data:image/jpeg;base64,' + product.image"
         @click="showCountModal(product)"
       ></product-component>
       <back-button-component where="cart"></back-button-component>

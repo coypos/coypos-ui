@@ -1,7 +1,7 @@
 <template>
   <div :style="'width:' + width + '%;'" :class="buttonClass">
     <p>{{ text }}</p>
-    <img class="buttonimage" :src="'data:image/jpeg;base64,' + image" />
+    <img class="buttonimage" :src="image" />
   </div>
 </template>
 <script lang="ts">
