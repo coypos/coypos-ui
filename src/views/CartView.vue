@@ -30,7 +30,7 @@
                   },
                 })
               "
-              image="/images/products/vegetables.png"
+              :image="'data:image/jpeg;base64,' + category.image"
             ></product-component>
           </div>
         </div>
@@ -147,7 +147,9 @@ export default defineComponent({
 
       try {
         await this.$axios
-          .get(`/categories?filter=AND&body=${encodedJsonString}`)
+          .get(
+            `/categories?filter=AND&loadImages=true&body=${encodedJsonString}`
+          )
           .then((response) => {
             const resp: ResponseModel = response.data;
             this.categories = resp.response;

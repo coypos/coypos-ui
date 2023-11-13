@@ -8,7 +8,7 @@
       >
         <product-component
           :text="category.name"
-          image="/images/products/fruits.png"
+          :image="'data:image/jpeg;base64,' + category.image"
           :small="false"
           @click="
             $router.push({
