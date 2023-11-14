@@ -55,19 +55,21 @@ export default defineComponent({
       this.pin = this.pin.slice(0, this.pin.length - 1);
     },
     async accept() {
-      if (this.product) {
-        await this.addToCart(
-          this.product.name,
-          this.product.price,
-          parseInt(this.pin)
-        );
+      if (this.pin.length != 0) {
+        if (this.product) {
+          await this.addToCart(
+            this.product.name,
+            this.product.price,
+            parseInt(this.pin)
+          );
+        }
+        this.$router.push({
+          name: `cart`,
+          query: {
+            lang: this.$router.currentRoute.value.query.lang,
+          },
+        });
       }
-      this.$router.push({
-        name: `cart`,
-        query: {
-          lang: this.$router.currentRoute.value.query.lang,
-        },
-      });
     },
     async addToCart(name: string, price: number, count: number) {
       let list = this.$storage.getStorageSync("cartList") as CartModel[];
@@ -105,6 +107,7 @@ export default defineComponent({
       margin: 0;
       border: 1px solid #c0c0c0;
       background-color: #f6f6f6;
+      cursor: pointer;
     }
   }
 }
