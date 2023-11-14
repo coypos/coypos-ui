@@ -94,7 +94,7 @@ export default defineComponent({
       try {
         await this.$axios
           .get(
-            `/categories?filter=AND&itemsPerPage=${this.itemsPerPage}&page=${this.page}&body=${encodedJsonString}`
+            `/categories?filter=AND&loadImages=true&itemsPerPage=${this.itemsPerPage}&page=${this.page}&body=${encodedJsonString}`
           )
           .then((response) => {
             const resp: ResponseModel = response.data;
