@@ -10,7 +10,17 @@
         <div v-for="(product, index) in cartList" :key="index" class="row">
           <div class="col-6">{{ product.name }}</div>
           <div class="col-2">{{ product.count }}</div>
-          <div class="col-4 right">{{ product.price }} zł</div>
+          <div class="col-4 right" v-if="product.discountedPrice == null">
+            {{ (product.price * product.count).toFixed(2) }} zł
+          </div>
+          <div class="col-4 right" v-else>
+            {{ (product.discountedPrice * product.count).toFixed(2) }} zł
+            <span class="oldprice">
+              <del v-if="product.discountedPrice != null"
+                >{{ (product.price * product.count).toFixed(2) }} zł</del
+              ></span
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -21,7 +31,10 @@
           <img src="/images/buttons/cart.png" />
         </div>
       </div>
-      <div class="col-4 right">{{ sum.toFixed(2) }}zł</div>
+      <div class="col-2 right">
+        <del>{{ saved.toFixed(2) }}zł</del>
+      </div>
+      <div class="col-2 right">{{ sum.toFixed(2) }}zł</div>
     </div>
   </div>
 </template>
@@ -36,15 +49,31 @@ export default defineComponent({
   setup() {
     let cartList = ref<CartModel[]>([]);
     let sum = ref<number>(0.0);
-    return { cartList, sum };
+    let saved = ref<number>(0.0);
+    return { cartList, sum, saved };
   },
   methods: {
     async getCartList() {
       this.cartList = this.$storage.getStorageSync("cartList") as CartModel[];
       this.sum = 0;
+      this.saved = 0;
       if (this.cartList) {
         for (let i = 0; this.cartList.length > i; i++) {
-          this.sum = this.sum + this.cartList[i].count * this.cartList[i].price;
+          this.saved =
+            this.saved + this.cartList[i].count * this.cartList[i].price;
+        }
+      }
+
+      if (this.cartList) {
+        for (let i = 0; this.cartList.length > i; i++) {
+          if (this.cartList[i].discountedPrice != null) {
+            this.sum =
+              this.sum +
+              this.cartList[i].count * (this.cartList[i].discountedPrice || 1);
+          } else {
+            this.sum =
+              this.sum + this.cartList[i].count * this.cartList[i].price;
+          }
           this.$storage.setStorageSync("sum", this.sum);
         }
       }

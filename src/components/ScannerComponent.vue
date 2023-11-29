@@ -51,9 +51,18 @@ export default defineComponent({
       window.removeEventListener("keydown", this.handleBarcodeInput);
       window.removeEventListener("input", this.handleBarcodeInput);
     },
-    async addToCart(name: string, price: number) {
+    async addToCart(
+      name: string,
+      price: number,
+      discountedPrice: number | null
+    ) {
       let list = this.$storage.getStorageSync("cartList") as CartModel[];
-      list.push({ name: name, price: price, count: 1 });
+      list.push({
+        name: name,
+        price: price,
+        count: 1,
+        discountedPrice: discountedPrice,
+      });
 
       this.$storage.setStorageSync("cartList", list);
     },
@@ -69,7 +78,11 @@ export default defineComponent({
           .get(`/products?filter=AND&body=${encodedJsonString}`)
           .then((response) => {
             const resp: ResponseModel = response.data;
-            this.addToCart(resp.response[0].name, resp.response[0].price);
+            this.addToCart(
+              resp.response[0].name,
+              resp.response[0].price,
+              resp.response[0].discountedPrice
+            );
           });
       } catch (e) {
         showModal("Nie znaleziono produktu");

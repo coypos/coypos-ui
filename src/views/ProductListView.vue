@@ -61,15 +61,25 @@ export default defineComponent({
   methods: {
     showCountModal(product: ProductModel) {
       this.product = product;
-      if (product.isLoose) {
-        this.addToCart(product.name, product.price, 1);
+      if (product.isLoose && product.name != null && product.price != null) {
+        this.addToCart(product.name, product.price, 1, product.discountedPrice);
       } else {
         showCountModal();
       }
     },
-    async addToCart(name: string, price: number, count: number) {
+    async addToCart(
+      name: string,
+      price: number,
+      count: number,
+      discountedPrice: number | null
+    ) {
       let list = this.$storage.getStorageSync("cartList") as CartModel[];
-      list.push({ name: name, price: price, count: count });
+      list.push({
+        name: name,
+        price: price,
+        count: count,
+        discountedPrice: discountedPrice,
+      });
       this.$storage.setStorageSync("cartList", list);
       this.$router.push(`/cart`);
     },

@@ -60,7 +60,8 @@ export default defineComponent({
           await this.addToCart(
             this.product.name,
             this.product.price,
-            parseInt(this.pin)
+            parseInt(this.pin),
+            this.product.discountedPrice
           );
         }
         this.$router.push({
@@ -71,9 +72,19 @@ export default defineComponent({
         });
       }
     },
-    async addToCart(name: string, price: number, count: number) {
+    async addToCart(
+      name: string,
+      price: number,
+      count: number,
+      discountedPrice: number | null
+    ) {
       let list = this.$storage.getStorageSync("cartList") as CartModel[];
-      list.push({ name: name, price: price, count: count });
+      list.push({
+        name: name,
+        price: price,
+        count: count,
+        discountedPrice: discountedPrice,
+      });
       this.$storage.setStorageSync("cartList", list);
       this.$router.push(`/cart`);
     },

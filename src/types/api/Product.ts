@@ -1,4 +1,5 @@
 import { CategoryModel } from "@/types/api/Category";
+import { PromotionModel } from "@/types/api/Promotion";
 
 export interface ProductModel {
   id: number | null;
@@ -9,11 +10,11 @@ export interface ProductModel {
 
   enabled: boolean | null;
 
-  name: string;
+  name: string | null;
 
   barcode: string | null;
 
-  price: number;
+  price: number | null;
 
   isLoose: boolean | null;
 
@@ -24,4 +25,8 @@ export interface ProductModel {
   category: CategoryModel | null;
 
   image: string | null;
+
+  discountedPrice: number | null;
+
+  appliedPromotion: PromotionModel | null;
 }
