@@ -12,10 +12,15 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title" id="staticBackdropLabel">Podaj liczbę</h1>
+          <h1 v-if="barcode" class="modal-title" id="staticBackdropLabel">
+            Podaj kod Kreskowy
+          </h1>
+          <h1 v-else class="modal-title" id="staticBackdropLabel">
+            Podaj liczbę
+          </h1>
         </div>
         <div class="modal-body">
-          <pin-component :product="product"></pin-component>
+          <pin-component :barcode="barcode"></pin-component>
         </div>
       </div>
     </div>
@@ -24,9 +29,11 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import PinComponent from "@/components/PinComponent.vue";
+
 export default defineComponent({
   props: {
     product: Object,
+    barcode: Boolean,
   },
   components: { PinComponent },
   expose: ["showModal"],

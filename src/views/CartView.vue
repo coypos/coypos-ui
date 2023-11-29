@@ -68,10 +68,20 @@
               v-if="!payView"
               @click="showModal('Wezwano pomoc')"
               :small="true"
-              :width="70"
+              :width="34"
               color="yellow"
               :text="$t(`help`)"
               image="/images/buttons/chat.png"
+            ></product-component>
+
+            <product-component
+              v-if="!payView"
+              @click="showCountModal(product)"
+              :small="true"
+              :width="33"
+              color="green"
+              :text="'KOD KRESKOWY'"
+              image="/images/buttons/barcode.png"
             ></product-component>
             <product-component
               v-if="!payView"
@@ -85,7 +95,7 @@
                 })
               "
               :small="true"
-              :width="30"
+              :width="33"
               color="green"
               :text="'SZUKAJ'"
               image="/images/buttons/search.png"
@@ -103,6 +113,7 @@
         </div>
       </div>
     </div>
+    <count-component :barcode="true"></count-component>
   </div>
 </template>
 <script lang="ts">
@@ -113,12 +124,15 @@ import ScannerComponent from "@/components/ScannerComponent.vue";
 
 import ProductComponent from "@/components/ProductComponent.vue";
 import { CategoryModel } from "@/types/api/Category";
-import { showModal } from "@/functions";
+import { showCountModal, showModal } from "@/functions";
 import { ResponseModel } from "@/types/Response";
+import CountComponent from "@/components/CountComponent.vue";
+import { ProductModel } from "@/types/api/Product";
 export default defineComponent({
   name: "CartView",
 
   components: {
+    CountComponent,
     ProductComponent,
     CartComponent,
     ScannerComponent,
@@ -130,6 +144,9 @@ export default defineComponent({
     return { payments, payView, categories };
   },
   methods: {
+    showCountModal() {
+      showCountModal();
+    },
     pay(name: string) {
       if (name == "Inne") {
         const suma = this.$storage.getStorageSync("sum");

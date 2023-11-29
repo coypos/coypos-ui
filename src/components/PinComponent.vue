@@ -37,11 +37,16 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { CartModel } from "@/types/api/Cart";
+import { ResponseModel } from "@/types/Response";
+import { showModal } from "@/functions";
+import { ProductModel } from "@/types/api/Product";
+import { Modal } from "bootstrap";
 export default defineComponent({
   name: "PinComponent",
   props: {
     product: Object,
     usage: String,
+    barcode: Boolean,
   },
   setup() {
     let pin = ref<string>("");
@@ -63,6 +68,34 @@ export default defineComponent({
             parseInt(this.pin),
             this.product.discountedPrice
           );
+        } else if (this.barcode) {
+          try {
+            const data = {
+              barcode: this.pin,
+            };
+
+            const jsonString = JSON.stringify(data);
+            const encodedJsonString = encodeURIComponent(jsonString);
+            await this.$axios
+              .get(
+                `/products?filter=AND&loadImages=false&itemsPerPage=1&page=1&body=${encodedJsonString}`
+              )
+              .then((response) => {
+                const resp: ResponseModel = response.data;
+                let product: ProductModel = resp.response[0] as ProductModel;
+                if (product) {
+                  this.addToCart(
+                    product.name || "",
+                    product.price || 0,
+                    1,
+                    product.discountedPrice
+                  );
+                }
+                location.reload();
+              });
+          } catch (e) {
+            showModal(e as string);
+          }
         }
         this.$router.push({
           name: `cart`,
