@@ -20,7 +20,8 @@
           </h1>
         </div>
         <div class="modal-body">
-          <pin-component :barcode="barcode"></pin-component>
+          <pin-component v-if="barcode" :barcode="barcode"></pin-component>
+          <pin-component v-if="product" :product="product"></pin-component>
         </div>
       </div>
     </div>
@@ -29,7 +30,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import PinComponent from "@/components/PinComponent.vue";
-
 export default defineComponent({
   props: {
     product: Object,
