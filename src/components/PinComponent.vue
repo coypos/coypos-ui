@@ -45,6 +45,7 @@ import { ResponseModel } from "@/types/Response";
 import { showModal } from "@/functions";
 import { ProductModel } from "@/types/api/Product";
 import { Modal } from "bootstrap";
+import { useI18n } from "vue-i18n";
 export default defineComponent({
   name: "PinComponent",
   props: {
@@ -54,7 +55,11 @@ export default defineComponent({
   },
   setup() {
     let pin = ref<string>("");
-    return { pin };
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
+    return { pin, t };
   },
   methods: {
     async addtopin(number: string) {
