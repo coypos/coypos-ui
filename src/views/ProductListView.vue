@@ -88,12 +88,13 @@ export default defineComponent({
         const data = {
           category: { id: this.$router.currentRoute.value.query.category },
         };
+        const lang = this.$storage.getStorageSync("lang");
 
         const jsonString = JSON.stringify(data);
         const encodedJsonString = encodeURIComponent(jsonString);
         await this.$axios
           .get(
-            `/products?filter=AND&loadImages=true&itemsPerPage=${this.itemsPerPage}&page=${this.page}&body=${encodedJsonString}`
+            `/products?filter=AND&language=${lang}&loadImages=true&itemsPerPage=${this.itemsPerPage}&page=${this.page}&body=${encodedJsonString}`
           )
           .then((response) => {
             const resp: ResponseModel = response.data;
@@ -120,6 +121,11 @@ export default defineComponent({
       );
       this.getProducts();
     }
+  },
+  watch: {
+    $route: function (to) {
+      this.getProducts();
+    },
   },
 });
 </script>

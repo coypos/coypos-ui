@@ -11,5 +11,16 @@
   "total": "Razem",
   "pay": "Zakończ i zapłać",
   "scaninfo": "Zeskanuj kod towaru lub wybierz kategorie",
-  "payinfo": "Wybierz metodę płatności"
+  "payinfo": "Wybierz metodę płatności",
+  "enternumber": "Podaj liczbę",
+  "enterbarcode": "Podaj kod Kreskowy",
+  "delete": "Kasuj",
+  "accept": "Zatw",
+  "barcode":"KOD KRESKOWY",
+  "search":"SZUKAJ",
+  "error":  "Wystąpił błąd kasy, kasa została zamknięta. Poproś o pomoc sprzedawce.",
+  "sellercall": "Wezwij sprzedawce",
+  "close": "KASA ZAMKNIETA",
+  "pin": "Wpisz PIN"
+
 }

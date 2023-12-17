@@ -13,10 +13,10 @@
       <div class="modal-content">
         <div class="modal-header">
           <h1 v-if="barcode" class="modal-title" id="staticBackdropLabel">
-            Podaj kod Kreskowy
+            {{ $t(`enterbarcode`) }}
           </h1>
           <h1 v-else class="modal-title" id="staticBackdropLabel">
-            Podaj liczbę
+            {{ $t(`enternumber`) }}
           </h1>
         </div>
         <div class="modal-body">

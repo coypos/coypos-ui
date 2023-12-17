@@ -80,7 +80,7 @@
               :small="true"
               :width="33"
               color="green"
-              :text="'KOD KRESKOWY'"
+              :text="$t(`barcode`)"
               image="/images/buttons/barcode.png"
             ></product-component>
             <product-component
@@ -97,7 +97,7 @@
               :small="true"
               :width="33"
               color="green"
-              :text="'SZUKAJ'"
+              :text="$t(`search`)"
               image="/images/buttons/search.png"
             ></product-component>
             <product-component
@@ -163,9 +163,10 @@ export default defineComponent({
       const encodedJsonString = encodeURIComponent(jsonString);
 
       try {
+        const lang = this.$storage.getStorageSync("lang");
         await this.$axios
           .get(
-            `/categories?filter=AND&loadImages=true&body=${encodedJsonString}`
+            `/categories?filter=AND&language=${lang}&loadImages=true&body=${encodedJsonString}`
           )
           .then((response) => {
             const resp: ResponseModel = response.data;
@@ -207,6 +208,11 @@ export default defineComponent({
       },
     ];
     this.getParentCategoriesList();
+  },
+  watch: {
+    $route: function (to) {
+      this.getParentCategoriesList();
+    },
   },
 });
 </script>

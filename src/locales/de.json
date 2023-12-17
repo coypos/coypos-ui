@@ -11,5 +11,16 @@
   "total": "Summe",
   "pay": "Beenden und bezahlen",
   "scaninfo": "Scannen Sie den Produktcode oder wählen Sie Kategorien aus",
-  "payinfo": "Wählen Sie eine Zahlungsmethode"
+  "payinfo": "Wählen Sie eine Zahlungsmethode",
+  "enternumber": "Geben Sie die Zahl",
+  "enterbarcode": "Barcode eingeben",
+  "delete": "Löschen",
+  "accept": "Geneh",
+  "barcode":"BAR CODE",
+  "search":"SUCHEN",
+  "error":  "An der Kasse ist ein Fehler aufgetreten, die Kasse wurde geschlossen. Bitten Sie Ihr Verkaufspersonal um Hilfe..",
+  "sellercall": "Rufen Sie Ihren Händler an",
+  "close": "REGISTRIERKASSE GESCHLOSSEN",
+  "pin": "PIN eingeben"
+
 }

@@ -19,7 +19,9 @@
       <div @click="addtopin('9')" class="col-4">9</div>
     </div>
     <div class="row">
-      <div @click="removefrompin()" class="col-4 leftdown">Kasuj</div>
+      <div @click="removefrompin()" class="col-4 leftdown">
+        {{ $t(`delete`) }}
+      </div>
       <div @click="addtopin('0')" class="col-4">0</div>
       <div
         v-if="product"
@@ -28,9 +30,11 @@
         @click="accept()"
         class="col-4 rightdown"
       >
-        Zatw
+        {{ $t(`accept`) }}
       </div>
-      <div v-else @click="accept()" class="col-4 rightdown">Zatw</div>
+      <div v-else @click="accept()" class="col-4 rightdown">
+        {{ $t(`accept`) }}
+      </div>
     </div>
   </div>
 </template>

@@ -92,9 +92,11 @@ export default defineComponent({
       const encodedJsonString = encodeURIComponent(jsonString);
 
       try {
+        const lang = this.$storage.getStorageSync("lang");
+
         await this.$axios
           .get(
-            `/categories?filter=AND&loadImages=true&itemsPerPage=${this.itemsPerPage}&page=${this.page}&body=${encodedJsonString}`
+            `/categories?filter=AND&loadImages=true&language=${lang}&itemsPerPage=${this.itemsPerPage}&page=${this.page}&body=${encodedJsonString}`
           )
           .then((response) => {
             const resp: ResponseModel = response.data;
@@ -121,6 +123,11 @@ export default defineComponent({
       );
       this.getParentCategoriesList();
     }
+  },
+  watch: {
+    $route: function (to) {
+      this.getParentCategoriesList();
+    },
   },
 });
 </script>

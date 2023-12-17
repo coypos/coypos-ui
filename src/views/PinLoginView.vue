@@ -7,7 +7,7 @@
       <div class="col-8">
         <div class="title">
           <h1 class="open">{{ $t("login") }}</h1>
-          <div class="info">Wpisz pin</div>
+          <div class="info">{{ $t("pin") }}</div>
           <pin-component></pin-component>
         </div>
       </div>

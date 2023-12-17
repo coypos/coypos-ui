@@ -12,11 +12,12 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title" id="staticBackdropLabel">Kasa zamknięta</h1>
+          <h1 class="modal-title" id="staticBackdropLabel">
+            {{ $t(`close`) }}
+          </h1>
         </div>
         <div class="modal-body">
-          "Wystąpił błąd kasy, kasa została zamknięta. Poproś o pomoc
-          sprzedawce.
+          {{ $t(`error`) }}
         </div>
         <div class="modal-footer">
           <button
@@ -32,7 +33,7 @@
               })
             "
           >
-            Wezwij sprzedawce
+            {{ $t(`sellercall`) }}
           </button>
         </div>
       </div>

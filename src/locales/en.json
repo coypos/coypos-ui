@@ -11,6 +11,16 @@
   "total": "Total",
   "pay": "Finish and pay",
   "scaninfo": "Scan the product code or select categories",
-  "payinfo": "Select a payment method"
+  "payinfo": "Select a payment method",
+  "enternumber": "Enter the number of",
+  "enterbarcode": "Enter barcode",
+  "delete": "Delete",
+  "accept": "Appr",
+  "barcode":"BARACODE",
+  "search":"SEARCH",
+  "error":  "There was a checkout error, the cash register was closed. Ask your salesperson for help.",
+  "sellercall": "Call the seller",
+  "close": "CASH CLOSED",
+  "pin": "Enter PIN"
 
 }
