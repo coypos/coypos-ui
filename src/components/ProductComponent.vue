@@ -55,12 +55,11 @@ export default defineComponent({
   border-width: 2px;
   margin: 0 0 15px;
 }
-
 .btn-primary {
   --bs-btn-color: var(--product-color);
   --bs-btn-bg: var(--product-color);
   --bs-btn-border-color: var(--product-color-darker);
-  --bs-btn-hover-color: var(--product-text-color);
+  --bs-btn-hover-color: var(--button-text-color);
   --bs-btn-hover-bg: var(--product-color);
   --bs-btn-hover-border-color: var(--product-color-darker);
   --bs-btn-focus-shadow-rgb: 7, 39, 62;
@@ -71,7 +70,24 @@ export default defineComponent({
   --bs-btn-disabled-color: var(--product-color);
   --bs-btn-disabled-bg: var(--product-color);
   --bs-btn-disabled-border-color: var(--product-color-darker);
-  color: var(--product-text-color);
+  color: var(--button-text-color);
+}
+.btn-success {
+  --bs-btn-color: var(--button-color);
+  --bs-btn-bg: var(--button-color);
+  --bs-btn-border-color: var(--button-color-darker);
+  --bs-btn-hover-color: var(--button-text-color);
+  --bs-btn-hover-bg: var(--button-color);
+  --bs-btn-hover-border-color: var(--button-color-darker);
+  --bs-btn-focus-shadow-rgb: 7, 39, 62;
+  --bs-btn-active-color: var(--button-color);
+  --bs-btn-active-bg: var(--button-color);
+  --bs-btn-active-border-color: var(--button-color-darker);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: var(--button-color);
+  --bs-btn-disabled-bg: var(--button-color);
+  --bs-btn-disabled-border-color: var(--button-color-darker);
+  color: var(--button-text-color);
 }
 .btn-warning {
   --bs-btn-color: var(--button-color-warning);

@@ -74,16 +74,12 @@
               image="/images/buttons/chat.png"
             ></product-component>
 
-            <product-component
+            <round-button-component
               v-if="!payView"
               @click="showCountModal(product)"
-              :small="true"
-              :width="33"
-              color="green"
-              :text="$t(`barcode`)"
               image="/images/buttons/barcode.png"
-            ></product-component>
-            <product-component
+            ></round-button-component>
+            <round-button-component
               v-if="!payView"
               @click="
                 $router.push({
@@ -94,12 +90,8 @@
                   },
                 })
               "
-              :small="true"
-              :width="33"
-              color="green"
-              :text="$t(`search`)"
               image="/images/buttons/search.png"
-            ></product-component>
+            ></round-button-component>
             <product-component
               v-if="payView"
               @click="showModal('Wezwano pomoc')"
@@ -128,6 +120,7 @@ import { showCountModal, showModal } from "@/functions";
 import { ResponseModel } from "@/types/Response";
 import CountComponent from "@/components/CountComponent.vue";
 import { ProductModel } from "@/types/api/Product";
+import RoundButtonComponent from "@/components/RoundButtonComponent.vue";
 export default defineComponent({
   name: "CartView",
 
@@ -136,6 +129,7 @@ export default defineComponent({
     ProductComponent,
     CartComponent,
     ScannerComponent,
+    RoundButtonComponent,
   },
   setup() {
     let categories = ref<CategoryModel[]>([]);
