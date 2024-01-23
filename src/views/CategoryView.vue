@@ -40,26 +40,12 @@
       class="row"
       style="height: 265px"
     ></div>
-    <div class="row">
-      <div class="col-12">
-        <product-component
-          @click="showModal('Wezwano pomoc')"
-          :small="true"
-          :width="80"
-          color="yellow"
-          :text="$t(`help`)"
-          image="/images/buttons/chat.png"
-        ></product-component>
-      </div>
-    </div>
-    <back-button-component where="cart"></back-button-component>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 
 import ProductComponent from "@/components/ProductComponent.vue";
-import BackButtonComponent from "@/components/BackButtonComponent.vue";
 import PageButtonComponent from "@/components/PageButtonComponent.vue";
 import { showModal } from "@/functions";
 import { CategoryModel } from "@/types/api/Category";
@@ -69,7 +55,6 @@ export default defineComponent({
 
   components: {
     ProductComponent,
-    BackButtonComponent,
     PageButtonComponent,
   },
   setup() {

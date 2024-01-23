@@ -1,5 +1,5 @@
 <template>
-  <div class="backbutton">
+  <div class="backbutton btn small btn-lg mr-1">
     <img @click="backTo(where)" src="/images/buttons/back.png" />
   </div>
 </template>
@@ -10,10 +10,6 @@ export default defineComponent({
   name: "BackButtonComponent",
   props: {
     where: String,
-  },
-  setup() {
-    let buttonClass = ref<string>("btn btn-primary btn-lg btn-default  mr-1");
-    return { buttonClass };
   },
   methods: {
     backTo(where: string) {
@@ -28,21 +24,12 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 .backbutton {
-  position: absolute;
-  border-top-right-radius: 100%;
-  padding: 20px;
-  background-color: var(--product-color);
-  bottom: 0;
-  left: 0;
-
-  width: 150px;
-  height: 150px;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
   img {
-    position: relative;
-    left: -20px;
-    bottom: -20px;
-    width: 90%;
-    height: 90%;
+    width: 90px;
+    height: 90px;
   }
 }
 </style>

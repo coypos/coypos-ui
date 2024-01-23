@@ -21,6 +21,13 @@
       </div>
     </div>
     <modal-component ref="staticBackdrop"></modal-component>
+    <FooterLayout
+      v-if="
+        $router.currentRoute.value.name != `home` &&
+        $router.currentRoute.value.name != `login` &&
+        $router.currentRoute.value.name != `pin`
+      "
+    ></FooterLayout>
   </div>
 </template>
 
@@ -40,6 +47,8 @@
 import { defineComponent, ref } from "vue";
 import { QueryModel } from "@/types/Query";
 import HeaderLayout from "@/components/layout/Header.vue";
+import FooterLayout from "@/components/layout/Footer.vue";
+
 import ModalComponent from "@/components/ModalComponent.vue";
 import type { AxiosInstance } from "axios";
 import { useI18n } from "vue-i18n";
@@ -51,7 +60,7 @@ declare module "@vue/runtime-core" {
 }
 export default defineComponent({
   name: "app",
-  components: { ModalComponent, HeaderLayout },
+  components: { ModalComponent, HeaderLayout, FooterLayout },
   setup() {
     const { t } = useI18n({
       inheritLocale: true,

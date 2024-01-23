@@ -32,7 +32,9 @@
         </div>
       </div>
       <div class="col-2 right">
-        <del>{{ saved.toFixed(2) }}zł</del>
+        <del v-if="saved.toFixed(2) != sum.toFixed(2)"
+          >{{ saved.toFixed(2) }}zł</del
+        >
       </div>
       <div class="col-2 right">{{ sum.toFixed(2) }}zł</div>
     </div>
@@ -95,13 +97,13 @@ export default defineComponent({
 <style scoped lang="scss">
 .about {
   color: var(--text-color);
-  height: 590px;
+  height: 530px;
   width: 100%;
   position: relative;
   text-align: left;
   padding: 30px;
   border-radius: 40px;
-  margin: 55px 15px;
+  margin: 40px 15px;
   background-color: var(--cart-first-background-color);
   border: 2px solid var(--cart-border-color);
   .list {

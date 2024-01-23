@@ -7,7 +7,6 @@
         :image="'data:image/jpeg;base64,' + product.image"
         @click="showCountModal(product)"
       ></product-component>
-      <back-button-component where="cart"></back-button-component>
     </div>
     <div :class="'col-' + column">
       <page-button-component
@@ -41,7 +40,6 @@ export default defineComponent({
   name: "productlistView",
   components: {
     PageButtonComponent,
-    BackButtonComponent,
     ProductComponent,
     CountComponent,
   },

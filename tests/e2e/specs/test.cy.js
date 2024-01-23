@@ -27,7 +27,7 @@ describe("user going to cart and selecting products", () => {
     cy.url().should("include", "/cart?lang=pl");
     cy.get("div").contains("Pieczywo").click();
     cy.url().should("include", "/category?category=3&page=1&lang=pl");
-    cy.get("div").contains("Chleb").click();
+    cy.get("div").contains("chleb").click();
     cy.url().should("include", "/products?category=8&lang=pl&page=1");
   });
   it("select fruits", () => {
@@ -64,15 +64,15 @@ describe("user changing languages", () => {
     cy.wait(1000);
     cy.get("#en").click();
     cy.url().should("include", "lang=en");
-    cy.get("div").contains("HELP");
+    cy.get("div").contains("YOUR SHOPPING");
     cy.get("#uk").click();
     cy.url().should("include", "lang=uk");
-    cy.get("div").contains("ДОПОМОГА");
+    cy.get("div").contains("ВАШІ ПОКУПКИ");
     cy.get("#de").click();
     cy.url().should("include", "lang=de");
-    cy.get("div").contains("HELFEN");
+    cy.get("div").contains("IHR EINKAUF");
     cy.get("#pl").click();
     cy.url().should("include", "lang=pl");
-    cy.get("div").contains("POMOC");
+    cy.get("div").contains("TWOJE ZAKUPY");
   });
 });

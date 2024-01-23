@@ -44,7 +44,7 @@ export default defineComponent({
 .btn-default {
   position: relative;
   top: 0;
-  height: 250px;
+  height: 260px;
   width: 100%;
   font-size: 30px;
   line-height: 40px;

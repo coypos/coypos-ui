@@ -8,7 +8,6 @@
         image="/images/products/bread3.png"
         @click="showCountModal(product)"
       ></product-component>
-      <back-button-component where="cart"></back-button-component>
     </div>
     <div :class="'col-' + column">
       <page-button-component
@@ -42,7 +41,6 @@ import ProductComponent from "@/components/ProductComponent.vue";
 import { useI18n } from "vue-i18n";
 import { showCountModal, showModal } from "@/functions";
 import { ProductModel } from "@/types/api/Product";
-import BackButtonComponent from "@/components/BackButtonComponent.vue";
 import { CartModel } from "@/types/api/Cart";
 import PageButtonComponent from "@/components/PageButtonComponent.vue";
 import CountComponent from "@/components/CountComponent.vue";
@@ -54,7 +52,6 @@ export default defineComponent({
   components: {
     SearchComponent,
     PageButtonComponent,
-    BackButtonComponent,
     ProductComponent,
     CountComponent,
   },
@@ -117,7 +114,7 @@ export default defineComponent({
         if (this.input) {
           await this.$axios
             .get(
-              `/search/${this.input}?itemsPerPage=${this.itemsPerPage}&page=${this.page}`
+              `/search/${this.input}?loadImages=true&itemsPerPage=${this.itemsPerPage}&page=${this.page}`
             )
             .then((response) => {
               const resp: ResponseModel = response.data;
@@ -163,7 +160,7 @@ export default defineComponent({
   width: 80%;
   height: 245px;
   right: 0;
-  bottom: 0;
+  bottom: 90px;
   .searchinput {
     position: absolute;
     left: 5%;

@@ -62,47 +62,6 @@
             ></product-component>
           </div>
         </div>
-        <div class="row">
-          <div class="col-12">
-            <product-component
-              v-if="!payView"
-              @click="showModal('Wezwano pomoc')"
-              :small="true"
-              :width="34"
-              color="yellow"
-              :text="$t(`help`)"
-              image="/images/buttons/chat.png"
-            ></product-component>
-
-            <round-button-component
-              v-if="!payView"
-              @click="showCountModal(product)"
-              image="/images/buttons/barcode.png"
-            ></round-button-component>
-            <round-button-component
-              v-if="!payView"
-              @click="
-                $router.push({
-                  name: `search`,
-                  query: {
-                    lang: $router.currentRoute.value.query.lang,
-                    page: 1,
-                  },
-                })
-              "
-              image="/images/buttons/search.png"
-            ></round-button-component>
-            <product-component
-              v-if="payView"
-              @click="showModal('Wezwano pomoc')"
-              :small="false"
-              :width="100"
-              color="yellow"
-              :text="$t(`help`)"
-              image="/images/buttons/chat.png"
-            ></product-component>
-          </div>
-        </div>
       </div>
     </div>
     <count-component :barcode="true"></count-component>
@@ -116,11 +75,10 @@ import ScannerComponent from "@/components/ScannerComponent.vue";
 
 import ProductComponent from "@/components/ProductComponent.vue";
 import { CategoryModel } from "@/types/api/Category";
-import { showCountModal, showModal } from "@/functions";
+import { showModal } from "@/functions";
 import { ResponseModel } from "@/types/Response";
 import CountComponent from "@/components/CountComponent.vue";
-import { ProductModel } from "@/types/api/Product";
-import RoundButtonComponent from "@/components/RoundButtonComponent.vue";
+
 export default defineComponent({
   name: "CartView",
 
@@ -129,7 +87,6 @@ export default defineComponent({
     ProductComponent,
     CartComponent,
     ScannerComponent,
-    RoundButtonComponent,
   },
   setup() {
     let categories = ref<CategoryModel[]>([]);
@@ -138,9 +95,6 @@ export default defineComponent({
     return { payments, payView, categories };
   },
   methods: {
-    showCountModal() {
-      showCountModal();
-    },
     pay(name: string) {
       if (name == "Inne") {
         const suma = this.$storage.getStorageSync("sum");
