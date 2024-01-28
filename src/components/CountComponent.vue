@@ -6,16 +6,16 @@
     data-bs-backdrop="static"
     data-bs-keyboard="false"
     tabindex="-1"
-    aria-labelledby="staticBackdropLabel"
+    aria-labelledby="staticBackdropPinLabel"
     aria-hidden="true"
   >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 v-if="barcode" class="modal-title" id="staticBackdropLabel">
+          <h1 v-if="barcode" class="modal-title" id="staticBackdropPinLabel">
             {{ $t(`enterbarcode`) }}
           </h1>
-          <h1 v-else class="modal-title" id="staticBackdropLabel">
+          <h1 v-else class="modal-title" id="staticBackdropPinLabel">
             {{ $t(`enternumber`) }}
           </h1>
         </div>
@@ -36,7 +36,6 @@ export default defineComponent({
     barcode: Boolean,
   },
   components: { PinComponent },
-  expose: ["showModal"],
   name: "CountComponent",
 });
 </script>

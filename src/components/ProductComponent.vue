@@ -108,7 +108,7 @@ export default defineComponent({
 }
 .buttonimage {
   position: absolute;
-  max-height: 160px;
+  max-height: 140px;
   max-width: 90%;
   width: 70%;
   left: 0;

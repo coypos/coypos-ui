@@ -79,8 +79,18 @@ export default defineComponent({
           this.$storage.setStorageSync("sum", this.sum);
         }
       }
+      this.calculateOnApi();
+    },
+    async calculateOnApi() {
+      if (this.cartList.length > 0) {
+        const data = this.cartList;
+
+        const jsonString = JSON.stringify(data);
+        const encodedJsonString = encodeURIComponent(jsonString);
+      }
     },
   },
+
   mounted() {
     setInterval(() => {
       this.getCartList();

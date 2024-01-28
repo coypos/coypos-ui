@@ -5,7 +5,7 @@
         :small="false"
         :text="product.name"
         style="height: 220px"
-        image="/images/products/bread3.png"
+        :image="'data:image/jpeg;base64,' + product.image"
         @click="showCountModal(product)"
       ></product-component>
     </div>
@@ -81,8 +81,19 @@ export default defineComponent({
   methods: {
     showCountModal(product: ProductModel) {
       this.product = product;
-      if (product.isLoose && product.name != null && product.price != null) {
-        this.addToCart(product.name, product.price, 1, product.discountedPrice);
+      if (
+        product.isLoose &&
+        product.name != null &&
+        product.price != null &&
+        product.id != null
+      ) {
+        this.addToCart(
+          product.name,
+          product.price,
+          1,
+          product.discountedPrice,
+          product.id
+        );
       } else {
         showCountModal();
       }
@@ -91,7 +102,8 @@ export default defineComponent({
       name: string,
       price: number,
       count: number,
-      discountedPrice: number | null
+      discountedPrice: number | null,
+      id: number
     ) {
       let list = this.$storage.getStorageSync("cartList") as CartModel[];
       list.push({
@@ -99,6 +111,7 @@ export default defineComponent({
         price: price,
         count: count,
         discountedPrice: discountedPrice,
+        id: id,
       });
       this.$storage.setStorageSync("cartList", list);
       this.$router.push(`/cart`);

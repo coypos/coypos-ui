@@ -75,7 +75,8 @@ export default defineComponent({
             this.product.name,
             this.product.price,
             parseInt(this.pin),
-            this.product.discountedPrice
+            this.product.discountedPrice,
+            this.product.id
           );
         } else if (this.barcode) {
           try {
@@ -97,7 +98,8 @@ export default defineComponent({
                     product.name || "",
                     product.price || 0,
                     1,
-                    product.discountedPrice
+                    product.discountedPrice,
+                    product.id || 0
                   );
                 }
                 location.reload();
@@ -118,7 +120,8 @@ export default defineComponent({
       name: string,
       price: number,
       count: number,
-      discountedPrice: number | null
+      discountedPrice: number | null,
+      id: number
     ) {
       let list = this.$storage.getStorageSync("cartList") as CartModel[];
       list.push({
@@ -126,6 +129,7 @@ export default defineComponent({
         price: price,
         count: count,
         discountedPrice: discountedPrice,
+        id: id,
       });
       this.$storage.setStorageSync("cartList", list);
       this.$router.push(`/cart`);

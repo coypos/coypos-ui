@@ -78,6 +78,7 @@ import { CategoryModel } from "@/types/api/Category";
 import { showModal } from "@/functions";
 import { ResponseModel } from "@/types/Response";
 import CountComponent from "@/components/CountComponent.vue";
+import { CartModel } from "@/types/api/Cart";
 
 export default defineComponent({
   name: "CartView",
@@ -95,10 +96,37 @@ export default defineComponent({
     return { payments, payView, categories };
   },
   methods: {
-    pay(name: string) {
-      if (name == "Inne") {
-        const suma = this.$storage.getStorageSync("sum");
-        window.location.href = `https://platnosc.hotpay.pl/?SEKRET=ZTY0MHBVb29JRU5MeHNKdExZWGdieGZVRDIwYU9sZ3BWSTl0RC9BeDhQWT0%2C&KWOTA=${suma}&NAZWA_USLUGI=Zakupy&ADRES_WWW=https%3A%2F%2Fsmilginp.evolpe.net&ID_ZAMOWIENIA=1&EMAIL=&DANE_OSOBOWE=`;
+    async pay(name: string) {
+      let cartlist = this.$storage.getStorageSync("cartList") as CartModel[];
+      let basket = [];
+      for (let i = 0; i < cartlist.length; i++) {
+        basket.push({
+          product_id: cartlist[i].id,
+          quantity: cartlist[i].count,
+        });
+      }
+
+      const data = {
+        user_id: 3,
+        action: "PAID_CARD",
+        basket_items: basket,
+        transaction_id: 2137,
+      };
+
+      const jsonString = JSON.stringify(data);
+      const encodedJsonString = encodeURIComponent(jsonString);
+
+      try {
+        await this.$axios.post(`/receipt`, data).then((response) => {
+          const resp: ResponseModel = response.data;
+          console.log(resp);
+        });
+      } catch (e) {
+        showModal(e as string);
+        if (name == "Inne") {
+          const suma = this.$storage.getStorageSync("sum");
+          window.location.href = `https://platnosc.hotpay.pl/?SEKRET=ZTY0MHBVb29JRU5MeHNKdExZWGdieGZVRDIwYU9sZ3BWSTl0RC9BeDhQWT0%2C&KWOTA=${suma}&NAZWA_USLUGI=Zakupy&ADRES_WWW=https%3A%2F%2Fsmilginp.evolpe.net&ID_ZAMOWIENIA=1&EMAIL=&DANE_OSOBOWE=`;
+        }
       }
     },
     showModal,

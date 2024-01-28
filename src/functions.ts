@@ -10,8 +10,8 @@ export function showModal(e: string) {
     e;
 }
 export function showCountModal() {
-  const myModal = new Modal(
+  const myModal2 = new Modal(
     document.getElementById("staticBackdropPin") as Element
   );
-  myModal.show();
+  myModal2.show();
 }

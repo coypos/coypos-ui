@@ -15,7 +15,6 @@
       <div class="col-1 col-sm-1 col-md-4 col-lg-4 col-xl-8"></div>
       <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
         <round-button-component
-          v-if="!payView"
           @click="showModal('Wezwano pomoc')"
           :small="true"
           :width="34"
@@ -26,14 +25,13 @@
       </div>
       <div class="col-1 col-sm-3 col-md-2 col-lg-2 col-xl-1">
         <round-button-component
-          v-if="!payView"
-          @click="showCountModal(product)"
+          v-if="$router.currentRoute.value.name == `cart`"
+          @click="showCountModal()"
           image="/images/buttons/barcode.png"
         ></round-button-component>
       </div>
       <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1">
         <round-button-component
-          v-if="!payView"
           @click="
             $router.push({
               name: `search`,
@@ -45,32 +43,33 @@
           "
           image="/images/buttons/search.png"
         ></round-button-component>
-        <product-component
-          v-if="payView"
-          @click="showModal('Wezwano pomoc')"
-          :small="false"
-          :width="100"
-          color="yellow"
-          :text="$t(`help`)"
-          image="/images/buttons/chat.png"
-        ></product-component>
       </div>
     </div>
+    <count-component :barcode="true"></count-component>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import RoundButtonComponent from "@/components/RoundButtonComponent.vue";
-import ProductComponent from "@/components/ProductComponent.vue";
 import { showCountModal, showModal } from "@/functions";
 import BackButtonComponent from "@/components/BackButtonComponent.vue";
+import CountComponent from "@/components/CountComponent.vue";
 
 export default defineComponent({
   name: "HeaderLayout",
-  components: { BackButtonComponent, ProductComponent, RoundButtonComponent },
+  components: {
+    CountComponent,
+    BackButtonComponent,
+    RoundButtonComponent,
+  },
 
-  methods: { showModal, showCountModal },
+  methods: {
+    showModal,
+    showCountModal() {
+      showCountModal();
+    },
+  },
 });
 </script>
 

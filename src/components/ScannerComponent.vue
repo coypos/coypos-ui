@@ -54,7 +54,8 @@ export default defineComponent({
     async addToCart(
       name: string,
       price: number,
-      discountedPrice: number | null
+      discountedPrice: number | null,
+      id: number
     ) {
       let list = this.$storage.getStorageSync("cartList") as CartModel[];
       list.push({
@@ -62,6 +63,7 @@ export default defineComponent({
         price: price,
         count: 1,
         discountedPrice: discountedPrice,
+        id: id,
       });
 
       this.$storage.setStorageSync("cartList", list);
@@ -81,7 +83,8 @@ export default defineComponent({
             this.addToCart(
               resp.response[0].name,
               resp.response[0].price,
-              resp.response[0].discountedPrice
+              resp.response[0].discountedPrice,
+              resp.response[0].id
             );
           });
       } catch (e) {
