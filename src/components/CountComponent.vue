@@ -18,6 +18,13 @@
           <h1 v-else class="modal-title" id="staticBackdropPinLabel">
             {{ $t(`enternumber`) }}
           </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            id="close"
+          ></button>
         </div>
         <div class="modal-body">
           <pin-component v-if="barcode" :barcode="barcode"></pin-component>

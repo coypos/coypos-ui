@@ -3,7 +3,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { showModal } from "@/functions";
+import { hideModal, showModal } from "@/functions";
 import { CartModel } from "@/types/api/Cart";
 import { ResponseModel } from "@/types/Response";
 
@@ -80,12 +80,18 @@ export default defineComponent({
           .get(`/products?filter=AND&body=${encodedJsonString}`)
           .then((response) => {
             const resp: ResponseModel = response.data;
-            this.addToCart(
-              resp.response[0].name,
-              resp.response[0].price,
-              resp.response[0].discountedPrice,
-              resp.response[0].id
-            );
+            if (resp.response[0].ageRestricted) {
+              hideModal();
+              showModal(
+                "Dodano przedmiot dla pełnoletnich. Sprzedawca proszony jest o sprawdzenie dowodu."
+              );
+              this.addToCart(
+                resp.response[0].name,
+                resp.response[0].price,
+                resp.response[0].discountedPrice,
+                resp.response[0].id
+              );
+            }
           });
       } catch (e) {
         showModal("Nie znaleziono produktu");

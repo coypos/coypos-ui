@@ -16,7 +16,7 @@
             {{ $t(`close`) }}
           </h1>
         </div>
-        <div class="modal-body">
+        <div class="modal-body errobody">
           {{ $t(`error`) }}
         </div>
         <div class="modal-footer">

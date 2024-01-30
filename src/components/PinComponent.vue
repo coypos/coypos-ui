@@ -42,7 +42,7 @@
 import { defineComponent, ref } from "vue";
 import { CartModel } from "@/types/api/Cart";
 import { ResponseModel } from "@/types/Response";
-import { showModal } from "@/functions";
+import { hideCountModal, hideModal, showModal } from "@/functions";
 import { ProductModel } from "@/types/api/Product";
 import { Modal } from "bootstrap";
 import { useI18n } from "vue-i18n";
@@ -78,6 +78,22 @@ export default defineComponent({
             this.product.discountedPrice,
             this.product.id
           );
+          if (this.product.ageRestricted) {
+            console.log(this.$storage.getStorageSync("checked18"));
+            if (!this.$storage.getStorageSync("checked18")) {
+              hideCountModal();
+              showModal(
+                "Dodano przedmiot dla pełnoletnich. Sprzedawca proszony jest o sprawdzenie dowodu."
+              );
+              this.$storage.setStorageSync("checked18", true);
+            } else {
+              hideCountModal();
+              this.pin = "";
+            }
+          } else {
+            hideCountModal();
+            this.pin = "";
+          }
         } else if (this.barcode) {
           try {
             const data = {
@@ -101,8 +117,26 @@ export default defineComponent({
                     product.discountedPrice,
                     product.id || 0
                   );
+
+                  if (product.ageRestricted) {
+                    console.log(this.$storage.getStorageSync("checked18"));
+
+                    if (!this.$storage.getStorageSync("checked18")) {
+                      this.$storage.setStorageSync("checked18", true);
+
+                      hideCountModal();
+                      showModal(
+                        "Dodano przedmiot dla pełnoletnich. Sprzedawca proszony jest o sprawdzenie dowodu."
+                      );
+                    } else {
+                      hideCountModal();
+                      this.pin = "";
+                    }
+                  } else {
+                    hideCountModal();
+                    this.pin = "";
+                  }
                 }
-                location.reload();
               });
           } catch (e) {
             showModal(e as string);

@@ -90,6 +90,7 @@ export default defineComponent({
   mounted() {
     this.getSettings();
     this.$storage.setStorageSync("cartList", []);
+    this.$storage.setStorageSync("checked18", false);
   },
 });
 </script>
