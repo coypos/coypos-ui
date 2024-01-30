@@ -107,7 +107,7 @@ export default defineComponent({
       }
 
       const data = {
-        user_id: 3,
+        user_id: 24,
         action: "PAID_CARD",
         basket_items: basket,
         transaction_id: 2137,
