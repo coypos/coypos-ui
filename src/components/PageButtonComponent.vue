@@ -48,7 +48,7 @@ export default defineComponent({
 .pagebutton {
   border-radius: 100%;
   padding: 20px;
-  margin-top: 50px;
+  margin-top: 10px;
   background-color: var(--button-color);
   display: inline-block;
   width: 150px;

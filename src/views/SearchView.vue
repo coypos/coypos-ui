@@ -9,27 +9,21 @@
         @click="showCountModal(product)"
       ></product-component>
     </div>
-    <div :class="'col-' + column">
-      <page-button-component
-        v-if="page != 1"
-        type="left"
-        :page="page - 1"
-      ></page-button-component>
+    <div :class="'nextbutton col-' + column">
       <page-button-component
         v-if="totalPages != page && totalPages != 0"
         type="right"
         :page="page + 1"
       ></page-button-component>
+      <page-button-component
+        v-if="page != 1"
+        type="left"
+        :page="page - 1"
+      ></page-button-component>
     </div>
     <count-component :product="product"></count-component>
     <div class="searchcomponent">
-      <input
-        :value="input"
-        class="input searchinput"
-        @input="onInputChange"
-        placeholder="Tap on the virtual keyboard to start"
-      />
-      <search-component class="search" @onChange="onChange" :input="input" />
+      <search-component @onKeyPress="onChange" :input="input" />
     </div>
   </div>
 </template>
@@ -119,9 +113,7 @@ export default defineComponent({
     onChange(input: string) {
       this.input = input;
     },
-    onInputChange(input: KeyboardInputModal) {
-      this.input = input.target.value;
-    },
+
     async getProducts() {
       try {
         if (this.input) {
@@ -142,7 +134,7 @@ export default defineComponent({
   },
   mounted() {
     this.page = parseInt(this.$router.currentRoute.value.query.page as string);
-    this.column = 12 / Math.ceil(this.itemsPerPage / 2);
+    this.column = 2;
     this.getProducts();
   },
   updated() {
@@ -167,24 +159,21 @@ export default defineComponent({
 .product {
   margin: 15px;
 }
+.productlist {
+  margin-top: 100px;
+}
 .searchcomponent {
-  //background: var(--product-color-darker);
   position: absolute;
-  width: 80%;
-  height: 245px;
-  right: 0;
-  bottom: 90px;
-  .searchinput {
-    position: absolute;
-    left: 5%;
-    width: 90%;
-    bottom: 250px;
-  }
-  .search {
-    position: absolute;
-    left: 5%;
-    width: 90%;
-    bottom: 20px;
-  }
+  left: 0;
+  width: 100%;
+  bottom: 100px;
+  height: 43%;
+}
+.nextbutton {
+  position: absolute;
+  right: 55px;
+  top: 45px;
+  width: 12%;
+  height: 100%;
 }
 </style>
