@@ -15,6 +15,7 @@
       <div class="col-1 col-sm-1 col-md-4 col-lg-4 col-xl-8"></div>
       <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
         <round-button-component
+          v-if="$router.currentRoute.value.name != `seller`"
           @click="showModal('Wezwano pomoc')"
           :small="true"
           :width="34"
@@ -32,6 +33,7 @@
       </div>
       <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1">
         <round-button-component
+          v-if="$router.currentRoute.value.name != `seller`"
           @click="
             $router.push({
               name: `search`,

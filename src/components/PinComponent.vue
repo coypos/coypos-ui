@@ -52,6 +52,7 @@ export default defineComponent({
     product: Object,
     usage: String,
     barcode: Boolean,
+    admin: Boolean,
   },
   setup() {
     let pin = ref<string>("");
@@ -79,13 +80,17 @@ export default defineComponent({
             this.product.id
           );
           if (this.product.ageRestricted) {
-            console.log(this.$storage.getStorageSync("checked18"));
             if (!this.$storage.getStorageSync("checked18")) {
               hideCountModal();
               showModal(
                 "Dodano przedmiot dla pełnoletnich. Sprzedawca proszony jest o sprawdzenie dowodu."
               );
-              this.$storage.setStorageSync("checked18", true);
+              this.$router.push({
+                name: `seller`,
+                query: {
+                  lang: this.$router.currentRoute.value.query.lang,
+                },
+              });
             } else {
               hideCountModal();
               this.pin = "";
@@ -122,12 +127,16 @@ export default defineComponent({
                     console.log(this.$storage.getStorageSync("checked18"));
 
                     if (!this.$storage.getStorageSync("checked18")) {
-                      this.$storage.setStorageSync("checked18", true);
-
                       hideCountModal();
                       showModal(
                         "Dodano przedmiot dla pełnoletnich. Sprzedawca proszony jest o sprawdzenie dowodu."
                       );
+                      this.$router.push({
+                        name: `seller`,
+                        query: {
+                          lang: this.$router.currentRoute.value.query.lang,
+                        },
+                      });
                     } else {
                       hideCountModal();
                       this.pin = "";
@@ -142,12 +151,21 @@ export default defineComponent({
             showModal(e as string);
           }
         }
-        this.$router.push({
-          name: `cart`,
-          query: {
-            lang: this.$router.currentRoute.value.query.lang,
-          },
-        });
+        if (this.admin) {
+          this.$router.push({
+            name: `seller`,
+            query: {
+              lang: this.$router.currentRoute.value.query.lang,
+            },
+          });
+        } else {
+          this.$router.push({
+            name: `cart`,
+            query: {
+              lang: this.$router.currentRoute.value.query.lang,
+            },
+          });
+        }
       }
     },
     async addToCart(

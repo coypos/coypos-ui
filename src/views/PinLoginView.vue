@@ -8,7 +8,7 @@
         <div class="title">
           <h1 class="open">{{ $t("login") }}</h1>
           <div class="info">{{ $t("pin") }}</div>
-          <pin-component></pin-component>
+          <pin-component :admin="true"></pin-component>
         </div>
       </div>
       <div class="col-2">

@@ -81,17 +81,19 @@ export default defineComponent({
           .then((response) => {
             const resp: ResponseModel = response.data;
             if (resp.response[0].ageRestricted) {
-              hideModal();
-              showModal(
-                "Dodano przedmiot dla pełnoletnich. Sprzedawca proszony jest o sprawdzenie dowodu."
-              );
-              this.addToCart(
-                resp.response[0].name,
-                resp.response[0].price,
-                resp.response[0].discountedPrice,
-                resp.response[0].id
-              );
+              if (!this.$storage.getStorageSync("checked18")) {
+                hideModal();
+                showModal(
+                  "Dodano przedmiot dla pełnoletnich. Sprzedawca proszony jest o sprawdzenie dowodu."
+                );
+              }
             }
+            this.addToCart(
+              resp.response[0].name,
+              resp.response[0].price,
+              resp.response[0].discountedPrice,
+              resp.response[0].id
+            );
           });
       } catch (e) {
         showModal("Nie znaleziono produktu");
