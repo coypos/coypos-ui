@@ -81,13 +81,16 @@ export default defineComponent({
     clearCache() {
       let arr = [];
       for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i).substring(0, 12) == "axios-cache:") {
-          arr.push(localStorage.key(i));
+        if (localStorage.key(i)) {
+          let key = localStorage.key(i) as string;
+          if (key.substring(0, 12) == "axios-cache:") {
+            arr.push(key);
+          }
         }
       }
 
       // Iterate over arr and remove the items by key
-      for (var i = 0; i < arr.length; i++) {
+      for (let i = 0; i < arr.length; i++) {
         localStorage.removeItem(arr[i]);
       }
     },
@@ -97,11 +100,9 @@ export default defineComponent({
     deleteproduct(id?: number) {
       this.deleting = false;
       let list = this.$storage.getStorageSync("cartList") as CartModel[];
-      if (id >= 0) {
+      if (id != undefined) {
         list.splice(id, 1);
-      } else if (this.selectedproduct >= 0) {
-        console.log(this.selectedproduct);
-
+      } else if (this.selectedproduct != undefined) {
         list.splice(this.selectedproduct, 1);
       }
       this.$storage.setStorageSync("cartList", list);
