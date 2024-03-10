@@ -24,7 +24,7 @@
       <div class="col-2">
         <img
           class="logo"
-          :src="this.$storage.getStorageSync(`logo`)"
+          :src="'data:image/png;base64,' + this.$storage.getStorageSync(`logo`)"
           alt="logo"
         />
       </div>
