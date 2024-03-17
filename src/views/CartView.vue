@@ -40,11 +40,11 @@
             :key="index"
             class="col-4"
             style="margin-top: 70px"
-            @click="pay(payment.name)"
+            @click="pay(payment.id)"
           >
             <product-component
               :text="payment.name"
-              image="/images/products/vegetables.png"
+              :image="'data:image/jpeg;base64,' + payment.image"
             ></product-component>
           </div>
         </div>
@@ -96,7 +96,7 @@ export default defineComponent({
     return { payments, payView, categories };
   },
   methods: {
-    async pay(name: string) {
+    async pay(id: number) {
       let cartlist = this.$storage.getStorageSync("cartList") as CartModel[];
       let basket = [];
       for (let i = 0; i < cartlist.length; i++) {
@@ -108,7 +108,7 @@ export default defineComponent({
 
       const data = {
         user_id: 24,
-        action: "PAID_CARD",
+        payment_method: id,
         basket_items: basket,
         transaction_id: 2137,
       };
@@ -123,7 +123,7 @@ export default defineComponent({
         });
       } catch (e) {
         showModal(e as string);
-        if (name == "Inne") {
+        if (id == 3) {
           const suma = this.$storage.getStorageSync("sum");
           window.location.href = `https://platnosc.hotpay.pl/?SEKRET=ZTY0MHBVb29JRU5MeHNKdExZWGdieGZVRDIwYU9sZ3BWSTl0RC9BeDhQWT0%2C&KWOTA=${suma}&NAZWA_USLUGI=Zakupy&ADRES_WWW=https%3A%2F%2Fsmilginp.evolpe.net&ID_ZAMOWIENIA=1&EMAIL=&DANE_OSOBOWE=`;
         }
@@ -152,37 +152,31 @@ export default defineComponent({
         showModal(e as string);
       }
     },
+    async getPaymentsMethodsList() {
+      const data = {
+        enabled: true,
+      };
+
+      const jsonString = JSON.stringify(data);
+      const encodedJsonString = encodeURIComponent(jsonString);
+
+      try {
+        const lang = this.$storage.getStorageSync("lang");
+        await this.$axios
+          .get(
+            `/payment_methods?filter=AND&language=${lang}&loadImages=true&body=${encodedJsonString}`
+          )
+          .then((response) => {
+            const resp: ResponseModel = response.data;
+            this.payments = resp.response;
+          });
+      } catch (e) {
+        showModal(e as string);
+      }
+    },
   },
   mounted() {
-    this.payments = [
-      {
-        id: null,
-        name: "Gotówka",
-        parentCategory: null,
-        updateDate: null,
-        createDate: null,
-        image: null,
-        isVisible: null,
-      },
-      {
-        id: null,
-        name: "Inne",
-        parentCategory: null,
-        updateDate: null,
-        createDate: null,
-        image: null,
-        isVisible: null,
-      },
-      {
-        id: null,
-        name: "Karta",
-        parentCategory: null,
-        updateDate: null,
-        createDate: null,
-        image: null,
-        isVisible: null,
-      },
-    ];
+    this.getPaymentsMethodsList();
     this.getParentCategoriesList();
   },
   watch: {
