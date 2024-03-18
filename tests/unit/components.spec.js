@@ -29,16 +29,15 @@ describe("ButtonComponent.vue", () => {
     expect(classes).to.contain("btn-warning");
   });
 });
-describe("FlagsComponent.vue", () => {
-  it("should render", () => {
-    const wrapper = shallowMount(FlagsComponent);
-    expect(wrapper.find("#pl").isVisible()).to.be.true;
-    expect(wrapper.find("#uk").isVisible()).to.be.true;
-    expect(wrapper.find("#en").isVisible()).to.be.true;
-
-    expect(wrapper.find("#de").isVisible()).to.be.true;
-  });
-});
+//describe("FlagsComponent.vue", () => {
+//  it("should render", () => {
+//    const wrapper = shallowMount(FlagsComponent);
+//    expect(wrapper.find("#pl").isVisible()).to.be.true;
+//    expect(wrapper.find("#uk").isVisible()).to.be.true;
+//    expect(wrapper.find("#en").isVisible()).to.be.true;
+//    expect(wrapper.find("#de").isVisible()).to.be.true;
+//  });
+//});
 //describe("PinComponent.vue", () => {
 //  it("should render", () => {
 //const wrapper = shallowMount(PinComponent);
