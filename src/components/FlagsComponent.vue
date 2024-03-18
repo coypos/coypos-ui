@@ -1,40 +1,20 @@
 <template>
   <div class="flags">
     <img
-      @click="changeLanguage('pl')"
+      :key="language.id"
+      v-for="language in languages"
+      @click="changeLanguage(language.countryCode)"
       :class="flagClass"
-      src="../assets/flags/pl.png"
-      alt="Polski"
-      id="pl"
+      :src="'data:image/jpeg;base64,' + language.image"
+      :alt="language.name"
+      :id="language.countryCode"
       srcset=""
-    />
-    <img
-      @click="changeLanguage('en')"
-      :class="flagClass"
-      src="../assets/flags/en.jpg"
-      alt="English"
-      srcset=""
-      id="en"
-    />
-    <img
-      @click="changeLanguage('uk')"
-      :class="flagClass"
-      src="../assets/flags/uk.png"
-      alt="українська"
-      srcset=""
-      id="uk"
-    />
-    <img
-      @click="changeLanguage('de')"
-      :class="flagClass"
-      src="../assets/flags/ge.png"
-      alt="Deutsch"
-      srcset=""
-      id="de"
     />
   </div>
 </template>
 <script lang="ts">
+import { LanguageModel } from "@/types/api/Language";
+import { ResponseModel } from "@/types/Response";
 import { defineComponent, ref } from "vue";
 export default defineComponent({
   name: "FlagsComponent",
@@ -43,9 +23,22 @@ export default defineComponent({
   },
   setup() {
     let flagClass = ref<string>("flag ");
-    return { flagClass };
+    let languages = ref<LanguageModel[]>([]);
+    return { languages, flagClass };
   },
   methods: {
+    async getLanguages() {
+      try {
+        await this.$axios
+          .get(`/languages?filter=AND&loadImages=true`)
+          .then((response) => {
+            const resp: ResponseModel = response.data;
+            this.languages = resp.response;
+          });
+      } catch (e: any) {
+        console.log(e);
+      }
+    },
     async changeLanguage(lang: string) {
       this.$storage.setStorageSync("lang", lang);
       this.$i18n.locale = lang;
@@ -80,6 +73,7 @@ export default defineComponent({
     },
   },
   mounted() {
+    this.getLanguages();
     this.changeHorizontally().then(() => {
       this.activeFlag();
     });

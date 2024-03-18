@@ -152,12 +152,28 @@ export default defineComponent({
           }
         }
         if (this.admin) {
-          this.$router.push({
-            name: `seller`,
-            query: {
-              lang: this.$router.currentRoute.value.query.lang,
-            },
-          });
+          try {
+            const data = {
+              card_id: this.$route.query.id,
+              pin: this.pin,
+            };
+
+            const jsonString = JSON.stringify(data);
+            const encodedJsonString = encodeURIComponent(jsonString);
+            await this.$axios
+              .get(`/employee_validate?body=${encodedJsonString}`)
+              .then((response) => {
+                const resp = response.data;
+                this.$router.push({
+                  name: `seller`,
+                  query: {
+                    lang: this.$router.currentRoute.value.query.lang,
+                  },
+                });
+              });
+          } catch (e: any) {
+            console.log(e);
+          }
         } else {
           this.$router.push({
             name: `cart`,
