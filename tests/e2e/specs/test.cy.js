@@ -9,8 +9,8 @@ describe("Cash register Language test", () => {
     cy.visit("/?lang=en");
     cy.contains("h1", "CASH REGISTER OPEN");
   });
-  it("Visits the app root url UK", () => {
-    cy.visit("/?lang=uk");
+  it("Visits the app root url UA", () => {
+    cy.visit("/?lang=ua");
     cy.contains("h1", "ВІДКРИТА КАСА");
   });
   it("Visits the app root url DE", () => {
@@ -54,8 +54,8 @@ describe("user changing languages", () => {
     cy.get("#en").click();
     cy.url().should("include", "lang=en");
     cy.get("div").contains("HELP");
-    cy.get("#uk").click();
-    cy.url().should("include", "lang=uk");
+    cy.get("#ua").click();
+    cy.url().should("include", "lang=ua");
     cy.get("div").contains("ДОПОМОГА");
     cy.get("#de").click();
     cy.url().should("include", "lang=de");
@@ -70,8 +70,8 @@ describe("user changing languages", () => {
     cy.get("#en").click();
     cy.url().should("include", "lang=en");
     cy.get("div").contains("YOUR SHOPPING");
-    cy.get("#uk").click();
-    cy.url().should("include", "lang=uk");
+    cy.get("#ua").click();
+    cy.url().should("include", "lang=ua");
     cy.get("div").contains("ВАШІ ПОКУПКИ");
     cy.get("#de").click();
     cy.url().should("include", "lang=de");
