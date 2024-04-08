@@ -91,6 +91,8 @@ export default defineComponent({
     this.getSettings();
     this.$storage.setStorageSync("cartList", []);
     this.$storage.setStorageSync("checked18", false);
+    this.$storage.setStorageSync("user", 0);
+    this.$storage.setStorageSync("username", "");
   },
 });
 </script>

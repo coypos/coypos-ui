@@ -94,6 +94,7 @@ export default defineComponent({
   mounted() {
     setInterval(() => {
       this.getCartList();
+
       if (
         this.cartList !=
         (this.$storage.getStorageSync("cartList") as CartModel[])

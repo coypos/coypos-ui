@@ -17,7 +17,8 @@ export default defineComponent({
   },
   setup() {
     let scanned = ref<string>("");
-    return { scanned };
+    let finded = ref<boolean>(false);
+    return { scanned, finded };
   },
   methods: {
     scannerEvent() {
@@ -69,32 +70,74 @@ export default defineComponent({
       this.$storage.setStorageSync("cartList", list);
     },
     async getProduct() {
+      const code = this.scanned;
       try {
-        const data = {
-          barcode: this.scanned,
+        let data = {
+          cardNumber: code,
+          role: null,
         };
+        let findeduser = false;
+        let jsonString = JSON.stringify(data);
+        let encodedJsonString = encodeURIComponent(jsonString);
+        if (!this.finded) {
+          try {
+            await this.$axios
+              .get(`/users?filter=AND&body=${encodedJsonString}`)
+              .then((response) => {
+                const resp: ResponseModel = response.data;
+                if (resp.response[0].name) {
+                  console.log(resp.response[0]);
 
-        const jsonString = JSON.stringify(data);
-        const encodedJsonString = encodeURIComponent(jsonString);
-        await this.$axios
-          .get(`/products?filter=AND&body=${encodedJsonString}`)
-          .then((response) => {
-            const resp: ResponseModel = response.data;
-            if (resp.response[0].ageRestricted) {
-              if (!this.$storage.getStorageSync("checked18")) {
-                hideModal();
-                showModal(
-                  "Dodano przedmiot dla pełnoletnich. Sprzedawca proszony jest o sprawdzenie dowodu."
-                );
+                  data = { cardNumber: "-1", role: null };
+                  this.finded = true;
+                  findeduser = true;
+                  this.$storage.setStorageSync("user", resp.response[0].id);
+                  this.$storage.setStorageSync(
+                    "username",
+                    resp.response[0].name
+                  );
+                }
+                if (this.$route.name != "cart") {
+                  this.$router.push({
+                    name: "cart",
+                    params: this.$route.params,
+                  });
+                }
+              });
+          } catch (e) {
+            console.log(e);
+          }
+        }
+        if (!findeduser) {
+          let data2 = {
+            barcode: code,
+          };
+
+          jsonString = JSON.stringify(data2);
+          encodedJsonString = encodeURIComponent(jsonString);
+          await this.$axios
+            .get(`/products?filter=AND&body=${encodedJsonString}`)
+            .then((response) => {
+              const resp: ResponseModel = response.data;
+              if (resp.response[0].ageRestricted) {
+                if (!this.$storage.getStorageSync("checked18")) {
+                  hideModal();
+                  showModal(
+                    "Dodano przedmiot dla pełnoletnich. Sprzedawca proszony jest o sprawdzenie dowodu."
+                  );
+                }
               }
-            }
-            this.addToCart(
-              resp.response[0].name,
-              resp.response[0].price,
-              resp.response[0].discountedPrice,
-              resp.response[0].id
-            );
-          });
+              this.addToCart(
+                resp.response[0].name,
+                resp.response[0].price,
+                resp.response[0].discountedPrice,
+                resp.response[0].id
+              );
+              if (this.$route.name != "cart") {
+                this.$router.push({ name: "cart", params: this.$route.params });
+              }
+            });
+        }
       } catch (e) {
         showModal("Nie znaleziono produktu");
       }

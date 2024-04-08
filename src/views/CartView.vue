@@ -1,6 +1,11 @@
 <template>
   <div class="cart">
     <div class="row">
+      <div class="col-4">
+        <div id="username" v-if="username">Witaj, {{ username }}</div>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-5 list">
         <cart-component></cart-component>
         <scanner-component></scanner-component>
@@ -93,7 +98,9 @@ export default defineComponent({
     let categories = ref<CategoryModel[]>([]);
     let payView = ref<boolean>(false);
     let payments = ref<CategoryModel[]>([]);
-    return { payments, payView, categories };
+    let username = ref<string>("");
+
+    return { username, payments, payView, categories };
   },
   methods: {
     async pay(id: number) {
@@ -107,7 +114,7 @@ export default defineComponent({
       }
 
       const data = {
-        user_id: 24,
+        user_id: this.$storage.getStorageSync("user"),
         payment_method: id,
         basket_items: basket,
         transaction_id: 2137,
@@ -176,6 +183,12 @@ export default defineComponent({
     },
   },
   mounted() {
+    setInterval(() => {
+      if (!this.username) {
+        this.username = this.$storage.getStorageSync("username") as string;
+      }
+    }, 400);
+
     this.getPaymentsMethodsList();
     this.getParentCategoriesList();
   },
@@ -190,6 +203,12 @@ export default defineComponent({
 <style scoped lang="scss">
 .cart {
   padding-top: 30px;
+}
+#username {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 20px;
 }
 .scaninfo {
   font-weight: 700;
