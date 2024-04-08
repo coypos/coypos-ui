@@ -117,11 +117,8 @@ export default defineComponent({
         user_id: this.$storage.getStorageSync("user"),
         payment_method: id,
         basket_items: basket,
-        transaction_id: 2137,
+        transaction_id: null,
       };
-
-      const jsonString = JSON.stringify(data);
-      const encodedJsonString = encodeURIComponent(jsonString);
 
       try {
         await this.$axios.post(`/receipt`, data).then((response) => {

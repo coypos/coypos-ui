@@ -26,7 +26,7 @@ describe("user going to cart and selecting products", () => {
     cy.get("div").contains("START").click();
     cy.url().should("include", "/cart?lang=pl");
     cy.get("div").contains("Pieczywo").click();
-    cy.url().should("include", "/category?category=3&page=1&lang=pl");
+    cy.url().should("include", "/category?category=29&page=1&lang=pl");
     cy.get("div").contains("chleb").click();
     cy.url().should("include", "/products?category=8&lang=pl&page=1");
   });
