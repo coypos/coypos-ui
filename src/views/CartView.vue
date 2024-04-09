@@ -114,7 +114,7 @@ export default defineComponent({
       }
 
       const data = {
-        user_id: this.$storage.getStorageSync("user"),
+        user_id: this.$storage.getStorageSync("user") || 40,
         payment_method: id,
         basket_items: basket,
         transaction_id: null,
@@ -124,6 +124,7 @@ export default defineComponent({
         await this.$axios.post(`/receipt`, data).then((response) => {
           const resp: ResponseModel = response.data;
           console.log(resp);
+          this.$router.push({ name: "home" });
         });
       } catch (e) {
         showModal(e as string);
