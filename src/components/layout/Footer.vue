@@ -16,6 +16,7 @@
       <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-1">
         <round-button-component
           v-if="$router.currentRoute.value.name != `seller`"
+          id="help"
           @click="showModal('Wezwano pomoc')"
           :small="true"
           :width="34"
@@ -26,6 +27,7 @@
       </div>
       <div class="col-1 col-sm-3 col-md-2 col-lg-2 col-xl-1">
         <round-button-component
+          id="barcode"
           v-if="$router.currentRoute.value.name == `cart`"
           @click="showCountModal()"
           image="/images/buttons/barcode.png"
@@ -33,6 +35,7 @@
       </div>
       <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1">
         <round-button-component
+          id="search"
           v-if="$router.currentRoute.value.name != `seller`"
           @click="
             $router.push({
