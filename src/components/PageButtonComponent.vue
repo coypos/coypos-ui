@@ -26,6 +26,7 @@ export default defineComponent({
     return { buttonClass };
   },
   methods: {
+    //zmiana query nr strony, aby przejsc na nastepna/poprzednia
     goToPage() {
       const currentLang = this.$router.currentRoute.value.query.lang;
       const currentRoute = this.$router.currentRoute.value.name as string;

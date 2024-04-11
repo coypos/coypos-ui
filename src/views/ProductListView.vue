@@ -57,6 +57,7 @@ export default defineComponent({
     return { product, totalPages, t, products, column, itemsPerPage, page };
   },
   methods: {
+    //funkcja wyswietlajaca modal z wproadzeniem ilosci sztuk danego produktu
     showCountModal(product: ProductModel) {
       this.product = product;
       if (
@@ -76,6 +77,7 @@ export default defineComponent({
         showCountModal();
       }
     },
+    //funckja dodajaca do koszyka produkt
     async addToCart(
       name: string,
       price: number,
@@ -94,6 +96,7 @@ export default defineComponent({
       this.$storage.setStorageSync("cartList", list);
       this.$router.push(`/cart`);
     },
+    //pobranie listy produktow na podstawie kategorii w ktorej jestesmy
     async getProducts() {
       try {
         const data = {
@@ -118,11 +121,14 @@ export default defineComponent({
     },
   },
   mounted() {
+    //obliczamy ilosc produktow do wyswietlania na stronie
     this.page = parseInt(this.$router.currentRoute.value.query.page as string);
     this.column = 12 / Math.ceil(this.itemsPerPage / 2);
     this.getProducts();
   },
   updated() {
+    //sprawdzamy czy nie zmienila sie strona i wyswietlamy nowe produkty jezeli sie zmienila
+
     if (
       this.page !=
       parseInt(this.$router.currentRoute.value.query.page as string)

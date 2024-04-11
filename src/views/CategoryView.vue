@@ -68,7 +68,7 @@ export default defineComponent({
 
   methods: {
     showModal,
-
+    //pobranie podkategorii kategorii z zadanym id
     async getParentCategoriesList() {
       const data = {
         parentCategory: { id: this.$router.currentRoute.value.query.category },
@@ -94,11 +94,13 @@ export default defineComponent({
     },
   },
   mounted() {
+    //obliczamy ilosc kategorii do wyswietlania na stronie
     this.page = parseInt(this.$router.currentRoute.value.query.page as string);
     this.column = 12 / Math.ceil(this.itemsPerPage / 2);
     this.getParentCategoriesList();
   },
   updated() {
+    //sprawdzamy czy nie zmienila sie strona i wyswietlamy nowe kategorie jezeli sie zmienila
     if (
       this.page !=
       parseInt(this.$router.currentRoute.value.query.page as string)

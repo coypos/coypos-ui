@@ -12,6 +12,7 @@ export default defineComponent({
     where: String,
   },
   methods: {
+    //zmiana widoku na zadany w argumencie z zachowaniem jezyka
     backTo(where: string) {
       const currentLang = this.$router.currentRoute.value.query.lang;
       this.$router.push({

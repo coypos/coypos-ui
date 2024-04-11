@@ -20,6 +20,7 @@ export default defineComponent({
   },
   methods: {
     updateClass() {
+      //jezeli w props dostaniemy kolor yellow to nastąpi zmiana klasy aby guzik byl zółty
       if (this.color == "yellow") {
         this.buttonClass = "btn btn-warning btn-default btn-lg mr-1 ";
       }

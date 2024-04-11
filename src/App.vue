@@ -71,6 +71,7 @@ export default defineComponent({
     return { t, flagClass };
   },
   methods: {
+    //zmiana jezyka kasy (dodanie do query inofmracji)
     async changeLanguage(lang: string) {
       this.$storage.setStorageSync("lang", lang);
       this.$i18n.locale = lang;
@@ -81,6 +82,7 @@ export default defineComponent({
         await this.$router.push({ name: currentName, query: mergedParams });
       }
     },
+    //sprawdzamy czy w pamieci mamy jakis zapisany jezyk i uzywamy go
     refreshLanguage(to: QueryModel) {
       const langParam = this.$storage.getStorageSync("lang");
       if (to.query.lang) {

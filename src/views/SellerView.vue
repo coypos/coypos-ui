@@ -74,10 +74,12 @@ export default defineComponent({
     };
   },
   methods: {
+    //pobranie koszyka do zmiennej i wyswietlenie listy produktow do usuniecia
     triggerdelete() {
       this.deleting = true;
       this.products = this.$storage.getStorageSync("cartList") as CartModel[];
     },
+    //wyczyszczenie cache przegladarki przy zmianach w bazie
     clearCache() {
       let arr = [];
       for (let i = 0; i < localStorage.length; i++) {
@@ -94,9 +96,11 @@ export default defineComponent({
         localStorage.removeItem(arr[i]);
       }
     },
+    //oznaczenie klienta jako pelnoletniego
     isAdult() {
       this.$storage.setStorageSync("checked18", true);
     },
+    //uzuniecie produktu z koszyka
     deleteproduct(id?: number) {
       this.deleting = false;
       let list = this.$storage.getStorageSync("cartList") as CartModel[];
@@ -107,9 +111,11 @@ export default defineComponent({
       }
       this.$storage.setStorageSync("cartList", list);
     },
+    //uzuniecie wszystkich produktow z koszyka
     deleteallproducts() {
       this.$storage.setStorageSync("cartList", []);
     },
+    //usuniecie produktu dla pelnoletnich przy odrzuceniu pelnoletnosci przez sprzedawce
     notAdult() {
       let len = (this.$storage.getStorageSync("cartList") as CartModel[])
         .length;

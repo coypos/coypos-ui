@@ -21,6 +21,8 @@ export default defineComponent({
     return { buttonClass };
   },
   methods: {
+    //jezeli w props dostaniemy kolor yellow to nastąpi zmiana klasy aby guzik byl zółty itp dla zielonego, dodatkowo weryfikujemy czy nie dostalismy props small ktore zmieni klase na przycisk o mniejszych rozmiarach
+
     updateClass() {
       if (this.color == "yellow" && this.small) {
         this.buttonClass = "btn btn-warning small btn-default btn-lg mr-1 ";

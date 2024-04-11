@@ -63,6 +63,7 @@ export default defineComponent({
   },
   methods: {
     showModal,
+    //pobranie ustawien kasy takich jak kolory czy logo
     async getSettings() {
       try {
         await this.$axios.get(`/settings`).then((response) => {
@@ -89,6 +90,7 @@ export default defineComponent({
   },
   mounted() {
     this.getSettings();
+    //wyzerowanie koszyka i informacji pobranych w trakcie poprzedniej sesji
     this.$storage.setStorageSync("cartList", []);
     this.$storage.setStorageSync("checked18", false);
     this.$storage.setStorageSync("user", 0);

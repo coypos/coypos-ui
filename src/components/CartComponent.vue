@@ -55,8 +55,11 @@ export default defineComponent({
     return { cartList, sum, saved };
   },
   methods: {
+    //funkcja służąca do pobrania listy zakupów
     async getCartList() {
+      //pobranie z pamieci listy
       this.cartList = this.$storage.getStorageSync("cartList") as CartModel[];
+      //obliczanie wartosci koszyka i zaoszczedzonych na promocjach pieniedzy
       this.sum = 0;
       this.saved = 0;
       if (this.cartList) {
@@ -65,7 +68,6 @@ export default defineComponent({
             this.saved + this.cartList[i].count * this.cartList[i].price;
         }
       }
-
       if (this.cartList) {
         for (let i = 0; this.cartList.length > i; i++) {
           if (this.cartList[i].discountedPrice != null) {
@@ -79,19 +81,11 @@ export default defineComponent({
           this.$storage.setStorageSync("sum", this.sum);
         }
       }
-      this.calculateOnApi();
-    },
-    async calculateOnApi() {
-      if (this.cartList.length > 0) {
-        const data = this.cartList;
-
-        const jsonString = JSON.stringify(data);
-        const encodedJsonString = encodeURIComponent(jsonString);
-      }
     },
   },
 
   mounted() {
+    //rozwiazanie problemu przekazywania koszyka do innego componentu, co 400 ms sprawdzamy czy koszyk ulegl zmianie i wyswietlamy go na nowo
     setInterval(() => {
       this.getCartList();
 

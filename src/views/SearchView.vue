@@ -73,6 +73,8 @@ export default defineComponent({
     };
   },
   methods: {
+    //funkcja wyswietlajaca modal z wproadzeniem ilosci sztuk danego produktu
+
     showCountModal(product: ProductModel) {
       this.product = product;
       if (
@@ -92,6 +94,8 @@ export default defineComponent({
         showCountModal();
       }
     },
+    //funckja dodajaca do koszyka produkt
+
     async addToCart(
       name: string,
       price: number,
@@ -110,10 +114,11 @@ export default defineComponent({
       this.$storage.setStorageSync("cartList", list);
       this.$router.push(`/cart`);
     },
+    //dodajemy wprowadzone litery do zmiennej input globalnej
     onChange(input: string) {
       this.input = input;
     },
-
+    //pobranie listy produktow z api o zadanym query wyszikiwania
     async getProducts() {
       try {
         if (this.input) {
@@ -133,11 +138,15 @@ export default defineComponent({
     },
   },
   mounted() {
+    //obliczamy ilosc produktow do wyswietlania na stronie
+
     this.page = parseInt(this.$router.currentRoute.value.query.page as string);
     this.column = 2;
     this.getProducts();
   },
   updated() {
+    //sprawdzamy czy nie zmienila sie strona i wyswietlamy nowe produkty jezeli sie zmienila
+
     if (
       this.page !=
       parseInt(this.$router.currentRoute.value.query.page as string)

@@ -103,6 +103,7 @@ export default defineComponent({
   },
 
   methods: {
+    //dodawnia wcisnietego przycisku do zmiennej input
     keyClicked(key: any) {
       if (key == "del") {
         this.input = this.input.slice(0, this.input.length - 1);
@@ -112,7 +113,6 @@ export default defineComponent({
       this.$emit("onKeyPress", this.input);
     },
   },
-  watch: {},
 });
 </script>
 <style scoped lang="scss">

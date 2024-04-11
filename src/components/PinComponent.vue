@@ -56,21 +56,23 @@ export default defineComponent({
   },
   setup() {
     let pin = ref<string>("");
-    const { t } = useI18n({
-      inheritLocale: true,
-      useScope: "local",
-    });
-    return { pin, t };
+
+    return { pin };
   },
   methods: {
+    //dodanie cyfry do pinu kliknetej na ekranie
     async addtopin(number: string) {
       this.pin += number;
     },
+    //usuniecie ostatniej cyfry w pinie
     async removefrompin() {
       this.pin = this.pin.slice(0, this.pin.length - 1);
     },
+    //funkcja wykonujaca sie po kliknieciu zatwierdz na ekranie
     async accept() {
+      //sprawdzamy czy uzytkownik wprowadzil jakis pin oraz czy komponent zostal wykonany jako wprowadzanie barcode czy ilosci produktu
       if (this.pin.length != 0) {
+        //jezeli zostal wykonany jako komponent ilosci produktu to dodaj zadana liczbe produktow do koszyka
         if (this.product) {
           await this.addToCart(
             this.product.name,
@@ -79,7 +81,9 @@ export default defineComponent({
             this.product.discountedPrice,
             this.product.id
           );
+          //sprawdzenie czy produkt jest dla pelnoletnich i wywolania modala z zablowoaniem kasy, aby pracownik mogl zatwierdzic wiek
           if (this.product.ageRestricted) {
+            //sprawdzamy czy juz nie zostal zatwierdzony wiek
             if (!this.$storage.getStorageSync("checked18")) {
               hideCountModal();
               showModal(
@@ -101,6 +105,7 @@ export default defineComponent({
           }
         } else if (this.barcode) {
           try {
+            //wykonujemy zapytanie do api z podanym barcode aby wyszukac produktu i dodajemy go do koszyka
             const data = {
               barcode: this.pin,
             };
@@ -122,6 +127,7 @@ export default defineComponent({
                     product.discountedPrice,
                     product.id || 0
                   );
+                  //sprawdzenie czy produkt jest dla pelnoletnich i wywolania modala z zablowoaniem kasy, aby pracownik mogl zatwierdzic wiek
 
                   if (product.ageRestricted) {
                     console.log(this.$storage.getStorageSync("checked18"));
@@ -151,6 +157,7 @@ export default defineComponent({
             showModal(e as string);
           }
         }
+        //sprawdzamy czy komponent nie zostal wywolany z poziomu panelu sprzedawcy, jezeli tak to walidujemy pin sprzedawcy z jego numerem karty
         if (this.admin) {
           try {
             const data = {
@@ -184,6 +191,7 @@ export default defineComponent({
         }
       }
     },
+    //funkcja odpowiadajaca dodawaniu produktu do koszyka w pamieci przegladarki
     async addToCart(
       name: string,
       price: number,
@@ -202,9 +210,6 @@ export default defineComponent({
       this.$storage.setStorageSync("cartList", list);
       this.$router.push(`/cart`);
     },
-  },
-  mounted() {
-    //this.pinf();
   },
 });
 </script>

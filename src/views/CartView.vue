@@ -103,9 +103,11 @@ export default defineComponent({
     return { username, payments, payView, categories };
   },
   methods: {
+    //funkcja wysylajaca koszyk i dane kupujacego do api aby utworzyc paragon
     async pay(id: number) {
       let cartlist = this.$storage.getStorageSync("cartList") as CartModel[];
       let basket = [];
+      //przygotowanie listy produktow pod api
       for (let i = 0; i < cartlist.length; i++) {
         basket.push({
           product_id: cartlist[i].id,
@@ -128,6 +130,7 @@ export default defineComponent({
         });
       } catch (e) {
         showModal(e as string);
+        //testowe wyslanie zapytania do bramki platniczej z kwota do zaplaty
         if (id == 3) {
           const suma = this.$storage.getStorageSync("sum");
           window.location.href = `https://platnosc.hotpay.pl/?SEKRET=ZTY0MHBVb29JRU5MeHNKdExZWGdieGZVRDIwYU9sZ3BWSTl0RC9BeDhQWT0%2C&KWOTA=${suma}&NAZWA_USLUGI=Zakupy&ADRES_WWW=https%3A%2F%2Fsmilginp.evolpe.net&ID_ZAMOWIENIA=1&EMAIL=&DANE_OSOBOWE=`;
@@ -135,6 +138,7 @@ export default defineComponent({
       }
     },
     showModal,
+    //pobranie kategorii do wyswietlenia sie w koszyku jako kategorie glowne
     async getParentCategoriesList() {
       const data = {
         isVisible: true,
@@ -157,6 +161,7 @@ export default defineComponent({
         showModal(e as string);
       }
     },
+    //pobranie metod platnosci do wyswietlenia w koszyku jako mozliwe do placenia
     async getPaymentsMethodsList() {
       const data = {
         enabled: true,
@@ -181,6 +186,7 @@ export default defineComponent({
     },
   },
   mounted() {
+    //sprawdzanie czy nie zostala zeskanowana karta lojalnosciowa aby wyswietlic komunikat witaj
     setInterval(() => {
       if (!this.username) {
         this.username = this.$storage.getStorageSync("username") as string;

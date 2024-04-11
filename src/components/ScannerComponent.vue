@@ -21,10 +21,12 @@ export default defineComponent({
     return { scanned, finded };
   },
   methods: {
+    //event nasluchujacy na wcisniecie klawisza (taka akcje symuluje skaner barcode)
     scannerEvent() {
       window.addEventListener("input", this.handleBarcodeInput);
       window.addEventListener("keydown", this.handleBarcodeInput);
     },
+    //sprawdzamy jaki input dostalismy po kliknieciu "enter" czyli zakonczenia skanowania przez skaner wywolywana jest akcja przejscia na widok podany w propsach z zadanym id lub wyszukanai produktu w zaleznosci od widoku na ktorym zostal wywolany
     handleBarcodeInput(event: Event) {
       const inputValue = (event as KeyboardEvent).key;
       if (inputValue && !isNaN(parseInt(inputValue))) {
@@ -48,10 +50,12 @@ export default defineComponent({
         }
       }
     },
+    //funkcja wylaczajaca event skanowania
     removeScannerEvent() {
       window.removeEventListener("keydown", this.handleBarcodeInput);
       window.removeEventListener("input", this.handleBarcodeInput);
     },
+    //dodanie produktu do koszyyka w pamieci
     async addToCart(
       name: string,
       price: number,
@@ -69,6 +73,7 @@ export default defineComponent({
 
       this.$storage.setStorageSync("cartList", list);
     },
+    //pobranie produktu lub uzytkownika z api po zadanym barcode zeksanowanym przez skaner
     async getProduct() {
       const code = this.scanned;
       try {
@@ -79,7 +84,9 @@ export default defineComponent({
         let findeduser = false;
         let jsonString = JSON.stringify(data);
         let encodedJsonString = encodeURIComponent(jsonString);
+        //sprawdzamy czy nie zostala juz zeskanowana karta lojalnosciowa aby nie wywolywac niepotrzebnych zapytan
         if (!this.finded) {
+          //pobranie uzytkownika jezeli uzytkownik o takim kodzie istnieje to zapisywany jest w pamieci do pozniejszego wykorzystania
           try {
             await this.$axios
               .get(`/users?filter=AND&body=${encodedJsonString}`)
@@ -97,6 +104,7 @@ export default defineComponent({
                     resp.response[0].name
                   );
                 }
+                //jezeli produkt zostal zeskanowany na innym widoku niz koszyk to wracamy do niego
                 if (this.$route.name != "cart") {
                   this.$router.push({
                     name: "cart",
@@ -109,6 +117,7 @@ export default defineComponent({
           }
         }
         if (!findeduser) {
+          //pobranie zeskanowanego produktu z api i dodanie do koszyka
           let data2 = {
             barcode: code,
           };
@@ -119,6 +128,7 @@ export default defineComponent({
             .get(`/products?filter=AND&body=${encodedJsonString}`)
             .then((response) => {
               const resp: ResponseModel = response.data;
+              //sprawdzenie czy produkt jest dla pelnoletnich i wywolania modala z zablowoaniem kasy, aby pracownik mogl zatwierdzic wiek
               if (resp.response[0].ageRestricted) {
                 if (!this.$storage.getStorageSync("checked18")) {
                   hideModal();
