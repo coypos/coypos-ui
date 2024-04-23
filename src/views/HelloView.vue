@@ -54,12 +54,18 @@ import ScannerComponent from "@/components/ScannerComponent.vue";
 import { showModal } from "@/functions";
 import { SettingModel } from "@/types/api/Setting";
 import { ResponseModel } from "@/types/Response";
+import { useI18n } from "vue-i18n";
+
 export default defineComponent({
   name: "HomeView",
   components: { ScannerComponent, ButtonComponent, FlagsComponent },
   setup() {
     let settings = ref<SettingModel[]>([]);
-    return { settings };
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
+    return { t, settings };
   },
   methods: {
     showModal,
@@ -71,7 +77,7 @@ export default defineComponent({
           this.settings = resp.response;
         });
       } catch (e) {
-        showModal(e as string);
+        showModal((this.t("error") + e) as string);
       }
       for (let i = 0; this.settings.length > i; i++) {
         if (this.settings[i].key.startsWith("--")) {

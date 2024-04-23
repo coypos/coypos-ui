@@ -6,6 +6,7 @@ import { defineComponent, ref } from "vue";
 import { hideModal, showModal } from "@/functions";
 import { CartModel } from "@/types/api/Cart";
 import { ResponseModel } from "@/types/Response";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
   name: "ScannerComponent",
@@ -18,7 +19,11 @@ export default defineComponent({
   setup() {
     let scanned = ref<string>("");
     let finded = ref<boolean>(false);
-    return { scanned, finded };
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
+    return { t, scanned, finded };
   },
   methods: {
     //event nasluchujacy na wcisniecie klawisza (taka akcje symuluje skaner barcode)
@@ -93,8 +98,6 @@ export default defineComponent({
               .then((response) => {
                 const resp: ResponseModel = response.data;
                 if (resp.response[0].name) {
-                  console.log(resp.response[0]);
-
                   data = { cardNumber: "-1", role: null };
                   this.finded = true;
                   findeduser = true;
@@ -132,9 +135,7 @@ export default defineComponent({
               if (resp.response[0].ageRestricted) {
                 if (!this.$storage.getStorageSync("checked18")) {
                   hideModal();
-                  showModal(
-                    "Dodano przedmiot dla pełnoletnich. Sprzedawca proszony jest o sprawdzenie dowodu."
-                  );
+                  showModal(this.t("adulterror"));
                 }
               }
               this.addToCart(
@@ -149,7 +150,7 @@ export default defineComponent({
             });
         }
       } catch (e) {
-        showModal("Nie znaleziono produktu");
+        showModal(this.t("noproduct"));
       }
     },
   },

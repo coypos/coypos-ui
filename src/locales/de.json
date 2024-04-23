@@ -18,9 +18,12 @@
   "accept": "Geneh",
   "barcode":"BAR CODE",
   "search":"SUCHEN",
-  "error":  "An der Kasse ist ein Fehler aufgetreten, die Kasse wurde geschlossen. Bitten Sie Ihr Verkaufspersonal um Hilfe..",
+  "error":  "Entschuldigung für die Unannehmlichkeiten! Unser Personal wurde benachrichtigt und ist bereits auf dem Weg, um diese Situation zu klären. Vielen Dank für Ihre Geduld!",
   "sellercall": "Rufen Sie Ihren Händler an",
   "close": "REGISTRIERKASSE GESCHLOSSEN",
-  "pin": "PIN eingeben"
+  "pin": "PIN eingeben",
+  "helpneeded": "Unser Personal ist bereits auf dem Weg, um Ihnen zu helfen. Wir bitten um Geduld.",
+  "adulterror": "Achtung: Ein Produkt für Erwachsene wurde gekauft. Unser Personal wird das Alter überprüfen. Vielen Dank für Ihre Zusammenarbeit!",
+  "noproduct":"Entschuldigung, das gescannte Produkt wurde nicht gefunden. Bitte versuchen Sie es erneut oder fragen Sie unser Personal um Hilfe. Vielen Dank für Ihr Verständnis!"
 
 }

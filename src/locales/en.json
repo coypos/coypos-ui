@@ -18,9 +18,14 @@
   "accept": "Appr",
   "barcode":"BARACODE",
   "search":"SEARCH",
-  "error":  "There was a checkout error, the cash register was closed. Ask your salesperson for help.",
+  "error":  "Sorry for the inconvenience! Our staff has been notified and is already on the way to resolve this situation. Thank you for your patience!",
   "sellercall": "Call the seller",
   "close": "CASH CLOSED",
-  "pin": "Enter PIN"
+  "pin": "Enter PIN",
+  "helpneeded": "Our staff is already on the way to assist you. Please be patient.",
+  "adulterror": "Attention: A product for adults has been purchased. Our staff will verify your age. Thank you for your cooperation!",
+
+  "noproduct":"Sorry, the scanned product was not found. Please try again or ask our staff for assistance. Thank you for your understanding!"
+
 
 }

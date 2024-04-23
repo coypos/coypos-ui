@@ -84,6 +84,7 @@ import { showModal } from "@/functions";
 import { ResponseModel } from "@/types/Response";
 import CountComponent from "@/components/CountComponent.vue";
 import { CartModel } from "@/types/api/Cart";
+import { useI18n } from "vue-i18n";
 
 export default defineComponent({
   name: "CartView",
@@ -94,13 +95,16 @@ export default defineComponent({
     CartComponent,
     ScannerComponent,
   },
-  setup() {
+  setup: function () {
     let categories = ref<CategoryModel[]>([]);
     let payView = ref<boolean>(false);
     let payments = ref<CategoryModel[]>([]);
     let username = ref<string>("");
-
-    return { username, payments, payView, categories };
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
+    return { t, username, payments, payView, categories };
   },
   methods: {
     //funkcja wysylajaca koszyk i dane kupujacego do api aby utworzyc paragon
@@ -129,7 +133,7 @@ export default defineComponent({
           this.$router.push({ name: "home" });
         });
       } catch (e) {
-        showModal(e as string);
+        showModal((this.t("error") + e) as string);
         //testowe wyslanie zapytania do bramki platniczej z kwota do zaplaty
         if (id == 3) {
           const suma = this.$storage.getStorageSync("sum");
@@ -158,7 +162,7 @@ export default defineComponent({
             this.categories = resp.response;
           });
       } catch (e) {
-        showModal(e as string);
+        showModal((this.t("error") + e) as string);
       }
     },
     //pobranie metod platnosci do wyswietlenia w koszyku jako mozliwe do placenia
@@ -181,7 +185,7 @@ export default defineComponent({
             this.payments = resp.response;
           });
       } catch (e) {
-        showModal(e as string);
+        showModal((this.t("error") + e) as string);
       }
     },
   },

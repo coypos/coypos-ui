@@ -55,9 +55,13 @@ export default defineComponent({
     admin: Boolean,
   },
   setup() {
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
     let pin = ref<string>("");
 
-    return { pin };
+    return { t, pin };
   },
   methods: {
     //dodanie cyfry do pinu kliknetej na ekranie
@@ -86,9 +90,8 @@ export default defineComponent({
             //sprawdzamy czy juz nie zostal zatwierdzony wiek
             if (!this.$storage.getStorageSync("checked18")) {
               hideCountModal();
-              showModal(
-                "Dodano przedmiot dla pełnoletnich. Sprzedawca proszony jest o sprawdzenie dowodu."
-              );
+
+              showModal(this.t("adulterror"));
               this.$router.push({
                 name: `seller`,
                 query: {
@@ -134,9 +137,8 @@ export default defineComponent({
 
                     if (!this.$storage.getStorageSync("checked18")) {
                       hideCountModal();
-                      showModal(
-                        "Dodano przedmiot dla pełnoletnich. Sprzedawca proszony jest o sprawdzenie dowodu."
-                      );
+                      showModal(this.t("adulterror"));
+
                       this.$router.push({
                         name: `seller`,
                         query: {

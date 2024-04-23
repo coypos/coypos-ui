@@ -50,6 +50,8 @@ import PageButtonComponent from "@/components/PageButtonComponent.vue";
 import { showModal } from "@/functions";
 import { CategoryModel } from "@/types/api/Category";
 import { ResponseModel } from "@/types/Response";
+import { useI18n } from "vue-i18n";
+
 export default defineComponent({
   name: "CategoryView",
 
@@ -63,7 +65,11 @@ export default defineComponent({
     let itemsPerPage = ref<number>(5);
     let page = ref<number>(1);
     let totalPages = ref<number>(1);
-    return { totalPages, page, itemsPerPage, column, categories };
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: "local",
+    });
+    return { t, totalPages, page, itemsPerPage, column, categories };
   },
 
   methods: {
@@ -89,7 +95,7 @@ export default defineComponent({
             this.totalPages = resp.totalPages;
           });
       } catch (e) {
-        showModal(e as string);
+        showModal((this.t("error") + e) as string);
       }
     },
   },

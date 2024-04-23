@@ -17,7 +17,7 @@
         <round-button-component
           v-if="$router.currentRoute.value.name != `seller`"
           id="help"
-          @click="showModal('Wezwano pomoc')"
+          @click="showModal($t('helpneeded') as string)"
           :small="true"
           :width="34"
           color="yellow"

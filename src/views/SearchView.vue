@@ -40,6 +40,7 @@ import PageButtonComponent from "@/components/PageButtonComponent.vue";
 import CountComponent from "@/components/CountComponent.vue";
 import { ResponseModel } from "@/types/Response";
 import SearchComponent from "@/components/SearchComponent.vue";
+
 import { KeyboardInputModal } from "@/types/KeyboardInput";
 export default defineComponent({
   name: "SearchView",
@@ -61,11 +62,12 @@ export default defineComponent({
     let totalPages = ref<number>(1);
     let product = ref<ProductModel>();
     let input = ref<string>();
+
     return {
       input,
+      t,
       product,
       totalPages,
-      t,
       products,
       column,
       itemsPerPage,
@@ -133,7 +135,7 @@ export default defineComponent({
             });
         }
       } catch (e) {
-        showModal(e as string);
+        showModal((this.t("error") + e) as string);
       }
     },
   },

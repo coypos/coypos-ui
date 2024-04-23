@@ -1,13 +1,12 @@
 import { Modal } from "bootstrap";
+
 //wyswietlenie modalu z podanym bledem
 export function showModal(e: string) {
   const myModal = new Modal(
     document.getElementById("staticBackdrop") as Element
   );
   myModal.show();
-  document.getElementsByClassName("errobody")[0].innerHTML =
-    "Wystąpił błąd kasy, kasa została zamknięta. Poproś o pomoc sprzedawce. </br>" +
-    e;
+  document.getElementsByClassName("errobody")[0].innerHTML = e;
 }
 //wylaczenie modalu
 export function hideModal() {

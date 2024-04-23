@@ -36,6 +36,7 @@ import { CartModel } from "@/types/api/Cart";
 import PageButtonComponent from "@/components/PageButtonComponent.vue";
 import CountComponent from "@/components/CountComponent.vue";
 import { ResponseModel } from "@/types/Response";
+
 export default defineComponent({
   name: "productlistView",
   components: {
@@ -116,7 +117,7 @@ export default defineComponent({
             this.totalPages = resp.totalPages;
           });
       } catch (e) {
-        showModal(e as string);
+        showModal((this.t("error") + e) as string);
       }
     },
   },

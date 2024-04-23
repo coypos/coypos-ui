@@ -18,9 +18,11 @@
   "accept": "Zatw",
   "barcode":"KOD KRESKOWY",
   "search":"SZUKAJ",
-  "error":  "Wystąpił błąd kasy, kasa została zamknięta. Poproś o pomoc sprzedawce.",
+  "error":  "Przepraszamy za problem! Nasz personel został powiadomiony i już w drodze, aby rozwiązać tę sytuację. Dziękujemy za cierpliwość!",
   "sellercall": "Wezwij sprzedawce",
   "close": "KASA ZAMKNIETA",
-  "pin": "Wpisz PIN"
-
+  "pin": "Wpisz PIN",
+  "helpneeded": "Nasz personel jest już w drodze, aby zapewnić Ci pomoc. Prosimy o cierpliwość.",
+  "adulterror": "Uwaga: Został zakupiony produkt przeznaczony dla osób pełnoletnich. Nasz personel podejdzie w celu potwierdzenia wieku. Dziękujemy za współpracę!",
+  "noproduct":"Przepraszamy, nie znaleziono zeskanowanego produktu. Prosimy spróbować ponownie lub poprosić nasz personel o pomoc. Dziękujemy za wyrozumiałość!"
 }
