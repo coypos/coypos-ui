@@ -42,6 +42,10 @@
   width: 100%;
   height: 100vh;
 }
+body {
+  max-width: 1200px;
+  margin: auto;
+}
 </style>
 <script lang="ts">
 import { defineComponent, ref } from "vue";

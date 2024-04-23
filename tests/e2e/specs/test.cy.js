@@ -499,7 +499,7 @@ describe("user scan twice product, seller use bad pin", () => {
     cy.get("body").type("4");
     cy.get("body").type("0");
     cy.get("body").type("{enter}");
-    cy.get("div").contains("Bułka Kajzerka").should("exist");
+    cy.get("div").contains("Bułka kajzerka").should("exist");
     cy.get("div").contains("Jabłko").should("exist");
 
     cy.get("#help").click();
