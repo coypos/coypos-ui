@@ -41,7 +41,7 @@ describe("user scan card and product then pay for it", () => {
     cy.get("body").type("3");
     cy.get("body").type("7");
     cy.get("body").type("{enter}");
-    cy.get("div").contains("Bułka Kajzerka").should("exist");
+    cy.get("div").contains("Bułka kajzerka").should("exist");
     cy.wait(1000);
     cy.get("div").contains("Zakończ i zapłać").click();
     cy.get("div").contains("Gotówka").should("exist");
@@ -257,7 +257,7 @@ describe("user add 18+ product, seller accept it", () => {
     cy.get("button").contains(" Potwierdz 18+").should("exist");
     cy.get("button").contains(" Potwierdz 18+").click();
     cy.get(".backbutton").click();
-    cy.get("div").contains("wódka").should("exist");
+    cy.get("div").contains("Wódka").should("exist");
   });
 });
 //uzytkownik kupuje produkt dla niepelnoletnich, sprzedawca niezatwierdza
@@ -300,7 +300,7 @@ describe("user add 18+ product, seller not accept it", () => {
     cy.get("button").contains("Nie jest 18+").should("exist");
     cy.get("button").contains("Nie jest 18+").click();
     cy.get(".backbutton").click();
-    cy.get("div").contains("wódka").should("not.exist");
+    cy.get("div").contains("Wódka").should("not.exist");
   });
 });
 //uzytkownik skanuje dwa razy ten sam produkt po czym sprzedawca jeden usuwa
@@ -324,7 +324,7 @@ describe("user scan twice product, seller remove one", () => {
     cy.get("body").type("4");
     cy.get("body").type("0");
     cy.get("body").type("{enter}");
-    cy.get("div").contains("Bułka Kajzerka").should("exist");
+    cy.get("div").contains("Bułka kajzerka").should("exist");
     cy.get("div").contains("Jabłko").should("exist");
 
     cy.get("#help").click();
@@ -356,7 +356,7 @@ describe("user scan twice product, seller remove one", () => {
     cy.get("button").contains("Potwierdź").click();
     cy.get(".backbutton").click();
     cy.get("div").contains("Jabłko").should("not.exist");
-    cy.get("div").contains("Bułka Kajzerka").should("exist");
+    cy.get("div").contains("Bułka kajzerka").should("exist");
   });
 });
 
@@ -413,7 +413,7 @@ describe("user scan twice product, seller remove all", () => {
     cy.get("body").type("4");
     cy.get("body").type("0");
     cy.get("body").type("{enter}");
-    cy.get("div").contains("Bułka Kajzerka").should("exist");
+    cy.get("div").contains("Bułka kajzerka").should("exist");
     cy.get("div").contains("Jabłko").should("exist");
 
     cy.get("#help").click();
@@ -442,7 +442,7 @@ describe("user scan twice product, seller remove all", () => {
     cy.get("div").contains(" Wyczyść koszyk").click();
     cy.get(".backbutton").click();
     cy.get("div").contains("Jabłko").should("not.exist");
-    cy.get("div").contains("Bułka Kajzerka").should("not.exist");
+    cy.get("div").contains("Bułka kajzerka").should("not.exist");
   });
 });
 //uzytkownik szuka produktu w liscie po czym rezygnuje i skanuje produkt
@@ -541,6 +541,8 @@ describe("user scan wrong barcode", () => {
     cy.get("body").type("2");
     cy.get("body").type("2");
     cy.get("body").type("{enter}");
-    cy.get("div").contains("Nie znaleziono produktu").should("exist");
+    cy.get("div")
+      .contains("Przepraszamy, nie znaleziono zeskanowanego produktu.")
+      .should("exist");
   });
 });
