@@ -386,8 +386,8 @@ describe("user changing language, select product and pay for it", () => {
     cy.get("div").contains("Bananas").should("exist");
     cy.wait(1000);
     cy.get("div").contains("Finish and pay").click();
-    cy.get("div").contains("Gotówka").should("exist");
-    cy.get("div").contains("Gotówka").click();
+    cy.get("div").contains("Cash").should("exist");
+    cy.get("div").contains("Cash").click();
     cy.get("div").contains("START").should("exist");
   });
 });

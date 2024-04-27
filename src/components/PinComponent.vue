@@ -55,13 +55,14 @@ export default defineComponent({
     admin: Boolean,
   },
   setup() {
+    let pin = ref<string>("");
+
     const { t } = useI18n({
       inheritLocale: true,
       useScope: "local",
     });
-    let pin = ref<string>("");
 
-    return { t, pin };
+    return { pin, t };
   },
   methods: {
     //dodanie cyfry do pinu kliknetej na ekranie
