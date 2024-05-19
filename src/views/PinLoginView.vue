@@ -12,7 +12,11 @@
         </div>
       </div>
       <div class="col-2">
-        <img class="logo" src="../assets/logo.png" alt="logo" />
+        <img
+          class="logo"
+          :src="'data:image/png;base64,' + this.$storage.getStorageSync(`logo`)"
+          alt="logo"
+        />
       </div>
     </div>
   </div>

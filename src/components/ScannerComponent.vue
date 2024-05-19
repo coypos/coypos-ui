@@ -31,7 +31,8 @@ export default defineComponent({
       window.addEventListener("input", this.handleBarcodeInput);
       window.addEventListener("keydown", this.handleBarcodeInput);
     },
-    //sprawdzamy jaki input dostalismy po kliknieciu "enter" czyli zakonczenia skanowania przez skaner wywolywana jest akcja przejscia na widok podany w propsach z zadanym id lub wyszukanai produktu w zaleznosci od widoku na ktorym zostal wywolany
+    //sprawdzamy jaki input dostalismy po kliknieciu "enter" czyli zakonczenia skanowania przez skaner wywolywana
+    //jest akcja przejscia na widok podany w propsach z zadanym id lub wyszukanai produktu w zaleznosci od widoku na ktorym zostal wywolany
     handleBarcodeInput(event: Event) {
       const inputValue = (event as KeyboardEvent).key;
       if (inputValue && !isNaN(parseInt(inputValue))) {

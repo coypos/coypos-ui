@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div oncontextmenu="return false" class="container-fluid">
     <div
       class="row"
       v-if="
@@ -45,6 +45,10 @@
 html {
   max-width: 1200px;
   margin: auto;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 </style>
 <script lang="ts">
